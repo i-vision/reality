@@ -28,6 +28,14 @@
 		<h1 i18n="ceskereality.cz">ČESKÉREALITY.CZ</h1> 
 		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r">Login</a>
 	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    
+    
+    
     <div data-role="content" data-theme="d" class="bgImage">
 	<div class="ui-grid-c">
 			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -70,7 +78,7 @@
 		</div>
     </div>
     </div>
-	<!-- END OF MAIN PAGE -->
+	<!-- // MAIN PAGE -->
 	
 	
 	
@@ -82,36 +90,53 @@
   	<div data-role="header">
     	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="byty_na_prodej">Byty na  prodej</h1> 
-		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r">Login</a>
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
 	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div data-role="content" data-theme="d" class="bgImage">
-	<div class="ui-grid-c">
-			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px">BYTY PRODEJ</div></div>
-			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
-			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
-			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
-					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px">A</div></div>
-			<div class="ui-block-b"><div style="height:20px">B</div></div>
-			<div class="ui-block-c"><div style="height:20px">C</div></div>
-			<div class="ui-block-d"><div style="height:20px">D</div></div>
-					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px">A</div></div>
-			<div class="ui-block-b"><div style="height:20px">B</div></div>
-			<div class="ui-block-c"><div style="height:20px">C</div></div>
-			<div class="ui-block-d"><div style="height:20px">D</div></div>
-				
-		</div><!-- /grid-c -->	
+   
+   
+    <div data-role="fieldcontain" >
+   	<!-- RADIO OPERATION, SELL , RENT -->
+   
+    <fieldset data-role="controlgroup" data-type="horizontal" >
+    	
+         	<input type="radio" name="operace" id="operaceProdej" value="0" checked="checked"   />
+         	<label for="operaceProdej"  >Prodej</label>
+
+         	<input type="radio" name="operace" id="operacePronajem" value="1"  />
+         	<label for="operacePronajem" >Pronajem</label>
+
+    </fieldset>
+    
+   	<!-- //RADIO OPERATION, SELL , RENT -->
+    
+    
+    <!-- SELECT SUBTYPE OF FLATT -->
+    
+    <fieldset>
+    
+    <select name="subtyp" class="subtyp_2">
+   	
+	</select>
+    
+	</fieldset>
+    <!-- //SELECT SUBTYPE OF FLATT -->
+    
+    
+	</div>
+    
+    
+
+ 
+	
+
+    
+   
 
     </div><!-- end jqm content -->
     <div data-role="footer" data-theme="c" >
@@ -126,7 +151,7 @@
 		</div>
     </div>
     </div>
-	<!-- END OF FLATS ON SALE PAGE -->
+	<!-- //FLATS ON SALE PAGE -->
 	
   </body>
 </html>

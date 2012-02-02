@@ -13,3 +13,12 @@
    /* or background-size: cover; */
 }
 
+.infoBar 
+{
+display:none;
+}
+
+.infoBar h3.infoBarHeadingText
+{
+text-align:center; margin-top:8px;	
+}
