@@ -1,3 +1,185 @@
+
+//INIT OF ISCROLL PLUGIN
+
+var myScroll;
+function loaded() {
+	myScroll = new iScroll('wrapper');
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+/* * * * * * * *
+ *
+ * Use this for high compatibility (iDevice + Android)
+ *
+ */
+document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+/*
+ * * * * * * * */
+
+
+/* * * * * * * *
+ *
+ * Use this for iDevice only
+ *
+ */
+//document.addEventListener('DOMContentLoaded', loaded, false);
+/*
+ * * * * * * * */
+
+
+/* * * * * * * *
+ *
+ * Use this if nothing else works
+ *
+ */
+//window.addEventListener('load', setTimeout(function () { loaded(); }, 200), false);
+/*
+ * * * * * * * */
+
+
+/*CUSTOM FUNCTIONS*/
+
+//CHECK ALL SETTING AFTER START OF APP, IF FIRST TIME START UP OF APP
+//GET ALL JSON VALUES FOR FORMS FILLING 
+
+function checkSettings()
+{
+	var firstTimeStartUp = localStorage.firstTimeStartUp;
+	
+	console.log("firstTimeStartUp VALUE IS: "+firstTimeStartUp);
+	
+	if (Number (firstTimeStartUp) !== 1)
+	{
+		console.log("APP IS STRARTING FOR FIRST TIME, DOWNLOADING ALL VALUES ");
+		localStorage.firstTimeStartUp=1;
+	}
+	
+	if (Number (firstTimeStartUp) == 1)
+	{
+		console.log("VALUES FOR APP ARE ALREADY STORED INTO APP, NOT NECESSARRY TO UPDATE");
+		//http://pts.ceskereality.cz/json/ciselniky.html
+		var test = getJson('http://search.twitter.com/search.json?q=bacon', 'GET');
+		
+		console.log("UKLADAM NAVRACENA DATA" + test);
+		
+		// Put the object into storage
+		//localStorage.classifiers =  JSON.stringify(classifiers);
+		
+		
+		
+	}
+	
+	
+}
+
+function getJson(url,type)
+{
+	console.log(url);
+	console.log(type);
+	
+	var returnValue;
+    $.ajax({
+        type: type,
+        url: url,
+        
+        dataType: "jsonp",
+        //async: false,
+        //data: $("form").serialize(),
+        success:
+            function(result) {
+                
+                    returnValue = result;
+                    return;
+                
+            },
+        error:
+            function(errorThrown) {
+                alert("Error occured: " + errorThrown);
+            }
+        });
+
+        return returnValue;
+}
+
+function downloadClassifiers()
+{
+
+		email = $("#userRegistrationEmail").val();
+		password = $.encoding.digests.hexSha1Str($("#userRegistrationPassword")
+				.val());
+		appDefLanguge = $("#userRegistrationLanguage").val();
+
+		if (!isValidEmailAddress(email) | password.length < 5) {
+
+			$("#errorMessRegistration").show();
+			$("#errorMessRegistration h1").text(text['chyba_registrace']);
+
+		}
+
+		else {
+			$("#errorMessRegistration").hide();
+
+			//
+			// IF NOT, DO REQUEST
+			// alert(apiUrl + "municipality/" + municipalityCode + ".json");
+			jQuery
+					.ajax({
+						url : "api/users/register?email=" + email + "&password="
+								+ password + "&applanguage=" + appDefLanguge + "",
+						type : "GET",
+						success : function(result) {
+							console.log('DATA SENT');
+							objectResult = jQuery.parseJSON(result);
+							console.log(objectResult.status);
+
+							if (objectResult.status == "user_alredy_exist") {
+								$("#errorMessRegistration").show();
+								$("#errorMessRegistration h1").text(
+										text['uzivatel_existuje']);
+								$("#sentNewPasswordBtn").show();
+
+							}
+
+							if (objectResult.status == "user_sucess_registered") {
+								$("#errorMessRegistration").show();
+								$("#errorMessRegistration h1").text(
+										text['uzivatel_uspesne_registrovan']);
+								$("#sentNewPasswordBtn").hide();
+								$("#goToLoginBtn").show();
+
+								$("#userRegistrationEmail").val("");
+								$("#userRegistrationPassword").val("");
+
+							}
+
+						},
+						// IF HTTP RESULT 400 || 404
+						error : function(x, e) {
+
+							if (x.status == 0) {
+								console
+										.log('You are offline!!\n Please Check Your Network.');
+							} else if (x.status == 404) {
+								console.log('Requested URL not found.');
+							} else if (x.status == 500) {
+								console.log('Internel Server Error');
+							} else if (e == 'parsererror') {
+								console.log('Error.\nParsing JSON Request failed.');
+							} else if (e == 'timeout') {
+								console.log('Request Time out.');
+							} else {
+								console.log('Unknow Error.\n' + x.responseText);
+							}
+
+						}
+					});
+
+		}
+
+	}
+
+
 var deviceInfo = function() {
     document.getElementById("platform").innerHTML = device.platform;
     document.getElementById("version").innerHTML = device.version;

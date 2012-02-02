@@ -1,0 +1,15 @@
+.mainPageImg
+{
+	width="70%";
+}
+
+.bgImage
+{
+	background-image: url("img/flat.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	
+    background-size: 100%;
+   /* or background-size: cover; */
+}
+
