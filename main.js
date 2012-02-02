@@ -73,33 +73,37 @@ function checkSettings()
 	
 }
 
-function getJson(url,type)
+
+function test(data)
+{
+	console.log("V FCI TEST "+data);
+	console.log(data);
+	
+}
+		
+
+function getJson(url,type,data)
 {
 	console.log(url);
 	console.log(type);
-	
-	var returnValue;
+
     $.ajax({
-        type: type,
         url: url,
-        
+        type: type,
         dataType: "jsonp",
         //async: false,
-        //data: $("form").serialize(),
+        data:data,
         success:
-            function(result) {
-                
-                    returnValue = result;
-                    return;
-                
-            },
+        function(result) {
+            test(result);
+        },
         error:
             function(errorThrown) {
                 alert("Error occured: " + errorThrown);
             }
         });
 
-        return returnValue;
+     
 }
 
 function downloadClassifiers()
