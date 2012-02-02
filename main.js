@@ -1,3 +1,7 @@
+//GLOBAL VARIABLES
+
+var actualResult;
+
 
 //INIT OF ISCROLL PLUGIN
 
@@ -59,9 +63,9 @@ function checkSettings()
 	{
 		console.log("VALUES FOR APP ARE ALREADY STORED INTO APP, NOT NECESSARRY TO UPDATE");
 		//http://pts.ceskereality.cz/json/ciselniky.html
-		var test = getJson('http://search.twitter.com/search.json?q=bacon', 'GET');
+		getJson('http://search.twitter.com/search.json?q=bacon', 'GET');
 		
-		console.log("UKLADAM NAVRACENA DATA" + test);
+		console.log("UKLADAM NAVRACENA DATA" + actualResult);
 		
 		// Put the object into storage
 		//localStorage.classifiers =  JSON.stringify(classifiers);
@@ -78,7 +82,8 @@ function test(data)
 {
 	console.log("V FCI TEST "+data);
 	console.log(data);
-	
+	actualResult = data;
+	console.log("UKLADAM NAVRACENA DATA" + actualResult);
 }
 		
 
@@ -87,7 +92,7 @@ function getJson(url,type,data)
 	console.log(url);
 	console.log(type);
 
-    $.ajax({
+    $.getJSON({
         url: url,
         type: type,
         dataType: "jsonp",
