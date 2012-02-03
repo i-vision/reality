@@ -19,7 +19,7 @@
 	<!-- <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>-->
 	<!-- <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>-->
 	</head>
-  <body onload="checkSettings();">
+  <body onload="init();">
   	
 	<!-- START OF MAIN PAGE -->
     <div data-role="page" data-theme="b">
@@ -120,11 +120,34 @@
     
     <fieldset>
     
-    <select name="subtyp" class="subtyp_2">
+    
+     <div class="ui-grid-a">
+	<div class="ui-block-a">Typ bytu</div>
+	<div class="ui-block-b"><select name="subtyp" class="subtyp_2">
    	
-	</select>
+	</select></div>
+</div><!-- /grid-a -->
+    
+    
     
 	</fieldset>
+    <!-- //SELECT SUBTYPE OF FLATT -->
+    
+    
+    
+    <!-- SELECT SUBTYPE OF FLATT -->
+    
+    
+    <div class="ui-grid-a">
+	<div class="ui-block-a">Lokalita
+    <div data-role="controlgroup" data-type="horizontal" >
+			<a  onClick="getMyPosition();" data-role="button" data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
+		</div>
+    </div>
+	<div class="ui-block-b"><a class="choosenCity" idofcity="" onClick="pageForReturn('flatsOnSalePage')"; href="#selectCityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_mesto">Zvolte mesto</a></div>
+</div><!-- /grid-a -->
+
+    
     <!-- //SELECT SUBTYPE OF FLATT -->
     
     
@@ -153,5 +176,38 @@
     </div>
 	<!-- //FLATS ON SALE PAGE -->
 	
+   
+   <!-- SELECT CITY PAGE -->
+    <div data-role="page" data-theme="b" id="selectCityPage">
+  	<div data-role="header">
+    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">Vyberte mesto</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF ALL CITIES TO SELECT-->
+   
+  <ul class="listOfAllCities" i18n="zde_zacnete_psat" data-role="listview" data-filter="true" data-filter-placeholder="Zde zacnete psat" data-filter-theme="b">
+				
+  </ul>
+	
+  <!-- //LIST OF ALL CITIES TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT CITY AGE -->
+   
+   
+   
   </body>
 </html>

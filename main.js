@@ -40,6 +40,19 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2
 
 /*CUSTOM FUNCTIONS*/
 
+//INIT PHONEGAP
+function init() {
+    // the next line makes it impossible to see Contacts on the HTC Evo since it
+    // doesn't have a scroll button
+    // document.addEventListener("touchmove", preventBehavior, false);
+	 checkSettings();
+	document.addEventListener("deviceready", deviceInfo, true);
+   
+}
+
+
+
+
 //CHECK ALL SETTING AFTER START OF APP, IF FIRST TIME START UP OF APP
 //GET ALL JSON VALUES FOR FORMS FILLING 
 
@@ -64,6 +77,8 @@ function checkSettings()
 		// Retrieve all the object from storage
 		//this procedure is repeated everytime after startup the app
 		var fetchedClassifiers = localStorage.getItem('Classifiers');
+		
+		//console.log(fetchedClassifiers);
 		// Parse to access 
 		var parsedFetchedClassifields = JSON.parse(fetchedClassifiers);
 
@@ -75,7 +90,7 @@ function checkSettings()
 		//TODO
 		//FILL ALL FORMS AND LISTS WITH DTA FROM CLASSIFIERS
 		
-		/*FILL FLAT FOR RENT LIST*/
+		/*FILL TYPE OF FLATS  LIST*/
 		
 		var flatForRentList = parsedFetchedClassifields.ciselniky.subtyp[2];
 		
@@ -85,11 +100,26 @@ function checkSettings()
 		$.each(flatForRentList, function(key, value) { 
 				  console.log(key + ': ' + value); 
 					$(".subtyp_2").append("<option value=\""+key+"\">"+value+"</option>");
+		});	
+		/*//FILL TYPE OF FLATS  LIST*/
+		
+		
+		
+		/*FILL CITY  LIST*/
+		
+		var listOFAllCities = parsedFetchedClassifields.ciselniky.okres;
+		
+		console.log("Seznam mest");
+		console.log(listOFAllCities);
+		
+		
+		$.each(listOFAllCities, function(key, value) { 
+				  console.log(key + ': ' + value); 
+					$(".listOfAllCities").append("<li><a onClick=\"passParamsOfCity("+key+","+"'"+value+"'"+");\" class=\"pageForReturn\" href=\"\" idOfCity=\""+key+"\" >"+value+"</a></li>");
 		});
-		$('.subtyp_2').listview('refresh');
-		/*//FILL FLAT FOR RENT LIST*/
+		$('.listOfAllCities').listview('refresh');
 		
-		
+		/*//FILL CITY  LIST*/
 		
 		
 		
@@ -102,6 +132,30 @@ function checkSettings()
 	
 }
 
+//GET NAME AND 
+//ID OF EACH SELECTED CITY
+function passParamsOfCity(id,name) {
+
+console.log("Vybrano mesto s id a jmenem "+ id + " "+name);	
+$(".choosenCity .ui-btn-text").text(name);
+$(".choosenCity").attr("idofcity",id);
+
+}
+
+
+//GET ID OF PAGE WHERE  
+//USER IS REDIRECTED AFTER SELECT OF CITY
+
+function pageForReturn(idOfpageForReturn) {
+
+	console.log("Po zvoleni mesta navrat na stranku: "+idOfpageForReturn);
+
+	
+	 $(".pageForReturn").each(function() {
+	        $(this).attr( 'href' , "#"+idOfpageForReturn );
+	    });
+	
+}
 
 //GET ALL CLASSIFIERS FOR APP INTO LOCAL STORAGE
 //DURING RUN OF THIS FUNCTION WE INFORM USER ABOUT PROCESSING OF DOWNLOAD
@@ -194,29 +248,41 @@ function getJson(url,type,data)
 }
 
 
+//GET ACTUAL GPS COORDS
+//AND GET NEAREST CITY FROM USER AND WRITEOUT
+function getMyPosition()
+{
+
+// onSuccess Callback
+//  This method accepts a `Position` object, which contains
+//  the current GPS coordinates
+//
+var onSuccess = function(position) {
+   console.log('Latitude: '          + position.coords.latitude          + '\n' +
+         'Longitude: '         + position.coords.longitude         + '\n' +
+         'Altitude: '          + position.coords.altitude          + '\n' +
+         'Accuracy: '          + position.coords.accuracy          + '\n' +
+         'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+         'Heading: '           + position.coords.heading           + '\n' +
+         'Speed: '             + position.coords.speed             + '\n' +
+         'Timestamp: '         + new Date(position.timestamp)      + '\n');
+};
 
 
-function init() {
-    // the next line makes it impossible to see Contacts on the HTC Evo since it
-    // doesn't have a scroll button
-    // document.addEventListener("touchmove", preventBehavior, false);
-    document.addEventListener("deviceready", deviceInfo, true);
+//WRITEOUT NEAREST CITY TO USER
 
-    $("#accelmenu").live('expand', function() {
-        toggleAccel();
-    }).live('collapse', function() {
-        toggleAccel();
-    });
 
-    $("#locationmenu").live('expand', function() {
-        toggleLocation();
-    }).live('collapse', function() {
-        toggleLocation();
-    });
-    
-    $("#compassmenu").live('expand', function() {
-        toggleCompass();
-    }).live('collapse', function() {
-        toggleCompass();
-    });    
+
+//onError Callback receives a PositionError object
+//
+function onError(error) {
+	
+	//TODO ERROR MESS FOR USER
+	console.log("GPS ERROR code: "   + error.code +"message:" + error.message);
+	
 }
+
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+}
+
