@@ -45,7 +45,7 @@ function init() {
     // the next line makes it impossible to see Contacts on the HTC Evo since it
     // doesn't have a scroll button
     // document.addEventListener("touchmove", preventBehavior, false);
-	 checkSettings();
+	checkSettings();
 	document.addEventListener("deviceready", deviceInfo, true);
    
 }
@@ -146,14 +146,117 @@ $(".choosenCity").attr("idofcity",id);
 //GET ID OF PAGE WHERE  
 //USER IS REDIRECTED AFTER SELECT OF CITY
 
-function pageForReturn(idOfpageForReturn) {
+/*typeOfPrice is experimental param, is used for show, hwhat type of price (sale, rent)
+ *will be offer to user (every page will have be different type, or any) 
+ **/
+
+
+function pageForReturn(idOfpageForReturn,typeOfPrice) {
 
 	console.log("Po zvoleni mesta navrat na stranku: "+idOfpageForReturn);
-
 	
 	 $(".pageForReturn").each(function() {
 	        $(this).attr( 'href' , "#"+idOfpageForReturn );
 	    });
+	 
+	 
+	 if(typeOfPrice == 'sale')
+     {
+		 	fillSelectPricePage('sale');
+     }
+	 
+	 
+	 if(typeOfPrice == 'rent')
+     {
+		 fillSelectPricePage('rent');
+     }
+	 
+	 if(!typeOfPrice)
+     {
+		 	
+     }
+	 
+	 
+}
+
+/*Fill select list of price range for rent or sale
+ * price for rent Kc/ Month
+ * price for sale 100000 Kc ++ 
+ * */
+
+function fillSelectPricePage(typeOf) {
+
+	var steps = 30; 
+	
+	
+	$('#priceRange').click(function() {
+	    
+		
+	    console.log ("Cena od zvolena  :" + $('select#priceFrom option:selected').val()); 
+	    console.log ("Cena od do  :" +$('select#priceTo option:selected').val()); 
+	    
+	    //UPDATE VALUES IN PAGE WHERE IS RETURNED TO
+
+	    
+	    $(".choosenPrice .ui-btn-text").text($('select#priceFrom option:selected').text()+" - "+$('select#priceTo option:selected').text());
+	    $(".choosenPrice").attr("priceFrom",$('select#priceFrom option:selected').val());
+	    $(".choosenPrice").attr("priceto",$('select#priceTo option:selected').val());
+	    
+	});
+	
+	
+	/*FILL FOR RENT OF FLATS, HOUSES, AREAS, ETC*/
+	
+	if(typeOf = "rent")
+	{
+		
+
+		//TODO FILL INTO LIST USER CURRENCY 
+		for ( var int = 0; int < steps; int++) {
+		
+			$("#priceFrom").append("<option value=\""+int * 10000+"\ >"+int * 10000+"</option>");
+			
+		}
+		
+		
+		for ( var int = 0; int < steps; int++) {
+			
+			$("#priceFrom").append("<option value=\""+int * 10000+"\">"+int * 10000+"</option>");
+
+			
+		}
+		
+		
+		
+	}
+	
+	
+	/*FILL FOR SALE OF FLATS, HOUSES, AREAS, ETC*/
+	
+	if(typeOf = "sale")
+	{
+		
+		for ( var int = 0; int < steps; int++) {
+			
+			$("#priceFrom").append("<option value=\""+int * 100000+"\">"+int * 100000+"</option>");
+
+			
+		}
+		
+		
+	for ( var int = 0; int < steps; int++) {
+			
+			$("#priceTo").append("<option value=\""+int * 10000+"\">"+int * 10000+"</option>");
+
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 }
 

@@ -21,7 +21,7 @@
 	</head>
   <body onload="init();">
   	
-	<!-- START OF MAIN PAGE -->
+	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b">
   	<div data-role="header">
     	<a href="index.html" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
@@ -78,14 +78,13 @@
 		</div>
     </div>
     </div>
-	<!-- // MAIN PAGE -->
+	<!-- // MAIN PAGE ------------------------------------------------------------------------------------------------>
 	
 	
 	
 	
+	<!-- FLATS ON SALE PAGE ------------------------------------------------------------------------------------------>
 	
-	
-	<!-- FLATS ON SALE PAGE -->
     <div data-role="page" data-theme="b" id="flatsOnSalePage">
   	<div data-role="header">
     	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
@@ -135,7 +134,7 @@
     
     
     
-    <!-- SELECT SUBTYPE OF FLATT -->
+    <!-- SELECT LOCALITY PART-->
     
     
     <div class="ui-grid-a">
@@ -148,15 +147,29 @@
 </div><!-- /grid-a -->
 
     
-    <!-- //SELECT SUBTYPE OF FLATT -->
+    <!-- //SELECT LOCALITY PART-->
+    
+    
+    
+        
+    <!-- SELECT PRICE FROM AND TO PART-->
+    
+    
+    <div class="ui-grid-a">
+	<div class="ui-block-a">Cena
+    </div>
+	<div class="ui-block-b"><a class="choosenPrice"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectPriceRangePage" data-role="button" priceFrom="" priceTo="" data-icon="arrow-r" data-iconpos="right" i18n="cena_do">Zvolte cenu</a></div>
+</div><!-- /grid-a -->
+
+    
+    <!-- //SELECT PRICE FROM AND TO PART-->
+    
+    
     
     
 	</div>
     
     
-
- 
-	
 
     
    
@@ -174,8 +187,17 @@
 		</div>
     </div>
     </div>
-	<!-- //FLATS ON SALE PAGE -->
+	<!-- //FLATS ON SALE PAGE -------------------------------------------------------------------------------------------------->
+  
 	
+    
+  
+   
+   <!-- UNIVERSAL PAGES ------------------------------------------------------------------------------>
+    
+    
+    
+   <!------------------------------------------------------------------------------>
    
    <!-- SELECT CITY PAGE -->
     <div data-role="page" data-theme="b" id="selectCityPage">
@@ -205,8 +227,57 @@
     </div><!-- end jqm content -->
    
     </div>
-	<!-- //SELECT CITY AGE -->
+	<!-- //SELECT CITY PAGE -->
+    <!------------------------------------------------------------------------------>
+    
+    
+    
+    
+    <!------------------------------------------------------------------------------>
+    <!-- SELECT PRICE RANGE PAGE -->
+    <div data-role="page" data-theme="b" id="selectPriceRangePage">
+  	<div data-role="header">
+    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">Zvolte cenovy rozsah</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF PRICE RANGES TO SELECT-->
+   <div class="ui-grid-a">
+	<div class="ui-block-a">
+    <select name="select-choice-1" id="priceFrom">
+      <option value="standard">Cena od:</option>
+      
+   </select>
+    </div>
+	<div class="ui-block-b">
+    
+    <select name="select-choice-1" id="priceTo">
+      <option value="standard">Cena do:</option>
+      
+   </select>
+    </div>
+</div><!-- /grid-a -->
+	
+  <!-- //LIST OF PRICE RANGES TO SELECT -->
+  
+    <a class="pageForReturn" onClick="" href="" id="priceRange" data-role="button" data-icon="arrow-l">Zvolit</a>
    
+
+    </div>
+    <!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT PRICE RANGE PAGE  -->
+    <!------------------------------------------------------------------------------>
+    
+<!-- //UNIVERSAL PAGES ------------------------------------------------------------------------------>
    
    
   </body>
