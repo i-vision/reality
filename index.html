@@ -115,21 +115,14 @@
    	<!-- //RADIO OPERATION, SELL , RENT -->
     
     
-    <!-- SELECT SUBTYPE OF FLATT -->
-    
-    <fieldset>
-    
+    <!-- SELECT SUBTYPE OF FLATT fillTypeOfRealitiesToSelect('2') 2 it means flats-->
     
      <div class="ui-grid-a">
-	<div class="ui-block-a">Typ bytu</div>
-	<div class="ui-block-b"><select name="subtyp" class="subtyp_2">
-   	
-	</select></div>
-</div><!-- /grid-a -->
-    
-    
-    
-	</fieldset>
+	<div class="ui-block-a" >Typ bytu</div>
+	<div class="ui-block-b"><a class="choosenSubtypes" typ="2" selectedSubtypes="" onClick="pageForReturn('flatsOnSalePage'),fillTypeOfRealitiesToSelect('2')"; href="#selectTypeOfReality" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_typ_nemovitosti">Zvolte typ nemovitosti</a></div>
+    </div>
+    <!-- /grid-a -->
+ 
     <!-- //SELECT SUBTYPE OF FLATT -->
     
     
@@ -140,7 +133,7 @@
     <div class="ui-grid-a">
 	<div class="ui-block-a">Lokalita
     <div data-role="controlgroup" data-type="horizontal" >
-			<a  onClick="getMyPosition();" data-role="button" data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
+			<a  onClick="getMyPosition();" data-role="button" municipalityId="" data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
 		</div>
     </div>
 	<div class="ui-block-b"><a class="choosenCity" idofcity="" onClick="pageForReturn('flatsOnSalePage')"; href="#selectCityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_mesto">Zvolte mesto</a></div>
@@ -163,16 +156,11 @@
 
     
     <!-- //SELECT PRICE FROM AND TO PART-->
-    
-    
-    
+
     
 	</div>
     
-    
-
-    
-   
+ 
 
     </div><!-- end jqm content -->
     <div data-role="footer" data-theme="c" >
@@ -199,10 +187,46 @@
     
    <!------------------------------------------------------------------------------>
    
+   <!-- SELECT SUBTYPE OF RELAITY PAGE -->
+    <div data-role="page" data-theme="b" id="selectTypeOfReality">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="upresneni">Upresneni</h1> 
+		
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF ALL REALITIES TO SELECT-->
+
+
+<ul data-role="listview" data-split-icon="check" data-split-theme="d" class="listOfSubtypes">
+
+         
+       
+</ul>
+	
+  <!-- //LIST OF ALL REALITIES TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT SUBTYPE OF RELITY PAGE -->
+    <!------------------------------------------------------------------------------>
+    
+   
+   
    <!-- SELECT CITY PAGE -->
     <div data-role="page" data-theme="b" id="selectCityPage">
   	<div data-role="header">
-    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vyberte_mesto">Vyberte mesto</h1> 
 		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
 	</div>
@@ -237,7 +261,7 @@
     <!-- SELECT PRICE RANGE PAGE -->
     <div data-role="page" data-theme="b" id="selectPriceRangePage">
   	<div data-role="header">
-    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vyberte_mesto">Zvolte cenovy rozsah</h1> 
 		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
 	</div>

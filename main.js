@@ -1,7 +1,9 @@
 
 //INIT OF ISCROLL PLUGIN
-
+var selectedSubtypesOfRealities= new Array();  
 var myScroll;
+//var myLat;
+//var myLong;
 function loaded() {
 	myScroll = new iScroll('wrapper');
 }
@@ -90,18 +92,7 @@ function checkSettings()
 		//TODO
 		//FILL ALL FORMS AND LISTS WITH DTA FROM CLASSIFIERS
 		
-		/*FILL TYPE OF FLATS  LIST*/
 		
-		var flatForRentList = parsedFetchedClassifields.ciselniky.subtyp[2];
-		
-		console.log(flatForRentList);
-		
-		
-		$.each(flatForRentList, function(key, value) { 
-				  console.log(key + ': ' + value); 
-					$(".subtyp_2").append("<option value=\""+key+"\">"+value+"</option>");
-		});	
-		/*//FILL TYPE OF FLATS  LIST*/
 		
 		
 		
@@ -131,6 +122,107 @@ function checkSettings()
 	
 	
 }
+
+/*FILL TYPE OF FLATS  LIST*/
+function fillTypeOfRealitiesToSelect(subtype) {
+	
+	
+	var fetchedClassifiers = localStorage.getItem('Classifiers');
+	
+	//console.log(fetchedClassifiers);
+	// Parse to access 
+	var parsedFetchedClassifields = JSON.parse(fetchedClassifiers);
+
+	//console.log('retrievedObject:'+ parsedFetchedClassifields);
+	//console.log(parsedFetchedClassifields);
+	
+	
+	
+	var flatForRentList = parsedFetchedClassifields.ciselniky.subtyp[subtype];
+	
+	console.log(flatForRentList);
+	
+	$('.listOfSubtypes li').remove();
+	
+	$.each(flatForRentList, function(key, value) { 
+	console.log(key + ': ' + value); 
+	$(".listOfSubtypes").append("<li onClick=\"addSubtypeToSelect("+key+","+"'"+value+"'"+");\"><a  id=\"subtypeId"+key+"\" ><h3 class=\"nameOfReality\">"+value+"</h3><p class=\"countOfRealities\">"+key+"</p><a data-rel=\"dialog\"  data-transition=\"slideup\">	</a></li>");
+	});	
+	//$('.listOfSubtypes').listview('refresh');
+
+
+	
+}
+
+function addSubtypeToSelect(key,value)
+{
+	console.log(key);
+	console.log("#subtypeId"+key+"");
+
+	
+	
+	//REMOVE SELECT ITEM FROM LIST
+	if($("#subtypeId"+key+"").css("background-color")=="rgb(38, 130, 193)")
+	{
+	console.log("Je obarveno, odbarvuji");	
+	$("#subtypeId"+key+"").css("background-color", "#fff");
+	console.log("BARVA JE NYNI"+ $("#subtypeId"+key+"").css("background-color"));
+	selectedSubtypesOfRealities.splice(key, 1);
+	console.log("Z POLE NA INDEXU: "+key+" ODEBRANA HODNOTA "+value+"");
+	}
+	
+	
+	//ADD SELECT ITEM TO LIST
+	else if($("#subtypeId"+key+"").css("background-color")=="rgba(0, 0, 0, 0)" || $("#subtypeId"+key+"").css("background-color")=="rgb(255, 255, 255)")
+	{
+	console.log("Neni obarveno, obarvuji");	
+	$("#subtypeId"+key+"").css("background-color", "#2682C1");
+	console.log("BARVA JE NYNI"+ $("#subtypeId"+key+"").css("background-color"));
+	selectedSubtypesOfRealities[key] = value;
+	console.log("DO POLE NA INDEX: "+key+" PRIDANA HODNOTA"+value+"");
+	
+	//PASS PARAMS TO FORM AND FILL NAMES TO THE BUTTON
+	
+	//DELETE DEFAULT TEXT IN BUTTON UF IS SET
+	if($(".choosenSubtypes .ui-btn-text").text() == "Zvolte typ nemovitosti");
+	{
+	$(".choosenSubtypes .ui-btn-text").text("");
+	}
+	//JOIN TEXT INT BUTTON
+	$(".choosenSubtypes .ui-btn-text").append(value);
+	
+	}
+
+	
+	//APPEND SUBTYPES ID INTO selectedSubtypes attr
+	var subtypesString = "";
+	
+	$.each(selectedSubtypesOfRealities, function(key, value) { 
+		//console.log(key + ': ' + value); 
+		
+		if(value != undefined)
+		{	
+			//PREPARE STRING
+			subtypesString += key+",";
+		
+		}
+		
+	});	
+	
+	//INSERT STIRNG INT ATTR
+	$(".choosenSubtypes").attr('selectedSubtypes',subtypesString );
+	//
+	
+	
+	//ECHO CONTENT ONTO ARRAY 
+	console.log(selectedSubtypesOfRealities);
+	
+}
+
+/*//FILL TYPE OF FLATS  LIST*/
+
+
+
 
 //GET NAME AND 
 //ID OF EACH SELECTED CITY
@@ -369,7 +461,13 @@ var onSuccess = function(position) {
          'Heading: '           + position.coords.heading           + '\n' +
          'Speed: '             + position.coords.speed             + '\n' +
          'Timestamp: '         + new Date(position.timestamp)      + '\n');
+   
+  // myLat = position.coords.latitude;
+  // myLong = position.coords.longitude;
+
+   getMunicipalityByGpsCoords(position.coords.latitude,position.coords.longitude);
 };
+
 
 
 //WRITEOUT NEAREST CITY TO USER
@@ -389,3 +487,44 @@ navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 }
 
+
+
+//GET NEAREST CITY BY GPS COORDS AND FILL ID OF THIS CITY INTO ATTRIBUTE municipalityId
+function getMunicipalityByGpsCoords(Lat,Long) {
+
+
+$(".infoBarHeadingText").text('Ziskavam informace o aktualni poloze');
+	
+$(".infoBar").show();
+	
+			jQuery.ajax({
+						
+						url :"http://pts.ceskereality.cz/json/gps_obce.html",
+						data: "mojelat="+Lat+"&mojelon="+Long+"",
+						type : "GET",
+						
+						success : function(result) {
+							console.log("getMunicipalityByGpsCoords prejalo souradnice"+Lat+" a "+Long+"");	
+							
+							//TODO PARSE
+							console.log(result);
+							var parsedInfoStringify =   JSON.stringify(result);
+							var parsedInfo = JSON.parse(parsedInfoStringify);
+							var parsedInfo2 = JSON.stringify(parsedInfo.nejblizsi_obec);
+							var parsedInfo3 = JSON.parse(parsedInfo2);
+							var parsedInfoString = JSON.stringify(parsedInfo3);
+							console.log(parsedInfoString);	
+
+							console.log('HOTOVO OBEC USPESNE NACTENA');
+							$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
+							$(".infoBar").hide('slow');		
+							
+						},
+						// IF HTTP RESULT 400 || 404
+						error : function(x, e) {
+								
+							typeOfRequestError(x, e);
+						}
+					});
+	
+}
