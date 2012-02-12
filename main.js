@@ -269,7 +269,21 @@ function pageForReturn(idOfpageForReturn,typeOfPrice) {
      }
 	 
 	 
+
 }
+
+
+
+/*Writeout list of all matched realities by passed params
+ * Example:
+ * http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=2&subtyp=1,3&okres=13&stranka=1&trideni=cena&ascdesc=desc&cenado=150000&cenaod=1200&plochaod=10&plochado=1000&mojelat=48.9808&mojelon=15.4814
+ * */
+function getListOfRealities(jensgps,typ,subtyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,mojelat,mojelon)
+{
+	
+}
+
+
 
 /*Fill select list of price range for rent or sale
  * price for rent Kc/ Month
@@ -402,16 +416,36 @@ function typeOfRequestError(x, e)
 
 	if (x.status == 0) {
 		console.log('You are offline!!\n Please Check Your Network.');
+		$(".infoBarHeadingText").text('Chyba : Nedostupne internetove pripojeni.');
+		$(".infoBar").show();		
+		
 	} else if (x.status == 404) {
 		console.log('Requested URL not found.');
+		$(".infoBarHeadingText").text('Chyba 404: adresa nenalezena.');
+		$(".infoBar").show();		
+
 	} else if (x.status == 500) {
 		console.log('Internel Server Error');
+		$(".infoBarHeadingText").text('Chyba 505: chyba serveru, zkuste to prosim za chvili.');
+		$(".infoBar").show();		
+
 	} else if (e == 'parsererror') {
 		console.log('Error.\nParsing JSON Request failed.');
+		$(".infoBarHeadingText").text('Chyba : vyskytla se chyba pri parsovani dat.');
+		$(".infoBar").show();		
+
 	} else if (e == 'timeout') {
 		console.log('Request Time out.');
+		$(".infoBarHeadingText").text('Chyba : casovy limit pro propojeni vyprsel.');
+		$(".infoBar").show();		
+
 	} else {
+	
 		console.log('Unknow Error.\n' + x.responseText);
+		$(".infoBarHeadingText").text('Chyba : neznama chyba. '+x.responseText+"");
+		$(".infoBar").show();		
+
+		
 	}
 
 }
@@ -507,15 +541,14 @@ $(".infoBar").show();
 							console.log("getMunicipalityByGpsCoords prejalo souradnice"+Lat+" a "+Long+"");	
 							
 							//TODO PARSE
-							console.log(result);
-							var parsedInfoStringify =   JSON.stringify(result);
-							var parsedInfo = JSON.parse(parsedInfoStringify);
-							var parsedInfo2 = JSON.stringify(parsedInfo.nejblizsi_obec);
-							var parsedInfo3 = JSON.parse(parsedInfo2);
-							var parsedInfoString = JSON.stringify(parsedInfo3);
-							console.log(parsedInfoString);	
-
-							console.log('HOTOVO OBEC USPESNE NACTENA');
+							console.log(result.nejblizsi_obec);
+							var nearestMunicipality = result.nejblizsi_obec.split(',');
+							
+							console.log("NEJBLIZSI MESTO MA ID "+nearestMunicipality[0]+"A NAZEV"+nearestMunicipality[1]+"");
+							passParamsOfCity(nearestMunicipality[0], nearestMunicipality[1]);
+							
+							
+							
 							$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
 							$(".infoBar").hide('slow');		
 							
