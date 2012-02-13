@@ -184,12 +184,12 @@ function addSubtypeToSelect(key,value)
 	//PASS PARAMS TO FORM AND FILL NAMES TO THE BUTTON
 	
 	//DELETE DEFAULT TEXT IN BUTTON UF IS SET
-	if($(".choosenSubtypes .ui-btn-text").text() == "Zvolte typ nemovitosti");
+	if($(".choosenSubtypesBtn .ui-btn-text").text() == "Zvolte typ nemovitosti");
 	{
-	$(".choosenSubtypes .ui-btn-text").text("");
+	$(".choosenSubtypesBtn .ui-btn-text").text("");
 	}
 	//JOIN TEXT INT BUTTON
-	$(".choosenSubtypes .ui-btn-text").append(value);
+	$(".choosenSubtypesBtn .ui-btn-text").append(value);
 	
 	}
 
@@ -210,7 +210,7 @@ function addSubtypeToSelect(key,value)
 	});	
 	
 	//INSERT STIRNG INT ATTR
-	$(".choosenSubtypes").attr('selectedSubtypes',subtypesString );
+	$(".choosenValues").attr('selectedSubtypes',subtypesString );
 	//
 	
 	
@@ -229,8 +229,8 @@ function addSubtypeToSelect(key,value)
 function passParamsOfCity(id,name) {
 
 console.log("Vybrano mesto s id a jmenem "+ id + " "+name);	
-$(".choosenCity .ui-btn-text").text(name);
-$(".choosenCity").attr("idofcity",id);
+$(".choosenCityBtn .ui-btn-text").text(name);
+$(".choosenValues").attr('idOfCity',id);
 
 }
 
@@ -272,6 +272,76 @@ function pageForReturn(idOfpageForReturn,typeOfPrice) {
 
 }
 
+//UNIVERSAL FUNCTION FOR PASING PARAMMS FROM FORM TO SEARCH FUNCTION
+
+function getParamsForSearch() {
+
+	//ATTR TYPE PRESENTS TYPE OF REALITY, PRICE, ETC.., FOR EXAMPLE type="2" is USED FOR FLATS  <div data-role="page" data-theme="b" id="flatsOnSalePage" type="2">
+	
+	
+	//TODO IMPLEMENT jensgps INTO  APP
+	var jensgps = 0;	
+	//TODO HOW TO RESOLVE TYP SALE OR RENT? TOOGLE BTN OR IN PAGE?
+	//ATTR TYPE PRESENTS TYPE OF REALITY, FOR EXAMPLE type="2" is USED FOR FLATS  <div data-role="page" data-theme="b" id="flatsOnSalePage" type="2">
+	
+	var typ = $('.ui-page-active').attr('type');
+	
+	var subtyp = $('.ui-page-active').attr('selectedSubtypes');
+	
+	var okres = $('.ui-page-active').attr('idOfCity');
+	
+	var stranka = "1";
+	
+	var trideni = "cena";
+	
+	var ascdesc = "asc";
+	
+	var cenaod = $('.ui-page-active').attr('priceFrom');
+	
+	var cenado = $('.ui-page-active').attr('priceTo');
+	
+	var plochaod = $('.ui-page-active').attr('sizeFrom');
+	
+	var plochado = $('.ui-page-active').attr('sizeTo');
+	
+	var mojelat = $('.ui-page-active').attr('mojelat');
+	
+	var mojelon = $('.ui-page-active').attr('mojelon');
+	
+	
+	
+	 console.log('GPS: '          + jensgps         + '\n' +
+	         'TYP: '         + typ        + '\n' +
+	         'SUBTYP: '          + subtyp         + '\n' +
+	         'OKRES: '          + okres         + '\n' +
+	         'trideni podle: ' + trideni  + '\n' +
+	         'ascdesc: '           + ascdesc          + '\n' +
+	         'cenaod: '             + cenaod             + '\n' +
+	         'cenado: '             + cenado            + '\n' +
+	         'plochaod: '             + plochaod            + '\n' +
+	         'plochado: '             + plochado            + '\n' +
+	         'mojelat: '             + mojelat            + '\n' +
+	         'mojelon: '         + mojelon     + '\n');
+	 
+	 
+	
+	//VERIFY, THAT IMPORTANT VALUES IN FORM  ARE FILLED
+	
+	 console.log("DELAK "+typ.length);
+	 
+	 if(typ.length == 0 || subtyp.length== 0 || okres.length== 0 || cenaod.length == 0 || cenado.length == 0 )
+		 
+	 {
+	 $(".infoBarHeadingText").text('Nespravne zadane hodnoty, vyberte prosim znovu');	
+	 $(".infoBar").show();
+	 }	
+	 
+	 else
+	 {
+		 getListOfRealities(jensgps, typ, subtyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado, mojelat, mojelon);
+	 }
+	
+}
 
 
 /*Writeout list of all matched realities by passed params
@@ -280,6 +350,10 @@ function pageForReturn(idOfpageForReturn,typeOfPrice) {
  * */
 function getListOfRealities(jensgps,typ,subtyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,mojelat,mojelon)
 {
+	
+	
+	console.log("FCE getListOfRealities jEde");
+	
 	
 }
 
@@ -304,9 +378,9 @@ function fillSelectPricePage(typeOf) {
 	    //UPDATE VALUES IN PAGE WHERE IS RETURNED TO
 
 	    
-	    $(".choosenPrice .ui-btn-text").text($('select#priceFrom option:selected').text()+" - "+$('select#priceTo option:selected').text());
-	    $(".choosenPrice").attr("priceFrom",$('select#priceFrom option:selected').val());
-	    $(".choosenPrice").attr("priceto",$('select#priceTo option:selected').val());
+	    $(".choosenPriceBtn .ui-btn-text").text($('select#priceFrom option:selected').text()+" - "+$('select#priceTo option:selected').text());
+	    $(".choosenValues").attr("priceFrom",$('select#priceFrom option:selected').val());
+	    $(".choosenValues").attr("priceto",$('select#priceTo option:selected').val());
 	    
 	});
 	
@@ -479,7 +553,7 @@ function getJson(url,type,data)
 
 //GET ACTUAL GPS COORDS
 //AND GET NEAREST CITY FROM USER AND WRITEOUT
-function getMyPosition()
+function getMyPosition(getAlsoMunicipality)
 {
 
 // onSuccess Callback
@@ -499,7 +573,15 @@ var onSuccess = function(position) {
   // myLat = position.coords.latitude;
   // myLong = position.coords.longitude;
 
-   getMunicipalityByGpsCoords(position.coords.latitude,position.coords.longitude);
+   if (getAlsoMunicipality == "1")
+	   {
+   
+	   $(".mojelat").attr('');
+	   getMunicipalityByGpsCoords(position.coords.latitude,position.coords.longitude);
+	   $(".choosenValues").attr("mojelat",position.coords.latitude );
+	   $(".choosenValues").attr("mojelon",position.coords.longitude );
+  
+	   }
 };
 
 
