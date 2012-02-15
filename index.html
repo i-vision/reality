@@ -8,7 +8,9 @@
 	  <link rel="stylesheet" href="custom.css" type="text/css"/>
 	  
 	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery-1.6.4.min"></script>
+       <script type="text/javascript" charset="utf-8" src="jquery-ui-map-3.0-beta/ui/jquery.ui.map.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery.mobile-1.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
@@ -134,6 +136,7 @@
 	<div class="ui-block-a">Lokalita
     <div data-role="controlgroup" data-type="horizontal" >
 			<a  onClick="getMyPosition('1');" data-role="button"  data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
+            <a  onClick="getMyPosition('selectOnMap');" data-role="button"  data-icon="plus" data-iconpos="notext">Lokalita dle mapy</a>
 		</div>
     </div>
 	<div class="ui-block-b"><a class="choosenCityBtn"  onClick="pageForReturn('flatsOnSalePage')"; href="#selectCityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_mesto">Zvolte mesto</a></div>
@@ -152,6 +155,10 @@
 	<div class="ui-block-a">Cena
     </div>
 	<div class="ui-block-b"><a class="choosenPriceBtn"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectPriceRangePage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="cena_do">Zvolte cenu</a></div>
+     <div data-role="controlgroup" data-type="horizontal" >
+			<a  onClick="showMoreOptions('2');" data-role="button"  data-icon="plus" data-iconpos="vice_voleb">Více voleb</a>
+		</div>
+    
 </div><!-- /grid-a -->
 
     
@@ -183,12 +190,12 @@
  
 
 
-<!-- FLATS ON SALE PAGE 2 ------------------------------------------------------------------------------------------>
+<!-- SELECT ON MAP PAGE  ------------------------------------------------------------------------------------------>
 	
-    <div data-role="page" data-theme="b" id="flatsOnRentPage">
+    <div data-role="page" data-theme="b" id="selectOnMapPage">
   	<div data-role="header">
     	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="byty_na_prodej">Byty na  prodej</h1> 
+		<h1 i18n="byty_na_prodej">Zvolte na mapě</h1> 
 		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -198,72 +205,6 @@
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div data-role="content" data-theme="d" class="bgImage">
    
-   
-    <div data-role="fieldcontain" >
-   	<!-- RADIO OPERATION, SELL , RENT -->
-   
-    <fieldset data-role="controlgroup" data-type="horizontal" >
-    	
-         	<input type="radio" name="operace" id="operaceProdej" value="0" checked="checked"   />
-         	<label for="operaceProdej"  >Prodej</label>
-
-         	<input type="radio" name="operace" id="operacePronajem" value="1"  />
-         	<label for="operacePronajem" >Pronajem</label>
-
-    </fieldset>
-    
-   	<!-- //RADIO OPERATION, SELL , RENT -->
-    
-    
-    <!-- SELECT SUBTYPE OF FLATT fillTypeOfRealitiesToSelect('2') 2 it means flats-->
-    
-     <div class="ui-grid-a">
-	<div class="ui-block-a" >Typ bytu</div>
-	<div class="ui-block-b"><a class="choosenSubtypes" typ="2" selectedSubtypes="" onClick="pageForReturn('flatsOnSalePage'),fillTypeOfRealitiesToSelect('2')"; href="#selectTypeOfReality" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_typ_nemovitosti">Zvolte typ nemovitosti</a></div>
-    </div>
-    <!-- /grid-a -->
- 
-    <!-- //SELECT SUBTYPE OF FLATT -->
-    
-    
-    
-    <!-- SELECT LOCALITY PART-->
-    
-    
-    <div class="ui-grid-a">
-	<div class="ui-block-a">Lokalita
-    <div data-role="controlgroup" data-type="horizontal" >
-			<a  onClick="getMyPosition();" data-role="button" municipalityId="" data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
-		</div>
-    </div>
-	<div class="ui-block-b"><a class="choosenCity" idofcity="" onClick="pageForReturn('flatsOnSalePage')"; href="#selectCityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_mesto">Zvolte mesto</a></div>
-</div><!-- /grid-a -->
-
-    
-    <!-- //SELECT LOCALITY PART-->
-    
-    
-    
-        
-    <!-- SELECT PRICE FROM AND TO PART-->
-    
-    
-    <div class="ui-grid-a">
-	<div class="ui-block-a">Cena
-    </div>
-	<div class="ui-block-b"><a class="choosenPrice"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectPriceRangePage" data-role="button" priceFrom="" priceTo="" data-icon="arrow-r" data-iconpos="right" i18n="cena_do">Zvolte cenu</a></div>
-</div><!-- /grid-a -->
-
-    
-    <!-- //SELECT PRICE FROM AND TO PART-->
-
-    
-	</div>
-    
-    
-    <a href="#writeoutOfRealities" data-role="button" i18n="hledat" onClick="">Hledat</a>
- 
-
     </div><!-- end jqm content -->
     <div data-role="footer" data-theme="c" >
     	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
@@ -277,7 +218,7 @@
 		</div>
     </div>
     </div>
-	<!-- //FLATS ON SALE PAGE 2 -------------------------------------------------------------------------------------------------->
+	<!-- //SELECT ON MAP PAGE  2 -------------------------------------------------------------------------------------------------->
   
 	 
  

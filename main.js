@@ -4,6 +4,9 @@ var selectedSubtypesOfRealities= new Array();
 var myScroll;
 //var myLat;
 //var myLong;
+
+var countOfSubtypes = new Object();
+
 function loaded() {
 	myScroll = new iScroll('wrapper');
 }
@@ -126,6 +129,46 @@ function checkSettings()
 /*FILL TYPE OF FLATS  LIST*/
 function fillTypeOfRealitiesToSelect(subtype) {
 	
+	
+	//GET COUNT OF REALITY TYPES
+	
+	
+	$(".infoBarHeadingText").text('Ziskavam informace o subtypech');
+	
+	$(".infoBar").show();
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/pocty_subtypy.html",
+							data: "typ="+subtype+"",
+							type : "GET",
+							
+							success : function(result) {
+								console.log("fillTypeOfRealitiesToSelect prejalo parametr"+subtype+"");	
+								
+								
+								console.log(result.pocty_subtypy);
+								
+								countOfSubtypes = result.pocty_subtypy;
+								
+								
+								$(".infoBarHeadingText").text('INFORMACE O SUBTYPECH NACTENY');
+								$(".infoBar").hide('slow');		
+								
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
+	
+	
+				
+	console.log(countOfSubtypes);			
+				
+	
+	//!GET COUNT OF REALITY TYPES
 	
 	var fetchedClassifiers = localStorage.getItem('Classifiers');
 	
@@ -327,7 +370,7 @@ function getParamsForSearch() {
 	
 	//VERIFY, THAT IMPORTANT VALUES IN FORM  ARE FILLED
 	
-	 console.log("DELAK "+typ.length);
+	 
 	 
 	 if(typ.length == 0 || subtyp.length== 0 || okres.length== 0 || cenaod.length == 0 || cenado.length == 0 )
 		 
@@ -350,9 +393,35 @@ function getParamsForSearch() {
  * */
 function getListOfRealities(jensgps,typ,subtyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,mojelat,mojelon)
 {
+
+	console.log("FCE getListOfRealities spustena");
+	$(".infoBarHeadingText").text('Nacitam data..');
+	$(".infoBar").show();
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/vypis.html",
+							data: {jensgps:jensgps,typ:typ,subtyp:subtyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,mojelat:mojelat,mojelon:mojelon},
+							type : "GET",
+							
+							success : function(result) {
+							
+								console.log(result);
+								
+								
+								
+								$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
+								$(".infoBar").hide('slow');		
+								
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
 	
 	
-	console.log("FCE getListOfRealities jEde");
 	
 	
 }
@@ -582,6 +651,23 @@ var onSuccess = function(position) {
 	   $(".choosenValues").attr("mojelon",position.coords.longitude );
   
 	   }
+   
+
+   //IF WE NEED MARK POSITION FOR SEARCH ON MAP 
+   if (getAlsoMunicipality == "selectOnMap")
+	   {
+	   
+	   console.log('HLEDAM PODLE ZADANI NA MAPE');
+   
+	   $(".mojelat").attr('');
+	   $(".choosenValues").attr("mojelat",position.coords.latitude );
+	   $(".choosenValues").attr("mojelon",position.coords.longitude );
+	   
+	   showOnMap(position.coords.latitude,position.coords.longitude);
+
+	   
+	   }
+   
 };
 
 
@@ -641,5 +727,17 @@ $(".infoBar").show();
 							typeOfRequestError(x, e);
 						}
 					});
+	
+}
+
+
+
+
+//SHOW MY CURRENT LOCATION ON GOOGLE MAP FOR NEXT USE 
+function showOnMap(Lat,Long) {
+
+$(".infoBarHeadingText").text('Ziskavam informace o aktualni poloze');
+$(".infoBar").show();
+	
 	
 }
