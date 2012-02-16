@@ -16,6 +16,9 @@
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
    		<script type="text/javascript" charset="utf-8" src="iscroll/iscroll.js"></script>
 			<script type="text/javascript" charset="utf-8" src="iscroll/jqmiscroll.js"></script>
+            <script type="text/javascript" src="resources.default.js"></script>
+            <script type="text/javascript" src="resources.es.js"></script>
+    
 	<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->
 	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />-->
 	<!-- <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>-->
@@ -27,8 +30,8 @@
     <div data-role="page" data-theme="b">
   	<div data-role="header">
     	<a href="index.html" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
-		<h1 i18n="ceskereality.cz">ČESKÉREALITY.CZ</h1> 
-		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r">Login</a>
+		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
+		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"><script>document.writeln(MyApp.resources.One) </script></a>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -44,7 +47,7 @@
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage"> BYTY PRODEJ</a></div></div>
+			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage"><script>document.writeln(MyApp.resources.One) </script></a></div></div>
 			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
@@ -189,6 +192,20 @@
 	
  
 
+ 
+ 
+    
+  
+   
+   <!-- UNIVERSAL PAGES ------------------------------------------------------------------------------>
+    
+    
+    
+    
+   
+    
+    
+<!------------------------------------------------------------------------------>   
 
 <!-- SELECT ON MAP PAGE  ------------------------------------------------------------------------------------------>
 	
@@ -204,6 +221,11 @@
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div data-role="content" data-theme="d" class="bgImage">
+	<div id="map_canvas" style="width:100%;height:400px;">
+    
+    </div>
+
+	
    
     </div><!-- end jqm content -->
     <div data-role="footer" data-theme="c" >
@@ -218,16 +240,12 @@
 		</div>
     </div>
     </div>
-	<!-- //SELECT ON MAP PAGE  2 -------------------------------------------------------------------------------------------------->
+	<!-- //SELECT ON MAP PAGE   -------------------------------------------------------------------------------------------------->
   
 	 
  
- 
- 
     
-  
-   
-   <!-- UNIVERSAL PAGES ------------------------------------------------------------------------------>
+    
     
     
     

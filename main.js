@@ -45,13 +45,24 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2
 
 /*CUSTOM FUNCTIONS*/
 
+$(document).ready(function () {
+	$.extend(MyApp.resources, localizedResources);
+
+	});
+
+
+
 //INIT PHONEGAP
 function init() {
+	
+
     // the next line makes it impossible to see Contacts on the HTC Evo since it
     // doesn't have a scroll button
     // document.addEventListener("touchmove", preventBehavior, false);
+	$.extend(MyApp.resources, localizedResources);
 	checkSettings();
 	document.addEventListener("deviceready", deviceInfo, true);
+	
    
 }
 
@@ -734,10 +745,92 @@ $(".infoBar").show();
 
 
 //SHOW MY CURRENT LOCATION ON GOOGLE MAP FOR NEXT USE 
+//DOCUMENTATION FOR THIS PLUGIN IS HERE 
+//http://code.google.com/p/jquery-ui-map/wiki/jquery_ui_map_v_3_sample_code
 function showOnMap(Lat,Long) {
 
 $(".infoBarHeadingText").text('Ziskavam informace o aktualni poloze');
 $(".infoBar").show();
+
+
+console.log('showOnMap runs');
+
+console.log("Lat"+Lat+"Lon"+Long+"" );
+/*
+$('#map_canvas').gmap().bind('init', function(ev, map) {
+	$('#map_canvas').gmap('addMarker', {'position': '48.978714,14.469563', 'bounds': true}).click(function() {
+		$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
+	});
+});
+*/
+
+
+$('#map_canvas').gmap().bind('init', function(event, map) { 
+	$(map).click( function(event) {
+		$('#map_canvas').gmap('addMarker', {
+			'position': event.latLng, 
+			'draggable': true, 
+			'bounds': false
+		}, function(map, marker) {
+			console.log(marker.__gm_id);
+			console.log(marker.__gm_id);
+			console.log(marker.__gm_id);
+		
+			findLocation(marker.getPosition(), marker);
+		}).dragend( function(event) {
+			findLocation(event.latLng, this);
+		}).click( function() {
+			openDialog(this);
+		})
+	});
+});
+
+function findLocation(location, marker) {
 	
+	console.log(location);
+	console.log(marker);
 	
+	$('#map_canvas').gmap('search', {'location': location}, function(results, status) {
+		console.log(results[0].address_components);
+		
+		if ( status === 'OK' ) {
+			
+			console.log(results[0].address_components);
+			
+			$.each(results[0].address_components, function(i,v) {
+				if ( v.types[0] == "administrative_area_level_1" || 
+					 v.types[0] == "administrative_area_level_2" ) {
+					
+					console.log(v.long_name);
+					
+				} else if ( v.types[0] == "country") {
+					console.log(v.long_name);
+					
+				}
+			});
+			console.log(results[0].formatted_address);
+			marker.setTitle(results[0].formatted_address);
+			
+			//openDialog(marker);
+		}
+	});
+}
+
+function openDialog(marker) {
+	$('#dialog'+marker.__gm_id).dialog({'modal':true, 'title': 'Edit and save point', 'buttons': { 
+		"Remove": function() {
+			$(this).dialog( "close" );
+			marker.setMap(null);
+		},
+		"Save": function() {
+			$(this).dialog( "close" );
+		}
+	}});
+}
+
+
+
+$.mobile.changePage( "#selectOnMapPage");	
+
+
 }
