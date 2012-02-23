@@ -105,6 +105,8 @@ $("#amountOfRepaymentTo").bind( "change", function(event, ui) {
 
 
 
+
+
 });
 
 //INIT PHONEGAP
@@ -199,9 +201,9 @@ function passParamsOfDistrict(id,name) {
 
 console.log("Vybran Okres s id a jmenem "+ id + " "+name);	
 $(".choosenDistrictBtn .ui-btn-text").text(name);
-$(".choosenValues").attr('idOfDictrict',id);
+$(".choosenValues").attr('dictrictId',id);
 
-console.log("ATRIBUT idOfDictrict nyni obsahuje: " + $(".choosenValues").attr('idOfDictrict'));
+console.log("ATRIBUT idOfDictrict nyni obsahuje: " + $(".choosenValues").attr('dictrictId'));
 
 
 
@@ -210,6 +212,20 @@ console.log("VOLAM FCI fillListOfMunicipalities");
 
 fillListOfMunicipalities(id);
 
+}
+
+
+function fillTypeSellOrRent(type)
+{
+	if(type== "sell")
+	{$(".choosenValues").attr('type',1);
+	console.log("DO ATRIBUTU type ulozeno 1 ");
+	}
+	
+	if(type== "rent")
+	{$(".choosenValues").attr('type',2);
+	console.log("DO ATRIBUTU type ulozeno 2 ");
+	}
 }
 
 //GET NAME AND 
@@ -723,7 +739,7 @@ function getParamsForSearch() {
 	
 	
 	
-	var stranka = "1";
+	var stranka = "0";
 	
 	var trideni = "cena";
 	
@@ -770,7 +786,7 @@ function getParamsForSearch() {
 	
 	 
 	 
-	 if(typ.length == 0 || subtyp.length== 0 || okres.length== 0 || cenaod.length == 0 || cenado.length == 0 )
+	 if(typ.length == 0 || subTyp.length== 0 || okres.length== 0 || cenaod.length == 0 || cenado.length == 0 )
 		 
 	 {
 	 $(".infoBarHeadingText").text('Nespravne zadane hodnoty, vyberte prosim znovu');	
@@ -800,7 +816,7 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 				jQuery.ajax({
 							
 							url :"http://pts.ceskereality.cz/json/vypis.html",
-							data: {jensgps:jensgps,typ:typ,subtyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
+							data: {jensgps:jensgps,typ:typ,subTyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
 							type : "GET",
 							
 							success : function(result) {
@@ -834,6 +850,9 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 
 function fillSelectPricePage(typeOf) {
 
+	console.log ("Typ ceny:" +typeOf); 
+    
+	
 	var steps = 30; 
 	
 	
@@ -862,14 +881,14 @@ function fillSelectPricePage(typeOf) {
 		//TODO FILL INTO LIST USER CURRENCY 
 		for ( var int = 0; int < steps; int++) {
 		
-			$("#priceFrom").append("<option value=\""+int * 10000+"\ >"+int * 10000+"</option>");
+			$("#priceFrom").append("<option value=\""+int * 1000+"\ >"+int * 1000+"</option>");
 			
 		}
 		
 		
 		for ( var int = 0; int < steps; int++) {
 			
-			$("#priceFrom").append("<option value=\""+int * 10000+"\">"+int * 10000+"</option>");
+			$("#priceTo").append("<option value=\""+int * 1000+"\">"+int * 1000+"</option>");
 
 			
 		}
@@ -889,19 +908,19 @@ function fillSelectPricePage(typeOf) {
 			$("#priceFrom").append("<option value=\""+int * 100000+"\">"+int * 100000+"</option>");
 
 			
-		}
+		}	
 		
 		
 	for ( var int = 0; int < steps; int++) {
 			
-			$("#priceTo").append("<option value=\""+int * 10000+"\">"+int * 10000+"</option>");
+			$("#priceTo").append("<option value=\""+int * 100000+"\">"+int * 100000+"</option>");
 
 			
 		}
+	
+	
+	
 	}
-	
-	
-	
 	
 	
 	

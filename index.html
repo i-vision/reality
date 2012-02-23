@@ -42,7 +42,7 @@
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
+			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
 			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
@@ -92,6 +92,15 @@
     	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="byty_na_prodej">Byty na  prodej</h1> 
 		
+        <!-- CHOOSE SELL OR RENT --> 
+        <div data-role="navbar">
+	<ul>
+		<li><a class="sellOrRent" onClick="fillTypeSellOrRent('sell');" value="sell" class="ui-btn-active" i18n="prodej">Prodej</a></li>
+		<li><a class="sellOrRent" onClick="fillTypeSellOrRent('rent');" value="rent" i18n="pronajem">Pronájem</a></li>
+	</ul>
+</div>
+  <!--// CHOOSE SELL OR RENT -->   
+
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -99,12 +108,7 @@
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div data-role="content" data-theme="d" class="bgImage">  
-    <!-- CHOOSE SELL OR RENT --> 
-    <div class="ui-grid-a" class="sellOrRent">
-         <div class="ui-block-a"><button type="submit" data-theme="b" value="sell" i18n="prodej">Prodej</button></div>
-         <div class="ui-block-b"><button type="submit" data-theme="c" value="rent" i18n="pronajem">Pronájem</button></div>                     
-    </div>
-    <!--// CHOOSE SELL OR RENT -->    
+   
    
    
    <!-- SELECT SUBTYPE OF FLATT fillTypeOfRealitiesToSelect('2') 2 it means flats-->
