@@ -1,7 +1,7 @@
 var MyApp = MyApp || {};
 
 MyApp.resources = {
-    One: "Oswswwwne",
+    One: "Preklad 1",
     Two: "Two",
     Three:"Three"    
 }

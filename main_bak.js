@@ -1,7 +1,6 @@
 
 //INIT OF ISCROLL PLUGIN
 var selectedSubtypesOfRealities= new Array();  
-var selectedSubtypesOfAdvertisers= new Array();  
 var myScroll;
 //var myLat;
 //var myLong;
@@ -46,66 +45,12 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2
 
 /*CUSTOM FUNCTIONS*/
 
-$(document).ready( function(){ 
+$(document).ready(function () {
+	$.extend(MyApp.resources, localizedResources);
 
-	
-//BIND EVENT TO TOOGLE FLIP SWITCH IF IS ENABLED EXTEND SEARCHING SHOW EXTENDED FORM, DEFAULT IS HIDDEN	
-	
-$("#extendedSearchFlip").bind( "change", function(event, ui) {
-	 console.log("changed"); 
-	 
-	 
-	 console.log($("#extendedSearchFlip").val());
-	 
-	 var showHiddenDiv = $("#extendedSearchFlip").val();
-	 
-	 if(showHiddenDiv=="yes")
-	 {
-		 $(".extendedSearchDiv").show();
-		fillListOfAdvertisers();
-	 }
-	 
-	 if(showHiddenDiv=="no")
-	 {
-		 $(".extendedSearchDiv").hide();
-	 }
-	 
-	});
-
-//BIND EVENT IF I SELECT LAST ITEM IN FORM FOR CALCULATION OF AMOUNT OF REPAYMENT
-$("#amountOfRepaymentTo").bind( "change", function(event, ui) {
-	 console.log("changed"); 
-	 
-	//GET rate of interest
-	// Retrieve all the object from storage
-		
-	var fetchedClassifiers = localStorage.getItem('Classifiers');
-		
-	// Parse to access 
-	var parsedFetchedClassifields = JSON.parse(fetchedClassifiers);
-
-	console.log('retrievedObject:'+ parsedFetchedClassifields);
-	console.log(parsedFetchedClassifields);
-		
-	/*GTE INTEREST CONSTANT*/
-	//TODO 	
-	var interestConstant = parsedFetchedClassifields.ciselniky.config;
-	 
-	 
-	 
-	 
-	 
-	 
-	 var amountOfRepaymentTo = $("#amountOfRepaymentTo").val();
-	 console.log(amountOfRepaymentTo);
-	 
 	});
 
 
-
-
-
-});
 
 //INIT PHONEGAP
 function init() {
@@ -114,7 +59,7 @@ function init() {
     // the next line makes it impossible to see Contacts on the HTC Evo since it
     // doesn't have a scroll button
     // document.addEventListener("touchmove", preventBehavior, false);
-	
+	$.extend(MyApp.resources, localizedResources);
 	checkSettings();
 	document.addEventListener("deviceready", deviceInfo, true);
 	
@@ -220,8 +165,6 @@ console.log("Vybrana Obec s id a jmenem "+ id + " "+name);
 $(".choosenMunicipalitytBtn .ui-btn-text").text(name);
 $(".choosenValues").attr('municipalityId',id);
 
-$(".choosenValues").attr('nameOfMunicipality',name);
-$(".choosenCityBtn .ui-btn-text").text(name);
 console.log("ATRIBUT idOfDictrict nyni obsahuje: " + $(".choosenValues").attr('municipalityId'));
 
 
@@ -242,7 +185,6 @@ function passParamsOfSubMunicipality(id,name) {
 console.log("Vybrana CAST OBCE s id a jmenem "+ id + " "+name);	
 $(".choosenPartOfMunicipalitytBtn .ui-btn-text").text(name);
 $(".choosenValues").attr('partOfMunicipalityId',id);
-$(".choosenValues").attr('nameOfSubMunicipality',name);
 
 console.log("ATRIBUT partOfMunicipalityId nyni obsahuje: " + $(".choosenValues").attr('partOfMunicipalityId'));
 
@@ -260,9 +202,9 @@ function fillListOfMunicipalities(idOfDistrict)
 	
 	
 
-	//$(".infoBarHeadingText").text('Ziskavam informace o subtypech');
+	$(".infoBarHeadingText").text('Ziskavam informace o subtypech');
 	
-	//$(".infoBar").show();
+	$(".infoBar").show();
 		
 				jQuery.ajax({
 							
@@ -304,79 +246,6 @@ function fillListOfMunicipalities(idOfDistrict)
 	
 }
 
-//GET VALUES FROM FORM WHERE USER SELECTED SIZE FROM AND TO OF REALITY
-
-function getSizesOfReality()
-{
-	
-	
-
-	console.log($('select#typeOfSpace option:selected').val());
-
-	console.log($('select#sizeOfSpaceFrom option:selected').val());
-
-	console.log($('select#sizeOfSpaceFrom option:selected').val());
-	
-	
-	
-	$(".choosenSpaceBtn .ui-btn-text").text($('select#sizeOfSpaceFrom option:selected').val()+ " - "+$('select#sizeOfSpaceTo option:selected').val());
-	$(".choosenValues").attr('sizeFrom',$('select#sizeOfSpaceFrom option:selected').val());
-	$(".choosenValues").attr('sizeTo',$('select#sizeOfSpaceTo option:selected').val());
-}
-
-
-
-/*FILL LIST OD ADVERTISERS*/
-function fillListOfAdvertisers() {
-	
-
-		
-				jQuery.ajax({
-					url :"http://pts.ceskereality.cz/json/inzerenti.html",
-					type : "GET",
-					
-					
-							
-							success : function(result) {
-								
-								console.log(result.inzerenti);
-								
-								listOfAdvertisers = result.inzerenti;
-								
-								$(".infoBar").hide();
-								
-								$('.listOfAdvertisers li').remove();
-								var  id = 0;
-								
-								$.each(listOfAdvertisers, function(key, value) { 
-								id ++;
-								console.log(id + ': ' +key + ': ' + value); 
-								$(".listOfAdvertisers").append("<li onClick=\"addAdvertiserToSelect('"+id+"',"+"'"+key+"',"+"'"+value+"'"+");\"><a  id=\"advertiserId"+key+"\" ><h3 class=\"nameOfReality\">"+value+"</h3>	</a></li>");
-								});	
-								$('.listOfAdvertisers').listview('refresh');
-
-								
-						
-								
-							},
-							// IF HTTP RESULT 400 || 404
-							error : function(x, e) {
-									
-								typeOfRequestError(x, e);
-							}
-						});
-	
-	
-				
-
-	
-	
-
-	
-}
-
-
-
 
 //FILL LIST OF SUBMUNICIPALITIES BY MUNICIPALITY ID
 
@@ -385,9 +254,9 @@ function fillListOfSubMunicipalities(idOfMunicipality)
 	
 	
 
-	//$(".infoBarHeadingText").text('Ziskavam informace o castech obce');
+	$(".infoBarHeadingText").text('Ziskavam informace o castech obce');
 	
-	//$(".infoBar").show();
+	$(".infoBar").show();
 		
 				jQuery.ajax({
 							
@@ -434,15 +303,15 @@ function fillListOfSubMunicipalities(idOfMunicipality)
 
 
 /*FILL TYPE OF FLATS  LIST*/
-function fillSubtypeOfRealitiesToSelect(subtype) {
-	$.mobile.changePage( "#selectSubTypesOfRealities");
+function fillTypeOfRealitiesToSelect(subtype) {
+	
 	
 	//GET COUNT OF REALITY TYPES
 	
 	
-	//$(".infoBarHeadingText").text('Načítám informace');
+	$(".infoBarHeadingText").text('Ziskavam informace o subtypech');
 	
-	//$(".infoBar").show();
+	$(".infoBar").show();
 		
 				jQuery.ajax({
 							
@@ -458,8 +327,9 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 								
 								countOfSubtypes = result.pocty_subtypy;
 								
-								$(".infoBar").hide();
-						
+								
+								$(".infoBarHeadingText").text('INFORMACE O SUBTYPECH NACTENY');
+								$(".infoBar").hide('slow');		
 								
 							},
 							// IF HTTP RESULT 400 || 404
@@ -497,87 +367,12 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 	console.log(key + ': ' + value); 
 	$(".listOfSubtypes").append("<li onClick=\"addSubtypeToSelect("+key+","+"'"+value+"'"+");\"><a  id=\"subtypeId"+key+"\" ><h3 class=\"nameOfReality\">"+value+"</h3><p class=\"countOfRealities\">"+key+"</p><a data-rel=\"dialog\"  data-transition=\"slideup\">	</a></li>");
 	});	
-	$('.listOfSubtypes').listview('refresh');
+	//$('.listOfSubtypes').listview('refresh');
 
-	//$(".infoBarHeadingText").text('INFORMACE O SUBTYPECH NACTENY');
-	//$(".infoBar").hide('slow');		
-	
-	console.log('INFORMACE O SUBTYPECH NACTENY');
-	
-	$.mobile.changePage( "#selectSubTypesOfRealities");
-
+	$.mobile.changePage( "#selectTypeOfReality");
+console.log("menim");
 	
 }
-
-//ADD SELECTED ADVERTISERS TO ARRAY AND ARRAY TO ATTRIBUTE
-function addAdvertiserToSelect(id,key,value)
-{
-	console.log(key);
-	console.log("#advertiserId"+key+"");
-
-	
-	
-	//REMOVE SELECT ITEM FROM LIST
-	if($("#advertiserId"+key+"").css("background-color")=="rgb(38, 130, 193)")
-	{
-	console.log("Je obarveno, odbarvuji");	
-	$("#advertiserId"+key+"").css("background-color", "#fff");
-	console.log("BARVA JE NYNI"+ $("#subtypeId"+key+"").css("background-color"));
-	selectedSubtypesOfAdvertisers.splice(id, 1);
-	console.log("Z POLE NA INDEXU: "+id+" ODEBRANA HODNOTA "+key+"");
-	}
-	
-	
-	//ADD SELECT ITEM TO LIST
-	else if($("#advertiserId"+key+"").css("background-color")=="rgba(0, 0, 0, 0)" || $("#advertiserId"+key+"").css("background-color")=="rgb(255, 255, 255)")
-	{
-	console.log("Neni obarveno, obarvuji");	
-	$("#advertiserId"+key+"").css("background-color", "#2682C1");
-	console.log("BARVA JE NYNI"+ $("#advertiserId"+key+"").css("background-color"));
-	selectedSubtypesOfAdvertisers[id] = key;
-	console.log("DO POLE NA INDEX: "+id+" PRIDANA HODNOTA"+key+"");
-	
-	//PASS PARAMS TO FORM AND FILL NAMES TO THE BUTTON
-	
-	//DELETE DEFAULT TEXT IN BUTTON UF IS SET
-	if($(".choosenAdvertisersBtn .ui-btn-text").text() == "Zvolte");
-	{
-	$(".choosenAdvertisersBtn .ui-btn-text").text("");
-	}
-	//JOIN TEXT INT BUTTON
-	$(".choosenAdvertisersBtn .ui-btn-text").append(value);
-	
-	}
-
-	
-	//APPEND SUBTYPES ID INTO selectedSubtypes attr
-	var advertisersString = "";
-	
-	$.each(selectedSubtypesOfAdvertisers, function(id, key) { 
-		//console.log(key + ': ' + value); 
-		
-		if(key != undefined)
-		{	
-			//PREPARE STRING
-			advertisersString += key+",";
-		
-		}
-		
-	});	
-	
-	//INSERT STIRNG INT ATTR
-	$(".choosenValues").attr('selectedSubtypesOfAdvertisers',advertisersString );
-	//
-	
-	
-	//ECHO CONTENT ONTO ARRAY 
-	console.log("ATRIBUT selectedSubtypesOfAdvertisers nyni obsahuje: "+$(".choosenValues").attr('selectedSubtypesOfAdvertisers'));
-	
-	//ECHO CONTENT ONTO ARRAY 
-	console.log(selectedSubtypesOfRealities);
-	
-}
-
 
 function addSubtypeToSelect(key,value)
 {
@@ -712,16 +507,11 @@ function getParamsForSearch() {
 	//TODO HOW TO RESOLVE TYP SALE OR RENT? TOOGLE BTN OR IN PAGE?
 	//ATTR TYPE PRESENTS TYPE OF REALITY, FOR EXAMPLE type="2" is USED FOR FLATS  <div data-role="page" data-theme="b" id="flatsOnSalePage" type="2">
 	
-	var typ = $('.choosenValues').attr('type');
-	var subTyp = $('.choosenValues').attr('selectedSubtypesOfRealities');
+	var typ = $('.ui-page-active').attr('type');
 	
-	var okres = $('.choosenValues').attr('dictrictId');
+	var subtyp = $('.ui-page-active').attr('selectedSubtypes');
 	
-	var obec = $('.choosenValues').attr('municipalityId');
-	
-	var castObce = $('.choosenValues').attr('partOfMunicipalityId');
-	
-	
+	var okres = $('.ui-page-active').attr('idOfCity');
 	
 	var stranka = "1";
 	
@@ -729,38 +519,30 @@ function getParamsForSearch() {
 	
 	var ascdesc = "asc";
 	
-	var cenaod = $('.choosenValues').attr('priceFrom');
+	var cenaod = $('.ui-page-active').attr('priceFrom');
 	
-	var cenado = $('.choosenValues').attr('priceTo');
+	var cenado = $('.ui-page-active').attr('priceTo');
 	
-	var plochaod = $('.choosenValues').attr('sizeFrom');
+	var plochaod = $('.ui-page-active').attr('sizeFrom');
 	
-	var plochado = $('.choosenValues').attr('sizeTo');
+	var plochado = $('.ui-page-active').attr('sizeTo');
 	
-	var prefix = $('.choosenValues').attr('selectedSubtypesOfAdvertisers');
+	var mojelat = $('.ui-page-active').attr('mojelat');
 	
-	var mojelat = $('.choosenValues').attr('mojelat');
-	
-	var mojelon = $('.choosenValues').attr('mojelon');
-	
-	
-	var prefix = $('.choosenValues').attr('selectedSubtypesOfAdvertisers');
+	var mojelon = $('.ui-page-active').attr('mojelon');
 	
 	
 	
 	 console.log('GPS: '          + jensgps         + '\n' +
 	         'TYP: '         + typ        + '\n' +
-	         'SUBTYP: '         + subTyp        + '\n' +
+	         'SUBTYP: '          + subtyp         + '\n' +
 	         'OKRES: '          + okres         + '\n' +
-	         'OBEC: '          + obec         + '\n' +
-	         'CAST OBCE: '          + castObce         + '\n' +
 	         'trideni podle: ' + trideni  + '\n' +
 	         'ascdesc: '           + ascdesc          + '\n' +
 	         'cenaod: '             + cenaod             + '\n' +
 	         'cenado: '             + cenado            + '\n' +
 	         'plochaod: '             + plochaod            + '\n' +
 	         'plochado: '             + plochado            + '\n' +
-	         'prefix: '             + prefix            + '\n' +
 	         'mojelat: '             + mojelat            + '\n' +
 	         'mojelon: '         + mojelon     + '\n');
 	 
@@ -778,9 +560,8 @@ function getParamsForSearch() {
 	 }	
 	 
 	 else
-	 {   
-		 //TODO VYRESIT CO POKUD JE VYPNENA POUZE LONG  A LAT a VYRESIT PARAM. TYP UKLADANI DO ATTRIBUTU
-		 getListOfRealities(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
+	 {
+		 getListOfRealities(jensgps, typ, subtyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado, mojelat, mojelon);
 	 }
 	
 }
@@ -790,7 +571,7 @@ function getParamsForSearch() {
  * Example:
  * http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=2&subtyp=1,3&okres=13&stranka=1&trideni=cena&ascdesc=desc&cenado=150000&cenaod=1200&plochaod=10&plochado=1000&mojelat=48.9808&mojelon=15.4814
  * */
-function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,prefix,mojelat,mojelon)
+function getListOfRealities(jensgps,typ,subtyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,mojelat,mojelon)
 {
 
 	console.log("FCE getListOfRealities spustena");
@@ -800,7 +581,7 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 				jQuery.ajax({
 							
 							url :"http://pts.ceskereality.cz/json/vypis.html",
-							data: {jensgps:jensgps,typ:typ,subtyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
+							data: {jensgps:jensgps,typ:typ,subtyp:subtyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,mojelat:mojelat,mojelon:mojelon},
 							type : "GET",
 							
 							success : function(result) {
@@ -1111,13 +892,8 @@ $(".infoBar").show();
 							console.log(result.nejblizsi_obec);
 							var nearestMunicipality = result.nejblizsi_obec.split(',');
 							
-							console.log("NEJBLIZSI MESTO MA ID OKRESU "+nearestMunicipality[1]+" ID OBCE "+nearestMunicipality[0]+"A NAZEV"+nearestMunicipality[2]+"");
-							
-							$(".choosenValues").attr('dictrictId',nearestMunicipality[1]);
-							$(".choosenValues").attr('municipalityId',nearestMunicipality[0]);
-							$(".choosenCityBtn .ui-btn-text").text(nearestMunicipality[2]);
-							
-							//passParamsOfCity(nearestMunicipality[1], nearestMunicipality[2]);
+							console.log("NEJBLIZSI MESTO MA ID "+nearestMunicipality[0]+"A NAZEV"+nearestMunicipality[1]+"");
+							passParamsOfCity(nearestMunicipality[0], nearestMunicipality[1]);
 							
 							
 							
@@ -1233,9 +1009,6 @@ function updateMarkerPosition(latLng) {
 	console.log("NOVA POZICE :"+latLng.lat() + latLng.lng() );
 	$("#actualGPSPosition").text(latLng.lat() + " "+ latLng.lng());
 	
-	$(".choosenValues").attr("mojelat",latLng.lat() );
-	$(".choosenValues").attr("mojelon",latLng.lng() );
-	
 /*	
 	document.getElementById('info').innerHTML = [
     latLng.lat(),
@@ -1252,8 +1025,6 @@ function updateMarkerAddress(str) {
 	var parsedAddress = str.split(",");
 	
 	$("#actualAddress").text(parsedAddress[0] );
-	
-	 $(".choosenCityBtn .ui-btn-text").text(parsedAddress[0]);
 
 }
 

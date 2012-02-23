@@ -1,0 +1,592 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>PhoneGap Demo With JQuery Mobile</title>
+      <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.0.css" type="text/css"/>
+	  <link rel="stylesheet" href="custom.css" type="text/css"/>
+	  
+	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
+        <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery-1.6.4.min"></script>
+     
+	  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery.mobile-1.0.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
+   		<script type="text/javascript" charset="utf-8" src="iscroll/iscroll.js"></script>
+		<script type="text/javascript" charset="utf-8" src="iscroll/jqmiscroll.js"></script>
+         <script type="text/javascript" src="resources.default.js"></script>
+         <script type="text/javascript" src="resources.es.js"></script>
+    
+	<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->
+	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />-->
+	<!-- <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>-->
+	<!-- <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>-->
+	</head>
+  <body onload="init();" class="choosenValues" type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="">
+  	
+	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
+    <div data-role="page" data-theme="b" id="mainPage">
+  	<div data-role="header">
+    	<a href="index.html" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
+		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
+		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"><script>document.writeln(MyApp.resources.One) </script></a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    
+    
+    
+    <div data-role="content" data-theme="d" class="bgImage">
+	<div class="ui-grid-c">
+			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage"><script>document.writeln(MyApp.resources.One) </script></a></div></div>
+			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
+			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
+			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
+					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-a"><div style="height:20px">A</div></div>
+			<div class="ui-block-b"><div style="height:20px">B</div></div>
+			<div class="ui-block-c"><div style="height:20px">C</div></div>
+			<div class="ui-block-d"><div style="height:20px">D</div></div>
+					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-a"><div style="height:20px">A</div></div>
+			<div class="ui-block-b"><div style="height:20px">B</div></div>
+			<div class="ui-block-c"><div style="height:20px">C</div></div>
+			<div class="ui-block-d"><div style="height:20px">D</div></div>
+				
+		</div><!-- /grid-c -->	
+
+    </div><!-- end jqm content -->
+    <div data-role="footer" data-theme="c" >
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+    </div>
+    </div>
+	<!-- // MAIN PAGE ------------------------------------------------------------------------------------------------>
+	
+	
+	
+	
+	<!-- FLATS ON SALE PAGE ------------------------------------------------------------------------------------------>
+	
+    <div data-role="page" data-theme="b" id="flatsOnSalePage" >
+  	<div data-role="header">
+    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="byty_na_prodej">Byty na  prodej</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+   
+   
+    <div data-role="fieldcontain" >
+   	<!-- RADIO OPERATION, SELL , RENT -->
+   
+    <fieldset data-role="controlgroup" data-type="horizontal" >
+    	
+         	<input type="radio" name="operace" id="operaceProdej" value="0" checked="checked"   />
+         	<label for="operaceProdej"  >Prodej</label>
+
+         	<input type="radio" name="operace" id="operacePronajem" value="1"  />
+         	<label for="operacePronajem" >Pronajem</label>
+
+    </fieldset>
+    
+   	<!-- //RADIO OPERATION, SELL , RENT -->
+    
+    
+    <!-- SELECT SUBTYPE OF FLATT fillTypeOfRealitiesToSelect('2') 2 it means flats-->
+    
+     <div class="ui-grid-a">
+	<div class="ui-block-a" >Typ bytu</div>
+	<div class="ui-block-b"><a  class="choosenSubtypesBtn" typ="2"  onClick="pageForReturn('flatsOnSalePage'),fillTypeOfRealitiesToSelect('2')"; href="#selectTypeOfReality" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_typ_nemovitosti">Zvolte typ nemovitosti</a></div>
+    </div>
+    <!-- /grid-a -->
+ 
+    <!-- //SELECT SUBTYPE OF FLATT -->
+    
+    
+    
+    <!-- SELECT LOCALITY PART-->
+    
+    
+    <div class="ui-grid-a">
+	<div class="ui-block-a">Lokalita
+    <div data-role="controlgroup" data-type="horizontal" >
+			<a  onClick="getMyPosition('1');" data-role="button"  data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
+            <a  onClick="getMyPosition('selectOnMap');" data-role="button"  data-icon="plus" data-iconpos="notext">Lokalita dle mapy</a>
+		</div>
+    </div>
+	<div class="ui-block-b"><a class="choosenCityBtn"  onClick="pageForReturn('flatsOnSalePage')"; href="#selectLocalityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_lokalitu">Zvolte lokalitu</a></div>
+</div><!-- /grid-a -->
+
+    
+    <!-- //SELECT LOCALITY PART-->
+    
+    
+    
+        
+    <!-- SELECT PRICE FROM AND TO PART-->
+    
+    
+    <div class="ui-grid-a">
+	<div class="ui-block-a">Cena
+    </div>
+	<div class="ui-block-b"><a class="choosenPriceBtn"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectPriceRangePage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="cena_do">Zvolte cenu</a></div>
+     <div data-role="controlgroup" data-type="horizontal" >
+			<a  onClick="showMoreOptions('2');" data-role="button"  data-icon="plus" data-iconpos="vice_voleb">Více voleb</a>
+		</div>
+    
+</div><!-- /grid-a -->
+
+    
+    <!-- //SELECT PRICE FROM AND TO PART-->
+
+    
+	</div>
+    
+    
+    <a  data-role="button" i18n="hledat" onClick="getParamsForSearch();">Hledat</a>
+ 
+
+    </div><!-- end jqm content -->
+    <div data-role="footer" data-theme="c" >
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+    </div>
+    </div>
+	<!-- //FLATS ON SALE PAGE -------------------------------------------------------------------------------------------------->
+  
+	
+ 
+
+ 
+ 
+    
+  
+   
+   <!-- UNIVERSAL PAGES ------------------------------------------------------------------------------>
+    
+    
+    
+    
+   
+    
+    
+<!------------------------------------------------------------------------------>   
+
+<!-- SELECT ON MAP PAGE  ------------------------------------------------------------------------------------------>
+	
+    <div data-role="page" data-theme="b" id="selectOnMapPage">
+  	<div data-role="header">
+    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="byty_na_prodej" id="mapActionStatus">Zvolte na mapě</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Zvolit</a>
+        
+    <!-- NAVBAR-->    
+    <div data-role="navbar">
+	<ul>
+		<li><a  id="actualAddress" i18n="aktualni_adresa" >Nejblizsi adresa</a></li>
+		
+	</ul>    
+    <!--//  NAVBAR-->   
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+	
+    <!-- MAP CANVAS  -->
+    
+    <div id="map_canvas" style="width:100%;height:250px;">
+    
+    </div>
+
+	<!-- MAP CANVAS-->
+    
+   
+    </div><!-- end jqm content -->
+    <div data-role="footer" data-theme="c" >
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+    </div>
+    </div>
+	<!-- //SELECT ON MAP PAGE   -------------------------------------------------------------------------------------------------->
+  
+	 
+ 
+    
+    
+    
+    
+    
+   <!------------------------------------------------------------------------------>
+   
+   <!-- SELECT SUBTYPE OF RELAITY PAGE -->
+    <div data-role="page" data-theme="b" id="selectTypeOfReality">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="upresneni">Zvolte typ</h1> 
+		
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF ALL REALITIES TO SELECT-->
+
+
+<ul data-role="listview" data-split-icon="check" data-split-theme="d" class="listOfSubtypes">
+
+         
+       
+</ul>
+	
+  <!-- //LIST OF ALL REALITIES TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT SUBTYPE OF RELITY PAGE -->
+    <!------------------------------------------------------------------------------>
+    
+   
+    
+    <!------------------------------------------------------------------------------>
+    <!-- SELECT LOCALITY  PAGE -->
+    <div data-role="page" data-theme="b" id="selectLocalityPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">Zvolte lokalitu</h1> 
+		
+         <!-- SELECT FROM MENU OR FROM MAP -->
+    
+    <div data-role="navbar">
+	<ul>
+		<li><a href="a.html" class="ui-btn-active">Zadat</a></li>
+		<li><a onClick="getMyPosition('selectOnMap');" >Vybrat na mapě</a></li>
+	</ul>
+</div><!-- /navbar -->
+
+   	<!-- // SELECT FROM MENU OR FROM MAP -->
+
+        
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    
+    
+	    
+    
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+
+    
+    <!-- CHOOSE DISTRICT BUTTON --> 
+    
+       <fieldset class="container_12"  data-type="horizontal" >
+   
+	<div class="grid_4">
+    <label for="username" i18n="okres" >Okres:</label>
+	</div>
+	<div class="grid_8"><a class="choosenDistrictBtn" href="#selectDistrictPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_okres">Zvolte okres</a></div>	   
+	</fieldset>
+    <!--// CHOOSE DISTRICT BUTTON -->
+    
+    
+
+	  <!-- CHOOSE MUNICIPALITY BUTTON --> 
+    
+       <fieldset class="container_12"  data-type="horizontal" >
+   
+	<div class="grid_4">
+    <label for="username" i18n="obec" >Obec:</label>
+	</div>
+	<div class="grid_8"><a  href="#selectMunicipalityPage" class="choosenMunicipalitytBtn" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_obec">Zvolte obec</a></div>	   
+	</fieldset>
+    <!--// CHOOSE MUNICIPALITY BUTTON -->
+
+    
+
+	  <!-- CHOOSE SUBMUNICIPALITY BUTTON --> 
+    
+       <fieldset class="container_12"  data-type="horizontal" >
+   
+	<div class="grid_4">
+    <label for="username" i18n="obec" >Část obce:</label>
+	</div>
+	<div class="grid_8"><a  href="#selectPartOfMunicipalityPage" class="choosenPartOfMunicipalitytBtn" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_cast_obce">Zvolte část obce</a></div>	   
+	</fieldset>
+    <!--// CHOOSE SUBMUNICIPALITY BUTTON -->
+
+    
+    
+    
+  
+    <a class="pageForReturn" onClick="" href="" id="priceRange" data-role="button" data-icon="arrow-l">Zvolit</a>
+   
+
+    </div>
+    <!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT LOCALITY  PAGE  -->
+    <!------------------------------------------------------------------------------>
+   
+   
+   
+   <!------------------------------------------------------------------------------>
+   <!-- SELECT DISTRICT PAGE -->
+    <div data-role="page" data-theme="b" id="selectDistrictPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_okres">Vyberte okres</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF ALL DISTRICTS TO SELECT-->
+   
+  <ul class="listOfAllDistricts" i18n="zde_zacnete_psat" data-role="listview" data-filter="true" data-filter-placeholder="Zde zacnete psat" data-filter-theme="b">
+				
+  </ul>
+	
+  <!-- //LIST OF ALL DISTRICTS TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT DISTRICT PAGE -->
+    <!------------------------------------------------------------------------------>
+
+
+   
+   
+   <!------------------------------------------------------------------------------>
+   <!-- SELECT MUNICIPALITY PAGE -->
+    <div data-role="page" data-theme="b" id="selectMunicipalityPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_obec">Vyberte obec</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF ALL MUNICIPALITIES TO SELECT-->
+   
+  <ul class="listOfMunicipalities" i18n="zde_zacnete_psat" data-role="listview" data-filter="true" data-filter-placeholder="Zde zacnete psat" data-filter-theme="b">
+				
+  </ul>
+	
+  <!-- //LIST OF ALL MUNICIPALITIES TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT MUNICIPALITY PAGE -->
+    <!------------------------------------------------------------------------------>
+    
+    
+    
+   <!------------------------------------------------------------------------------>
+   <!-- SELECT PART OF MUNICIPALITY PAGE -->
+    <div data-role="page" data-theme="b" id="selectPartOfMunicipalityPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="zvolte_cast_obce">Vyberte cast obce</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF  PART OF MUNICIPALITIES TO SELECT-->
+   
+  <ul class="listOfSubMunicipalities" data-role="listview">
+				
+  </ul>
+	
+  <!-- //LIST OF PART OF MUNICIPALITIES TO SELECT -->
+  
+    
+   
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!-- // SELECT PART OF MUNICIPALITY PAGEE -->
+    <!------------------------------------------------------------------------------>
+    
+    
+    
+    
+    <!------------------------------------------------------------------------------>
+    <!-- SELECT PRICE RANGE PAGE -->
+    <div data-role="page" data-theme="b" id="selectPriceRangePage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">Zvolte cenovy rozsah</h1> 
+		<a href="index.html" data-theme="b" i18n="prihlasit" class="ui-btn-right"  data-icon="arrow-r">Prihlasit</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF PRICE RANGES TO SELECT-->
+   <div class="ui-grid-a">
+	<div class="ui-block-a">
+    <select name="select-choice-1" id="priceFrom">
+      <option value="standard">Cena od:</option>
+      
+   </select>
+    </div>
+	<div class="ui-block-b">
+    
+    <select name="select-choice-1" id="priceTo">
+      <option value="standard">Cena do:</option>
+      
+   </select>
+    </div>
+</div><!-- /grid-a -->
+	
+  <!-- //LIST OF PRICE RANGES TO SELECT -->
+  
+    <a class="pageForReturn" onClick="" href="" id="priceRange" data-role="button" data-icon="arrow-l">Zvolit</a>
+   
+
+    </div>
+    <!-- end jqm content -->
+   
+    </div>
+	<!-- //SELECT PRICE RANGE PAGE  -->
+    <!------------------------------------------------------------------------------>
+    
+    
+    
+    
+     
+    <!------------------------------------------------------------------------------>
+    <!-- WRITEOUT OF REALITIES PAGE -->
+    <div data-role="page" data-theme="b" id="writeoutOfRealities">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">Nalezené reality</h1> 
+		<div data-role="controlgroup" data-type="horizontal">  
+
+	<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
+	
+        
+	</div>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  
+  <!-- LIST OF MATCHED REALITIES-->
+   <ul data-role="listview">
+			<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+			<li><a href="index.html">
+				<img src="http://img.ceskereality.cz/foto/04874/04874aaa10835793518113.jpg" height="100" />
+					<h3>Stephen Weber</h3>
+					<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+					<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+					<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+				
+			</a></li>
+    </ul>        
+	
+  <!-- //LIST OF MATCHED REALITIES -->
+  
+
+
+    </div>
+    <!-- end jqm content -->
+   
+    </div>
+	<!-- // WRITEOUT OF REALITIES PAGE  -->
+    <!------------------------------------------------------------------------------>
+    
+    
+    
+    
+    
+<!-- //UNIVERSAL PAGES ------------------------------------------------------------------------------>
+   
+   
+  </body>
+</html>
