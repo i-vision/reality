@@ -3,6 +3,7 @@
 var selectedSubtypesOfRealities= new Array();  
 var selectedSubtypesOfAdvertisers= new Array();  
 var myScroll;
+var markerID = 1;
 //var myLat;
 //var myLong;
 
@@ -102,12 +103,83 @@ $("#amountOfRepaymentTo").bind( "change", function(event, ui) {
 	});
 
 
+//SWIPE LEFT EVENT  
 
+$('#writeoutOfRealities').live('swipeleft',function(event, ui){
+	decrementActualPage();
+	
+	});
 
+//SWIPE RIGHT EVENT  
 
-
+$('#writeoutOfRealities').live('swiperight',function(event, ui){
+	incrementActualPage();
+	});
 
 });
+
+
+//INCREMENT ACTUAL PAGE VALUE
+
+function incrementActualPage() {
+	console.log("SWIPE RIGHT");
+	  	var actualPageVal = $(".choosenValues").attr("actualPage");
+	  	var pagesTotal = $(".choosenValues").attr("pagesTotal");
+	  	
+		actualPageVal ++;
+		$(".choosenValues").attr("actualPage",actualPageVal);
+		
+		//UPDATE VALUE IN LIST INFO
+		$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPage"));
+		
+		
+		if(actualPageVal ==pagesTotal )
+		{
+			//$("#nextPage").hide();
+			$(".infoBar").show();
+			$(".infoBarHeadingText").text("TOTO JE POSLEDNI STRÁNKA, NEMŮŽETE DALE");
+			
+		}
+		if(actualPageVal <=pagesTotal )	
+		{
+			$(".infoBar").hide();
+			getParamsForSearch();
+		}
+		
+		
+	}
+
+//DECRMENT ACTUAL PAGE VALUE
+
+function decrementActualPage() {
+	
+		console.log("SWIPE LEFT");
+		var actualPageVal = $(".choosenValues").attr("actualPage");
+		var pagesTotal = $(".choosenValues").attr("pagesTotal");
+		actualPageVal --;
+		$(".choosenValues").attr("actualPage",actualPageVal);
+		
+		//UPDATE VALUE IN LIST INFO
+		$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPage"));
+		
+		if(actualPageVal >= 0)
+		{
+			$(".infoBar").hide();
+			getParamsForSearch();
+		}
+		if(actualPageVal == 0)
+		{
+			//$("#previousPage").hide();
+			$(".infoBarHeadingText").text("TOTO JE PRVNÍ STRÁNKA, NEMŮŽETE DOPŘEDU");
+			
+			$(".infoBar").show();
+		}
+	}
+
 
 //INIT PHONEGAP
 function init() {
@@ -718,7 +790,7 @@ function pageForReturn(idOfpageForReturn,typeOfPrice) {
 
 //UNIVERSAL FUNCTION FOR PASING PARAMMS FROM FORM TO SEARCH FUNCTION
 
-function getParamsForSearch() {
+function getParamsForSearch(isForMapShow) {
 
 	//ATTR TYPE PRESENTS TYPE OF REALITY, PRICE, ETC.., FOR EXAMPLE type="2" is USED FOR FLATS  <div data-role="page" data-theme="b" id="flatsOnSalePage" type="2">
 	
@@ -763,7 +835,6 @@ function getParamsForSearch() {
 	var prefix = $('.choosenValues').attr('selectedSubtypesOfAdvertisers');
 	
 	
-	
 	 console.log('GPS: '          + jensgps         + '\n' +
 	         'TYP: '         + typ        + '\n' +
 	         'SUBTYP: '         + subTyp        + '\n' +
@@ -784,6 +855,8 @@ function getParamsForSearch() {
 	
 	//VERIFY, THAT IMPORTANT VALUES IN FORM  ARE FILLED
 	
+	
+	 
 	 
 	 
 	 if(typ.length == 0 || subTyp.length== 0 || okres.length== 0 || cenaod.length == 0 || cenado.length == 0 )
@@ -791,14 +864,422 @@ function getParamsForSearch() {
 	 {
 	 $(".infoBarHeadingText").text('Nespravne zadane hodnoty, vyberte prosim znovu');	
 	 $(".infoBar").show();
-	 }	
+	 }
+	 
+	 
+	 else if(isForMapShow == "1")
+	 {
+		 showRealitiesOnMap(1, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
+	 }
 	 
 	 else
 	 {   
-		 //TODO VYRESIT CO POKUD JE VYPNENA POUZE LONG  A LAT a VYRESIT PARAM. TYP UKLADANI DO ATTRIBUTU
+		
 		 getListOfRealities(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
 	 }
 	
+}
+
+
+//SHOW FOUNDED REALITIES ON MAP,ONLY WITH FILLED GPS COORDS
+function showRealitiesOnMap(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
+{
+	
+	console.log("showRealitiesOnMap runnning");
+	
+	console.log('jensgps:  '          + jensgps         + '\n' +
+	         'prodej nebo pronajem: '         + typ        + '\n' +
+	         'typ: '         + typ       + '\n' +
+	         'subTyp: '          + subTyp         + '\n' +
+	         'stranka: '          + stranka         + '\n' +
+	         'trideni: '          + trideni         + '\n' +
+	         'ascdesc: ' + ascdesc  + '\n' +
+	         'cenaod: '           + cenaod          + '\n' +
+	         'cenado: '             + cenado             + '\n' +
+	         'plochaod: '             + plochaod            + '\n' +
+	         'plochado: '             + plochado            + '\n' +
+	
+	         'prefix: '             + prefix            + '\n' +
+	         'mojelat: '             + mojelat            + '\n' +
+	         'mojelon: '             + mojelon            + '\n');
+	      
+	
+	
+	jQuery.ajax({
+		
+		url :"http://pts.ceskereality.cz/json/vypis.html",
+		//ONLY REALITIES WITH FILLED GPS COORDS
+		data: {jensgps:'1',typ:typ,subTyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
+		type : "GET",
+		
+		success : function(result) {
+			
+			console.log(result);
+			
+			$("#countOfFoundRealities").text(result.nemovitosti.pocet);
+			
+			
+			
+			var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
+			var parsedRes = JSON.parse(stringifiedRes);
+		
+			
+			console.log(parsedRes);
+			/*
+			console.log(result.nemovitosti);
+			console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
+			
+			
+			console.log("NAVRACENE REALITY");
+			console.log(result.nemovitosti.nemovitost);
+			
+			*/
+			
+			
+			
+			$.each(parsedRes, function(key, value) { 
+				  
+			
+				 console.log('CENA:  '          + value.cena         + '\n' +
+				         'CISLO: '         + value.cislo        + '\n' +
+				         'datum_vlozeni: '         + value.datum_vlozeni        + '\n' +
+				         'foto: '          + value.foto         + '\n' +
+				         'inzerent: '          + value.inzerent         + '\n' +
+				         'lat: '          + value.lat         + '\n' +
+				         'lon: ' + value.lon  + '\n' +
+				         'obec: '           + value.obec          + '\n' +
+				         'okres: '             + value.okres             + '\n' +
+				         'popis: '             + value.popis            + '\n' +
+				         'prefix: '             + value.prefix            + '\n' +
+				
+				         'subtyp: '             + value.subtyp            + '\n' +
+				         'typ: '             + value.typ            + '\n' +
+				         'typ_ceny: '             + value.typ_ceny            + '\n' +
+				         'vlastnictvi: '         + value.vlastnictvi     + '\n');
+				  
+				
+			//INSERT REALITIES ON MAP
+			
+
+
+				 console.log('showOnMap runs');
+
+				 console.log("Moje Lat"+Lat+" Moje Lon"+Long+"" );
+				 //Onload handler to fire off the app.
+				 //google.maps.event.addDomListener(window, 'load', initialize);
+				 var geocoder = new google.maps.Geocoder();
+
+				 initialize();
+
+				 function initialize() {
+				 	  var latLng = new google.maps.LatLng(Lat, Long);
+
+				 	  
+				 	  console.log(latLng);
+				 	  var map = new google.maps.Map(document.getElementById('map_canvas'), {
+				 	    zoom: 15,
+				 	    zoomControl: true,
+				 	    
+				 	    zoomControlOptions: {
+				 	    //STYLE AND POSITION OF ZOOM BTNS IN MAPS
+				 	    style: google.maps.ZoomControlStyle.SMALL,
+				 	    position: google.maps.ControlPosition.TOP_RIGHT
+				 	  },
+				 	  //STYLE AND POSITION OF DIRECTIONS CONTOLS
+				 	  panControlOptions: {
+				 	    position: google.maps.ControlPosition.TOP_RIGHT
+				 	    },    
+				 	    center: latLng,
+				 	    mapTypeId: google.maps.MapTypeId.ROADMAP
+				 	  });
+				 	  var marker = new google.maps.Marker({
+				 	    
+				 	    position: latLng,
+				 	    title: 'Zde se nachazite',
+				 	    map: map,
+				 	    draggable: true,
+				 	    icon: 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-3ab4e0/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/star-3.png'  
+				 	  });
+				 	  
+				 	  // Update current position info.
+				 	  updateMarkerPosition(latLng);
+				 	  geocodePosition(latLng);
+				 	  
+				 	  // Add dragging event listeners.
+				 	  google.maps.event.addListener(marker, 'dragstart', function() {
+				 	    updateMarkerAddress('Umistete zalozku');
+				 	  });
+				 	  
+				 	  google.maps.event.addListener(marker, 'drag', function() {
+				 	    updateMarkerStatus('Umistete zalozku');
+				 	    updateMarkerPosition(marker.getPosition());
+				 	  });
+				 	  
+				 	  google.maps.event.addListener(marker, 'dragend', function() {
+				 	    console.log('Drag ended');
+				 	    geocodePosition(marker.getPosition());
+				 	  });
+				 	  
+				 	  console.log("MENIM");
+				 	  $.mobile.changePage( "#selectOnMapPage");
+				 	  
+				 	}
+
+
+
+
+
+
+				 function geocodePosition(pos) {
+				   geocoder.geocode({
+				     latLng: pos
+				   }, function(responses) {
+				     if (responses && responses.length > 0) {
+				       updateMarkerAddress(responses[0].formatted_address);
+				     } else {
+				       updateMarkerAddress('Neznama adresa');
+				     }
+				   });
+				 }
+
+				 function updateMarkerStatus(str) {
+				 	console.log("AKTUALNI STATUS :"+str );
+				 }
+
+				 function updateMarkerPosition(latLng) {
+				   
+				 	console.log("NOVA POZICE :"+latLng.lat() + latLng.lng() );
+				 	$("#actualGPSPosition").text(latLng.lat() + " "+ latLng.lng());
+				 	
+				 	$(".choosenValues").attr("mojelat",latLng.lat() );
+				 	$(".choosenValues").attr("mojelon",latLng.lng() );
+				 	
+				 /*	
+				 	document.getElementById('info').innerHTML = [
+				     latLng.lat(),
+				     latLng.lng()
+				   ].join(', ');
+				   */
+				   
+				 }
+
+				 function updateMarkerAddress(str) {
+				 	
+				 	console.log("AKTUALNI ADRESA :"+str );
+				 	
+				 	var parsedAddress = str.split(",");
+				 	
+				 	$("#actualAddress").text(parsedAddress[0] );
+				 	
+				 	 $(".choosenCityBtn .ui-btn-text").text(parsedAddress[0]);
+
+				 }
+
+
+				 
+			//!! INSERTS REALITIES ON MAP	 
+				
+				
+			});
+			
+			
+			$.mobile.changePage( "#selectOnMapPage");
+			
+			
+			$(".infoBar").hide();
+			
+		},
+		// IF HTTP RESULT 400 || 404
+		error : function(x, e) {
+				
+			typeOfRequestError(x, e);
+		}
+	});
+	
+	
+	
+}
+
+function showOnMapTest()
+{
+	
+	
+	//IF EVERYTHING IS FINISHED CHANGE PAGE
+    $.mobile.changePage( "#showRealitiesOnMapPage", { transition: "slideup"} );		
+    //TESTING JSON
+    var nemovitost = [
+{ "title": "barak1",
+                "lat": "48.974481",
+                "popis": "Prodej pěkné chalupy v blízkosti Borovan. Jedná se o klasické vesnické stavení, které se sestává z obytné části, vejminku a stodoly. Obytnou část tvoří kuchyně, obývací pokoj, ložnice, koupelna, WC, p",
+                "cena": 22222,
+                "lon": "14.474546"  },
+
+{"title": "barak2",
+                "lat": "48.975024",
+                "popis": "Nabízíme k prodeji udržovanou chalupu 3+1 v Nepomuku u Dražíče. Chalupa se nachází na okraji obce v blízkosti lesa. Dispozice : Kuchyň, 2 x pokoj, chodba, samostatná koupelna a WC se započatou rekonst",
+                "cena": 22522,
+                "lon": "14.473994"}]; 
+        
+
+    //INIT MAP AND DEAFAULT SETTING FOR THIS MAP
+    var mapOpts = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scaleControl: true,
+      scrollwheel: false
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas2"), mapOpts);
+    //  We set zoom and center later by fitBounds()
+
+
+
+    /**
+     * makeMarker() ver 0.2
+     * creates Marker and InfoWindow on a Map() named 'map'
+     * creates sidebar row in a DIV 'sidebar'
+     * saves marker to markerArray and markerBounds
+     * @param options object for Marker, InfoWindow and SidebarItem
+     * @author Esa 2009
+     */
+    var infoWindow = new google.maps.InfoWindow();
+    var markerBounds = new google.maps.LatLngBounds();
+    var markerArray = [];
+     
+    function makeMarker(options){
+      var pushPin = new google.maps.Marker({map:map,	    
+      icon: 'img/realt_1.png'  
+});
+      pushPin.setOptions(options);
+      google.maps.event.addListener(pushPin, "click", function(){
+        infoWindow.setOptions(options);
+        infoWindow.open(map, pushPin);
+        if(this.sidebarButton)this.sidebarButton.button.focus();
+      });
+      var idleIcon = pushPin.getIcon();
+      if(options.sidebarItem){
+        pushPin.sidebarButton = new SidebarItem(pushPin, options);
+        pushPin.sidebarButton.addIn("sidebar");
+      }
+      markerBounds.extend(options.position);
+      markerArray.push(pushPin);
+      return pushPin;
+    }
+
+    google.maps.event.addListener(map, "click", function(){
+      infoWindow.close();
+    });
+
+
+    /**
+     * Creates an sidebar item, in this case button, which is hidden for user and user can switch between markers by top buttons
+     * @constructor
+     * @author Esa 2009
+     * @param marker
+     * @param options object Supported properties: sidebarItem, sidebarItemClassName, sidebarItemWidth,
+     */
+    var sidebarId = 0;
+    function SidebarItem(marker, opts){
+      sidebarId ++;
+      //alert(sidebarId);
+      var tag = opts.sidebarItemType || "button";
+      var row = document.createElement(tag);
+      row.innerHTML = opts.sidebarItem;
+      row.className = opts.sidebarItemClassName || "sidebar_item";  
+      //ADDED BECAUSE OF TRIGERING JQUERY CLICK
+      row.id = "sidebar_item"+sidebarId;  
+      //row.style.display = "block";
+      row.style.width = opts.sidebarItemWidth || "120px";
+      row.onclick = function(){
+        google.maps.event.trigger(marker, 'click');
+      }
+      row.onmouseover = function(){
+        google.maps.event.trigger(marker, 'mouseover');
+      }
+      row.onmouseout = function(){
+        google.maps.event.trigger(marker, 'mouseout');
+      }
+      this.button = row;
+    }
+    // adds a sidebar item to a <div>
+    SidebarItem.prototype.addIn = function(block){
+      if(block && block.nodeType == 1)this.div = block;
+      else
+        this.div = document.getElementById(block)
+        || document.getElementById("sidebar")
+        || document.getElementsByTagName("body")[0];
+      this.div.appendChild(this.button);
+    }
+    // deletes a sidebar item
+    SidebarItem.prototype.remove = function(){
+      if(!this.div) return false;
+      this.div.removeChild(this.button);
+      return true;
+    }
+
+
+
+
+    /**
+     * add markers and info window contents
+     *   makeMarker({
+      position: new google.maps.LatLng(60.28527,24.84864),
+      title: "Vantaankoski",
+      sidebarItem: "Vantaankoski",
+      content: "<b>Vantaankoski</b>"
+    }); 
+     *
+     */
+    
+   var imgSrc = "http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg";
+    
+    $.each(nemovitost, function(i,item){
+    	  makeMarker({
+    	      position: new google.maps.LatLng(item.lat,item.lon),
+    	      title: item.title,
+    	      sidebarItem: item.title,
+    	      content: "<div id=\"content\">"
+    	    	
+    	    	  +"<img src=\""+imgSrc+"\" />"
+    	    	  +"<h4 style=\"float:right;left:20px;\">"+item.title+"</h4>"
+    	    	
+    	    	  +"<p style=\"float:right;left:20px;\">"+item.cena+"</p>"
+    	    	  +"<a href=\"#mainPage\" style=\"float:right;left:20px;\" >Detail</p>"
+    	  		  +"</div>"
+    	      
+    	    }); 
+
+     
+    });
+    
+    
+
+
+    /**
+     *   fit viewport to markers
+     */
+    map.fitBounds(markerBounds);
+
+
+
+    
+}
+
+/*THIS FUNCTION IS FOR SWICTHING OF MARKERS AT MAP, BUTTONS ARE HIDDEN AND WE INCREASE O DECR. ID OF HIDDEN BUTTON,
+THIS BUTTON WE THEN SUBMIT BY TRIGGER*/
+
+//TODO GET ACTUAL COUNT OF RETURNED VALUES FROM JSON AND SET THIS VALUE FOR REPEATING, FXP. IF COUT IS 9, AFTER 9, RESET TO 0
+function updateMarker(action)
+{
+	if (action == 'increase')
+	{
+		markerID ++;
+		$("#sidebar_item"+markerID+"").trigger('click'); 
+	}
+	
+	if (action == 'decrease')
+	{
+		markerID --;
+		$("#sidebar_item"+markerID+"").trigger('click'); 
+	}
 }
 
 
@@ -820,13 +1301,79 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 							type : "GET",
 							
 							success : function(result) {
-							
+								
 								console.log(result);
 								
+								$("#countOfFoundRealities").text(result.nemovitosti.pocet);
+								
+								//GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								var countOfPages = result.nemovitosti.pocet / $(".choosenValues").attr('itemsPerPage') ;
+								var countOfPagesRounded = Math.round(countOfPages);
+								
+								$(".choosenValues").attr('pagesTotal', countOfPagesRounded);
+								$("#totalCountOfPages").text( countOfPagesRounded);	
+								console.log("pocet STRANEK "+countOfPagesRounded);
+								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
 								
 								
-								$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
-								$(".infoBar").hide('slow');		
+								
+								var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
+								var parsedRes = JSON.parse(stringifiedRes);
+							
+								
+								console.log(parsedRes);
+								/*
+								console.log(result.nemovitosti);
+								console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
+								
+								
+								console.log("NAVRACENE REALITY");
+								console.log(result.nemovitosti.nemovitost);
+								
+								*/
+								
+								
+								
+								$.each(parsedRes, function(key, value) { 
+									  
+									//console.log(value.cena);	
+									//console.log(value.cislo);	
+									/* console.log('CENA:  '          + value.cena         + '\n' +
+									         'CISLO: '         + cislo        + '\n' +
+									         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+									         'foto: '          + foto         + '\n' +
+									         'inzerent: '          + inzerent         + '\n' +
+									         'lat: '          + lat         + '\n' +
+									         'lon: ' + lon  + '\n' +
+									         'obec: '           + obec          + '\n' +
+									         'okres: '             + okres             + '\n' +
+									         'popis: '             + popis            + '\n' +
+									         'prefix: '             + prefix            + '\n' +
+									
+									         'subtyp: '             + subtyp            + '\n' +
+									         'typ: '             + typ            + '\n' +
+									         'typ_ceny: '             + typ_ceny            + '\n' +
+									         'vlastnictvi: '         + vlastnictvi     + '\n');
+									 */ 
+									
+									
+									$(".listOfFoudRealities").append("<li class=\"listOfRealities\">" +
+											"<a href=\"#showDetailOfReality\" onClick=\"passParamsOfDistrict("+key+","+"'"+value+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" height=\"100\" />" +
+											"<h3>"+value.obec+"</h3>"+
+											"<p><strong>"+value.cena+" Kč</p>"+
+											"<p>"+value.popis+"</p>"+
+											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+											
+											"</a>" +
+											"</li>");
+						
+								
+								});
+								
+
+								$('.listOfFoudRealities').listview('refresh');
+								$(".infoBar").hide();
 								
 							},
 							// IF HTTP RESULT 400 || 404
@@ -840,6 +1387,118 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 	
 	
 }
+
+
+//FOR TESTING, CAN BE DELETED
+function getListOfRealitiesTest()
+{
+
+	console.log("FCE getListOfRealitiesTest spustena");
+	$(".infoBarHeadingText").text('Nacitam data..');
+	$(".infoBar").show();
+	
+
+	$('.listOfFoudRealities li.listOfRealities').remove();
+	
+	var stranka = $(".choosenValues").attr("actualPage");
+	
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=1&subTyp=0%2C1%2C&okres=13&stranka="+stranka+"&trideni=cena&ascdesc=asc&cenaod=600000&cenado=2260000&plochaod=&plochado=&prefix=&mojelat=&mojelon=",
+							type : "GET",
+							
+							success : function(result) {
+								
+								console.log(result);
+								
+								$("#countOfFoundRealities").text(result.nemovitosti.pocet);
+								
+								//GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								var countOfPages = result.nemovitosti.pocet / $(".choosenValues").attr('itemsPerPage') ;
+								var countOfPagesRounded = Math.round(countOfPages);
+								
+								$(".choosenValues").attr('pagesTotal', countOfPagesRounded);
+								$("#totalCountOfPages").text( countOfPagesRounded);	
+								console.log("pocet STRANEK "+countOfPagesRounded);
+								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								
+								
+								
+								var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
+								var parsedRes = JSON.parse(stringifiedRes);
+							
+								
+								console.log(parsedRes);
+								/*
+								console.log(result.nemovitosti);
+								console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
+								
+								
+								console.log("NAVRACENE REALITY");
+								console.log(result.nemovitosti.nemovitost);
+								
+								*/
+								
+								
+								
+								$.each(parsedRes, function(key, value) { 
+									  
+									//console.log(value.cena);	
+									//console.log(value.cislo);	
+									/* console.log('CENA:  '          + value.cena         + '\n' +
+									         'CISLO: '         + cislo        + '\n' +
+									         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+									         'foto: '          + foto         + '\n' +
+									         'inzerent: '          + inzerent         + '\n' +
+									         'lat: '          + lat         + '\n' +
+									         'lon: ' + lon  + '\n' +
+									         'obec: '           + obec          + '\n' +
+									         'okres: '             + okres             + '\n' +
+									         'popis: '             + popis            + '\n' +
+									         'prefix: '             + prefix            + '\n' +
+									
+									         'subtyp: '             + subtyp            + '\n' +
+									         'typ: '             + typ            + '\n' +
+									         'typ_ceny: '             + typ_ceny            + '\n' +
+									         'vlastnictvi: '         + vlastnictvi     + '\n');
+									 */ 
+									
+									
+									$(".listOfFoudRealities").append("<li class=\"listOfRealities\">" +
+											"<a href=\"#showDetailOfReality\" onClick=\"passParamsOfDistrict("+key+","+"'"+value+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" height=\"100\" />" +
+											"<h3>"+value.obec+"</h3>"+
+											"<p><strong>"+value.cena+" Kč</p>"+
+											"<p>"+value.popis+"</p>"+
+											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+											
+											"</a>" +
+											"</li>");
+						
+								
+								});
+								
+
+								$('.listOfFoudRealities').listview('refresh');
+								$(".infoBar").hide();
+								
+									
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
+	
+	
+	
+	
+}
+
+
+
 
 
 

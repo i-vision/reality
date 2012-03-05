@@ -28,3 +28,17 @@ text-align:center; margin-top:8px;
 {
 	display:none;
 }
+
+.previousPage, .nextPage
+{
+	position:static; z-index:99999;padding-top:40%;
+}
+
+.previousPage
+{
+	float:left;
+}
+.nextPage
+{
+	float:right;
+}

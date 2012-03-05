@@ -43,7 +43,7 @@
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a onClick="showOnMapTest().showAlert();"> BYTY PRONÁJEM</a></div></div>
+			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
 					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -834,62 +834,6 @@
 	
     <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
     
-    
-    
-  
-    
-<!------------------------------------THIS PAGE MUST BE AS LAST SELECT ON MAP PAGE -------------------------------------------->
-	
-    <div data-role="page" data-theme="b" id="showRealitiesOnMapPage">
-  	<div data-role="header">
-    	<a href="#selectLocalityPage" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="byty_na_prodej" id="mapActionStatus">Vypis</h1> 
-		<a href="" class="pageForReturn" data-theme="b" i18n="ulozit"   data-icon="arrow-r">Zvolit</a>
-        
-    <!-- NAVBAR-->    
-    <div data-role="navbar">
-	
-	<ul>
-		<li><a onClick="updateMarker('decrease');" class="ui-btn-active">Předchozí</a></li>
-		<li><a onClick="updateMarker('increase');">Následující</a></li>
-	</ul
-	    
-    <!--//  NAVBAR-->   
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-	
-    <!-- MAP CANVAS  -->
-   
-    <div id="map_canvas2" style="width:100%;height:250px;">
-    
-    </div>
- <div style="display:none;" id="sidebar">
- </div>
-	<!-- MAP CANVAS-->
-    
-   
-    </div><!-- end jqm content -->
-    <div data-role="footer" data-theme="c" >
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-    </div>
-    </div>
-	<!----------------------------------------- //SELECT ON MAP PAGE ----------------------------------------------------------->
-  
-	 
-   
     
     
     
