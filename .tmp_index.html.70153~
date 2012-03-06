@@ -4,49 +4,30 @@
     <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>ČESKÉ REALITY</title>
-     
-	  
- <!--CSS-->	  
-	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />     
- <!--     <link rel="stylesheet" href="custom.css" type="text/css"/>
-	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
-      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />-->	   
- <!--CSS-->	   
-
-<!--PHOTOSWIPE-->
-		<link href="photoswipe/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
-		<link href="photoswipe/photoswipe.css" type="text/css" rel="stylesheet" />
-<!--PHOTOSWIPE-->
-
-<!--GOOGLE MAPS API-->	 
-<!--	 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	-->		
-<!--GOOGLE MAPS API-->   
- 
- 
- <script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
- 
- <!--JQUERY-->	 
-  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script> 
-  <!--JQUERY-->	 
- 
- <!--PHONEGAP-->   
-	<!--  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>--> 
-	 
- <!--PHONEGAP-->   	  
- 
- <!--JQM-->  
-<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
-
- <!--JQM--> 
-	  
-<!--CUSTOM FUNCTIONS JS-->
-	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
-<!--CUSTOM FUNCTIONS JS-->
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
 	
-<!--PHOTOSWIPE JS-->
-<script type="text/javascript" src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
-<!--PHOTOSWIPE-->
+		
+        
+      <link rel="stylesheet" href="custom.css" type="text/css"/>
+	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
+      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />
 
+
+	  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script> 
+     
+     <script type="text/javascript" charset="utf-8" src="jquery.touch-gallery-1.0.0.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+	  <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
+    
+
+      <!--
+   	  <script type="text/javascript" charset="utf-8" src="iscroll/iscroll.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="iscroll/jqmiscroll.js"></script>
+		
+        
+-->
 
         
         
@@ -806,8 +787,12 @@
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">Výpis nemovitostí</h1> 
 		<div data-role="controlgroup" data-type="horizontal" >  
-		<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
-		</div>
+
+	
+	<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
+	
+        
+	</div>
     <div data-role="navbar">
 	<ul>
 		<li id="previousPage"><a i18n="predchozi" onCLick="decrementActualPage();" class="ui-btn-active">Předchozí</a></li>
@@ -824,18 +809,16 @@
   	
   
   <!-- LIST OF MATCHED REALITIES-->
-   
    <ul data-role="listview" class="listOfFoudRealities">
-			<li data-role="list-divider" id="infoAboutFound">
-			<span i18n="strana">strana :</span> 
-			<span id="ActualPage"> 0</span> 
-			<span i18n="z"> z </span>
-			<span id="totalCountOfPages">0</span>  
-			<span i18n="pocet_nemovitosti" style="float:right;padding-right:20px;">počet  nemovistostí: <span>
-			<span id="countOfFoundRealities" class="ui-li-count">0</span></li>
+			<li data-role="list-divider" id="infoAboutFound" ><span i18n="strana">strana :</span> <span id="ActualPage"> 0</span> <span i18n="z"> z </span><span id="totalCountOfPages">0</span>  <span i18n="pocet_nemovitosti" style="float:right;padding-right:20px;">počet  nemovistostí: <span><span id="countOfFoundRealities" class="ui-li-count">0</span></li>
+			
+            
+    
+            
+            
+            
     </ul>        
 	
-   
   <!-- //LIST OF MATCHED REALITIES -->
   
 
@@ -858,8 +841,10 @@
 		</ul>
 		</div>
        <!--// NAVBAR--> 
-    </div >
-	</div>
+    </div
+   
+    ></div>
+	
     <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
     
     
@@ -871,7 +856,7 @@
   	<div data-role="header">
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
-	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Ukaž na mapě </a>
+	
 </div>
 	
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -882,24 +867,7 @@
     <div data-role="content" data-theme="d" class="bgImage">
   	
     
-    <!-- GALLERY FOR IMAGES -->
     
- <ul class="gallery">
-		
-<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
-<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
-
-<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
-<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
-<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
-<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
-		
-</ul>
- 
-   <!-- //GALLERY FOR IMAGES -->
- 
-    
-     <!-- BASIC INFO, PRICE, PLACE --> 
     
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
 		
@@ -908,75 +876,88 @@
 					<h3>Sorent - realitní kancelář, s.r.o., Sorent - CB s.r.o.</h3>
 					<p><strong>Hlincová Hora</strong></p>
 					<p>60000 kc.</p>
-					
+					<p class="ui-li-aside"><strong>600000</strong>PM</p>
 				
 			</li>
-   <!-- //BASIC INFO, PRICE, PLACE --> 
-   
-   
-   <!--  collapsible DIVS-->    
-   
-   <div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
-			
-   <!-- TEXT DESCRIPTION-->    
-     <div data-role="collapsible">
-				<h3>Popis </h3>
-				<p>Nabízíme k prodeji zděnou chatu 16 m2, v lokalitě Hlincová Hora, České Budějovice. Dispozice chaty - obývací pokoj s kuchyňkou, ložnice, koupelna, WC, prostorný sklep s možností využití jako letní kuchyň. Chata leží na pronajatém oploceném pozemku - zahrada s okrasnými keři a bazénem, nájem činí 1300 ,- Kč/rok. Chata má vlastní vrt, el. 220/380 V, septik. Topení je na tuhá paliva (krbová kamna), teplá voda je zajištěna bojlerem. Chata se nachází v zahrádkářské kolonii, v blízkosti rybníka Mrhal (cca 1 km), dostupnost MHD. Bližší informace v RK.</p>
-			</div>
-    <!-- //TEXT DESCRIPTION-->         
+            <li>
+            </li>
+			<div>
             
+           	</div>
             
-            <!-- SCECIFICATION--> 
-            
-			<div data-role="collapsible">
-				<h3>Specifikace</h3>
-				<p>Collapsible content
-                </p>
 
-			</div>
-            
-          <!-- //SCECIFICATION-->       
-		
-        
-          <!-- QUIPMENT-->       
-        
-        
-        	<div data-role="collapsible">
-				<h3>Vybaveni</h3>
-				<p>Collapsible content</p>
-			</div>
-            
-          <!-- //QUIPMENT-->       
+
+
+  <div id="gallery">
+      
+        <img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" data-large="http://jquery4u.jquery4u.netdna-cdn.com/wp-content/uploads/2012/02/HTML5-CSS3-Drop-Down-Menu.jpg" />
+      
+       <img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" data-large="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" />
+      
+      <img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" data-large="http://jquery4u.jquery4u.netdna-cdn.com/wp-content/uploads/2012/02/HTML5-CSS3-Drop-Down-Menu.jpg" />
+      
+    </div>
+
             
             
-            
-              <!-- CONTACT--> 
-            
-            <div data-role="collapsible">
-				<h3>Kontakt</h3>
-				<p>Collapsible content</p>
-			</div>
-            
-            
-              <!-- //CONTACT--> 
-              
-                
-                
-                <!--SEND MESS-->  
-            <div data-role="collapsible">
-				<h3>Zaslat vzkaz</h3>
-				<p>Collapsible content</p>
-			</div>
-                <!-- //SEND MESS--> 
-            
-		</div>
-   
-   
-   
-  </ul>          
+			<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
+			<li><a href="index.html">
+				<h3>Avery Walker</h3>
+				<p><strong>Re: Dinner Tonight</strong></p>
+				<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
+				<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+			</a></li>
+			<li data-role="list-divider">Wednesday, October 6, 2010 <span class="ui-li-count">3</span></li>
+			<li><a href="index.html">
+				<h3>Amazon.com</h3>
+				<p><strong>4-for-3 Books for Kids</strong></p>
+				<p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
+				<p class="ui-li-aside"><strong>12:47</strong>PM</p>
+			</a></li>
+			<li><a href="index.html">
+				<h3>Mike Taylor</h3>
+				<p><strong>Re: This weekend in Maine</strong></p>
+				<p>Hey little buddy, sorry but I can't make it up to vacationland this weekend. Maybe next weekend?</p>
+				<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+			</a></li>
+			<li><a href="index.html">
+				<h3>Redfin</h3>
+				<p><strong>Redfin listing updates for today</strong></p>
+				<p>There are 3 updates for the home on your watchlist: 1 updated MLS listing and 2 homes under contract.</p>
+				<p class="ui-li-aside"><strong>5:52</strong>AM</p>
+			</a></li>
+				<li data-role="list-divider">Tuesday, October 5, 2010 <span class="ui-li-count">3</span></li>
+				<li><a href="index.html">
+					<h3>Angela Smith</h3>
+					<p><strong>Link Request</strong></p>
+					<p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
+					<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+				</a></li>
+				<li><a href="index.html">
+					<h3>Mike Taylor</h3>
+					<p><strong>This weekend in Maine</strong></p>
+					<p>Sounds good, let me check into our plans.</p>
+					<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+				</a></li>
+		</ul>
     
-       
+    
+    
+ 	<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Collapsible content</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Collapsible content</p>
 
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Collapsible content</p>
+			</div>
+		</div>
 
 
     </div>
@@ -1004,32 +985,9 @@
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
     
-	 <!------------------------------ SHOW GALLERY PAGE CURRENTLY UNUSSED------------------------------------------------>
-	
-<div data-role="page" data-add-back-btn="true" id="Gallery1" >
-
-	<div data-role="header">
-		<h1>First Gallery</h1>
-	</div>
-
-	<div data-role="content">	
-		
-	
-		
-	</div>
-	
-	<div data-role="footer">
-		<h4>&copy; 2011 Code Computerlove</h4>
-	</div>
-	
-</div>
-
-	
-	
-	
    
     
-<!------------------------------------ !!SHOW GALLERY PAGE CURRENTLY UNUSSED-------------------------------------------->
+<!------------------------------------SHOW MARKERS OF REALITIES ON MAP -------------------------------------------->
 	
     <div data-role="page" data-theme="b" id="showRealitiesOnMapPage">
   	<div data-role="header">
