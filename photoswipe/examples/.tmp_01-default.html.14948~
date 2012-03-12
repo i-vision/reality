@@ -10,24 +10,23 @@
 	<link href="../photoswipe.css" type="text/css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="../lib/klass.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	
-	<script type="text/javascript" src="../code.photoswipe.jquery-3.0.4.min.js"></script>
+	<script type="text/javascript" src="../code.photoswipe-3.0.4.min.js"></script>
 	
 	
 	<script type="text/javascript">
 
-		(function(window, $, PhotoSwipe){
+		(function(window, PhotoSwipe){
+		
+			document.addEventListener('DOMContentLoaded', function(){
 			
-			$(document).ready(function(){
-				
-				var options = {};
-				$("#Gallery a").photoSwipe(options);
+				var
+					options = {},
+					instance = PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), options );
 			
-			});
+			}, false);
 			
 			
-		}(window, window.jQuery, window.Code.PhotoSwipe));
+		}(window, window.Code.PhotoSwipe));
 		
 	</script>
 	

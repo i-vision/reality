@@ -8,9 +8,9 @@
 	  
  <!--CSS-->	  
 	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />     
- <!--     <link rel="stylesheet" href="custom.css" type="text/css"/>
+ <<link rel="stylesheet" href="custom.css" type="text/css"/>
 	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
-      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />-->	   
+      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" /> 
  <!--CSS-->	   
 
 <!--PHOTOSWIPE-->
@@ -19,7 +19,7 @@
 <!--PHOTOSWIPE-->
 
 <!--GOOGLE MAPS API-->	 
-<!--	 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	-->		
+	 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>		
 <!--GOOGLE MAPS API-->   
  
  
@@ -75,7 +75,7 @@
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage"> BYTY PRONÁJEM</a></div></div>
+			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage" onclick="showDetailOfReality('BOR','26062','CB110412');"> BYTY PRONÁJEM</a></div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
 					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -196,7 +196,7 @@
    
    
     <!-- EXTENDED SEARCH DIV, HIDDEN BY DEFAULT-->
-   <div class="extendedSearchDiv">
+   <div class="extendedSearchDiv" style="display:none;">
    
    
 
@@ -871,7 +871,7 @@
   	<div data-role="header">
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
-	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Ukaž na mapě </a>
+	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Mapa </a>
 </div>
 	
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -883,34 +883,42 @@
   	
     
     <!-- GALLERY FOR IMAGES -->
-    
- <ul class="gallery">
-		
-<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
-<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
 
-<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
-<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
-<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
-<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
-		
+
+<ul class="gallery" id="Gallery" data-role="listview" >
+
+<!-- <li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>-->
+    
+       
 </ul>
+
  
    <!-- //GALLERY FOR IMAGES -->
  
     
      <!-- BASIC INFO, PRICE, PLACE --> 
-    
+     
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
 		
-			<li>
+	<li>
 				
-					<h3>Sorent - realitní kancelář, s.r.o., Sorent - CB s.r.o.</h3>
-					<p><strong>Hlincová Hora</strong></p>
-					<p>60000 kc.</p>
-					
+                    
+    <fieldset class="container_12">
+	<div class="grid_6"><h2 id="nabidkaod" style="float:left;"></h2></div>
+		   
+	<div class="grid_6"><h2 id="datum_aktualizace" style="float:right;"></h2></div>	   
+    </fieldset>
+                    
+                    
+     <fieldset class="container_12">
+	<div class="grid_6"><h2 id="adresa"></h2></div>
+		   
+	<div class="grid_6"><h2 id="cena" style="float:right;"> Kč</h2></div>	   
+    </fieldset>
+            
 				
-			</li>
+	</li>
+			
    <!-- //BASIC INFO, PRICE, PLACE --> 
    
    
@@ -921,16 +929,127 @@
    <!-- TEXT DESCRIPTION-->    
      <div data-role="collapsible">
 				<h3>Popis </h3>
-				<p>Nabízíme k prodeji zděnou chatu 16 m2, v lokalitě Hlincová Hora, České Budějovice. Dispozice chaty - obývací pokoj s kuchyňkou, ložnice, koupelna, WC, prostorný sklep s možností využití jako letní kuchyň. Chata leží na pronajatém oploceném pozemku - zahrada s okrasnými keři a bazénem, nájem činí 1300 ,- Kč/rok. Chata má vlastní vrt, el. 220/380 V, septik. Topení je na tuhá paliva (krbová kamna), teplá voda je zajištěna bojlerem. Chata se nachází v zahrádkářské kolonii, v blízkosti rybníka Mrhal (cca 1 km), dostupnost MHD. Bližší informace v RK.</p>
+				<p id="popis"></p>
 			</div>
     <!-- //TEXT DESCRIPTION-->         
             
             
-            <!-- SCECIFICATION--> 
+            <!-- SPECIFICATION--> 
             
 			<div data-role="collapsible">
 				<h3>Specifikace</h3>
-				<p>Collapsible content
+				<p>
+               <fieldset class="container_12">
+	<div class="grid_6"><div>Vlastnictví:</div></div>
+		   
+	<div class="grid_6"><div id="vlastnictvi" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+          <fieldset class="container_12">
+	<div class="grid_6"><div>Rok výstavby:</div></div>
+		   
+	<div class="grid_6"><div id="rok_vystavby" style="float:right;"></div></div>	   
+    </fieldset>
+    
+                   
+                   
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Posl. rekonstrukce:</div></div>
+		   
+	<div class="grid_6"><div id="posl_rekonstrukce" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+     
+             
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Charakter obce:</div></div>
+		   
+	<div class="grid_6"><div id="charakterobce" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+             
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Poloha:</div></div>
+		   
+	<div class="grid_6"><div id="poloha" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+             
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Stav:</div></div>
+		   
+	<div class="grid_6"><div id="stav" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+             
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha ceková:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_celkova" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+             
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha zastavěná:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_zastavena" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha obytná:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_obytna" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+     
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha užitná:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_uzitna" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+     
+     
+     
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha výrobní:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_vyrobni" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+     
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Plocha nebytová:</div></div>
+		   
+	<div class="grid_6"><div id="plocha_nebytova" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                    <fieldset class="container_12">
+	<div class="grid_6"><div>Patro:</div></div>
+		   
+	<div class="grid_6"><div id="patro" style="float:right;"></div></div>	   
+    </fieldset>
+     
+     
+     
+                
+                
                 </p>
 
 			</div>
@@ -943,18 +1062,101 @@
         
         	<div data-role="collapsible">
 				<h3>Vybaveni</h3>
-				<p>Collapsible content</p>
+				<p>
+                       <fieldset class="container_12">
+	<div class="grid_6"><div>Parkování:</div></div>
+		   
+	<div class="grid_6"><div id="parkovani" style="float:right;"></div></div>	   
+    </fieldset>
+                </p>
 			</div>
             
           <!-- //QUIPMENT-->       
             
             
             
-              <!-- CONTACT--> 
+              <!-- CONTACT --> 
             
             <div data-role="collapsible">
 				<h3>Kontakt</h3>
-				<p>Collapsible content</p>
+				<p>
+                
+                           <fieldset class="container_12">
+	<div class="grid_6"><div>Nabídka od:</div></div>
+		   
+	<div class="grid_6"><div id="nabidkaod" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Ulice:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_ulice" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Město:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_mesto" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Psč:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_psc" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Tel:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_tel" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Tel 2:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_tel2" style="float:right;"></div></div>	   
+    </fieldset>
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Tel 3:</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_tel3" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Web :</div></div>
+		   
+	<div class="grid_6"><div id="inzerent_www" style="float:right;"></div></div>	   
+    </fieldset>
+    
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Makléř mobilní tel :</div></div>
+		   
+	<div class="grid_6"><div id="makler_telm" style="float:right;"></div></div>	   
+    </fieldset>
+    
+                  <fieldset class="container_12">
+	<div class="grid_6"><div>Makléř e-mail :</div></div>
+		   
+	<div class="grid_6"><div id="makler_mail" style="float:right;"></div></div>	   
+    </fieldset>
+    
+         <fieldset class="container_12">
+	<div class="grid_6"><div>Foto :</div></div>
+		   
+	<div class="grid_6"><img src="" id="makler_foto" style="float:right;"/></div>	   
+    </fieldset>
+  
+    
+    
+                </p>
 			</div>
             
             
@@ -989,10 +1191,9 @@
       <!-- NAVBAR-->
     	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
 		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLÍDAT</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">PŘIDAT POZNÁMKU</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">SDÍLET</a></li>
 			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
 		</ul>
 		</div>
@@ -1003,6 +1204,47 @@
 	
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
+	
+	 <!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="historyOfSearchPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">Historie hledání</h1> 
+	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
+    
+    
+	
+	
+	
     
 	 <!------------------------------ SHOW GALLERY PAGE CURRENTLY UNUSSED------------------------------------------------>
 	

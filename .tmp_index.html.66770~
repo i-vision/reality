@@ -1,25 +1,57 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>ČESKÉ REALITY</title>
-      <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.0.css" type="text/css"/>
-	  <link rel="stylesheet" href="custom.css" type="text/css"/>
-	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
-      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />
-      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery-1.6.4.min"></script>
      
-	  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery.mobile-1.0.js"></script>
+	  
+ <!--CSS-->	  
+	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />     
+ <!--     <link rel="stylesheet" href="custom.css" type="text/css"/>
+	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
+      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />-->	   
+ <!--CSS-->	   
+
+<!--PHOTOSWIPE-->
+		<link href="photoswipe/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
+		<link href="photoswipe/photoswipe.css" type="text/css" rel="stylesheet" />
+<!--PHOTOSWIPE-->
+
+<!--GOOGLE MAPS API-->	 
+	 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>		
+<!--GOOGLE MAPS API-->   
+ 
+ 
+ <script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
+ 
+ <!--JQUERY-->	 
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script> 
+  <!--JQUERY-->	 
+ 
+ <!--PHONEGAP-->   
+	<!--  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>--> 
+	 
+ <!--PHONEGAP-->   	  
+ 
+ <!--JQM-->  
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+
+ <!--JQM--> 
+	  
+<!--CUSTOM FUNCTIONS JS-->
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
-   	  <script type="text/javascript" charset="utf-8" src="iscroll/iscroll.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="iscroll/jqmiscroll.js"></script>
-      <script type="text/javascript" src="resources.default.js"></script>
-      <script type="text/javascript" src="resources.es.js"></script>
+<!--CUSTOM FUNCTIONS JS-->
+	
+<!--PHOTOSWIPE JS-->
+<script type="text/javascript" src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
+<!--PHOTOSWIPE-->
+
+
+        
+        
   </head>
-  <body onload="init();" class="choosenValues" type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20"  >
+  <body onload="init();" class="choosenValues" type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
   	
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b" id="mainPage">
@@ -43,7 +75,7 @@
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px">BYTY PRONÁJEM</div></div>
+			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage"> BYTY PRONÁJEM</a></div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
 					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -774,12 +806,8 @@
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">Výpis nemovitostí</h1> 
 		<div data-role="controlgroup" data-type="horizontal" >  
-
-	
-	<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
-	
-        
-	</div>
+		<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
+		</div>
     <div data-role="navbar">
 	<ul>
 		<li id="previousPage"><a i18n="predchozi" onCLick="decrementActualPage();" class="ui-btn-active">Předchozí</a></li>
@@ -796,16 +824,18 @@
   	
   
   <!-- LIST OF MATCHED REALITIES-->
+   
    <ul data-role="listview" class="listOfFoudRealities">
-			<li data-role="list-divider" id="infoAboutFound" ><span i18n="strana">strana :</span> <span id="ActualPage"> 0</span> <span i18n="z"> z </span><span id="totalCountOfPages">0</span>  <span i18n="pocet_nemovitosti" style="float:right;padding-right:20px;">počet  nemovistostí: <span><span id="countOfFoundRealities" class="ui-li-count">0</span></li>
-			
-            
-    
-            
-            
-            
+			<li data-role="list-divider" id="infoAboutFound">
+			<span i18n="strana">strana :</span> 
+			<span id="ActualPage"> 0</span> 
+			<span i18n="z"> z </span>
+			<span id="totalCountOfPages">0</span>  
+			<span i18n="pocet_nemovitosti" style="float:right;padding-right:20px;">počet  nemovistostí: <span>
+			<span id="countOfFoundRealities" class="ui-li-count">0</span></li>
     </ul>        
 	
+   
   <!-- //LIST OF MATCHED REALITIES -->
   
 
@@ -828,12 +858,269 @@
 		</ul>
 		</div>
        <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
+    
+    
+    
+    
+    <!--------------------------------- SHOW REALITY DEATIL PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="showDetailOfRealityPage" class="gallery-page">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
+	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Ukaž na mapě </a>
+</div>
+	
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  	
+    
+    <!-- GALLERY FOR IMAGES -->
+    
+ <ul class="gallery">
+		
+<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
+<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
+
+<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
+<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
+<li><a href="photoswipe/examples/images/full/002.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/75d583fead8dda0298a806184e8ef43e.jpg" alt="Image 002" /></a></li>
+<li><a href="photoswipe/examples/images/full/003.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/26062/09b52d2dbbb7c820b6195ad48ac809e6.jpg" alt="Image 003" /></a></li>
+		
+</ul>
+ 
+   <!-- //GALLERY FOR IMAGES -->
+ 
+    
+     <!-- BASIC INFO, PRICE, PLACE --> 
+    
+    <ul data-role="listview" data-theme="d" data-divider-theme="d">
+		
+			<li>
+				
+					<h3>Sorent - realitní kancelář, s.r.o., Sorent - CB s.r.o.</h3>
+					<p><strong>Hlincová Hora</strong></p>
+					<p>60000 kc.</p>
+					
+				
+			</li>
+   <!-- //BASIC INFO, PRICE, PLACE --> 
+   
+   
+   <!--  collapsible DIVS-->    
+   
+   <div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
+			
+   <!-- TEXT DESCRIPTION-->    
+     <div data-role="collapsible">
+				<h3>Popis </h3>
+				<p>Nabízíme k prodeji zděnou chatu 16 m2, v lokalitě Hlincová Hora, České Budějovice. Dispozice chaty - obývací pokoj s kuchyňkou, ložnice, koupelna, WC, prostorný sklep s možností využití jako letní kuchyň. Chata leží na pronajatém oploceném pozemku - zahrada s okrasnými keři a bazénem, nájem činí 1300 ,- Kč/rok. Chata má vlastní vrt, el. 220/380 V, septik. Topení je na tuhá paliva (krbová kamna), teplá voda je zajištěna bojlerem. Chata se nachází v zahrádkářské kolonii, v blízkosti rybníka Mrhal (cca 1 km), dostupnost MHD. Bližší informace v RK.</p>
+			</div>
+    <!-- //TEXT DESCRIPTION-->         
+            
+            
+            <!-- SCECIFICATION--> 
+            
+			<div data-role="collapsible">
+				<h3>Specifikace</h3>
+				<p>Collapsible content
+                </p>
+
+			</div>
+            
+          <!-- //SCECIFICATION-->       
+		
+        
+          <!-- QUIPMENT-->       
+        
+        
+        	<div data-role="collapsible">
+				<h3>Vybaveni</h3>
+				<p>Collapsible content</p>
+			</div>
+            
+          <!-- //QUIPMENT-->       
+            
+            
+            
+              <!-- CONTACT--> 
+            
+            <div data-role="collapsible">
+				<h3>Kontakt</h3>
+				<p>Collapsible content</p>
+			</div>
+            
+            
+              <!-- //CONTACT--> 
+              
+                
+                
+                <!--SEND MESS-->  
+            <div data-role="collapsible">
+				<h3>Zaslat vzkaz</h3>
+				<p>Collapsible content</p>
+			</div>
+                <!-- //SEND MESS--> 
+            
+		</div>
+   
+   
+   
+  </ul>          
+    
+       
+
+
+
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+  
+     
+     
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLÍDAT</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">PŘIDAT POZNÁMKU</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">SDÍLET</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
     </div
    
     ></div>
 	
-    <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
+    <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
+	
+	 <!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="historyOfSearchPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">Historie hledání</h1> 
+	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
+    
+    
+	
+	
+	
+    
+	 <!------------------------------ SHOW GALLERY PAGE CURRENTLY UNUSSED------------------------------------------------>
+	
+<div data-role="page" data-add-back-btn="true" id="Gallery1" >
+
+	<div data-role="header">
+		<h1>First Gallery</h1>
+	</div>
+
+	<div data-role="content">	
+		
+	
+		
+	</div>
+	
+	<div data-role="footer">
+		<h4>&copy; 2011 Code Computerlove</h4>
+	</div>
+	
+</div>
+
+	
+	
+	
+   
+    
+<!------------------------------------ !!SHOW GALLERY PAGE CURRENTLY UNUSSED-------------------------------------------->
+	
+    <div data-role="page" data-theme="b" id="showRealitiesOnMapPage">
+  	<div data-role="header">
+    	<a href="#selectLocalityPage" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="byty_na_prodej" id="mapActionStatus">Vypis</h1> 
+		<a href="" class="pageForReturn" data-theme="b" i18n="ulozit"   data-icon="arrow-r">Zvolit</a>
+        
+    <!-- NAVBAR-->    
+    <div data-role="navbar">
+	
+	<ul>
+		<li><a onClick="updateMarker('decrease');" class="ui-btn-active">Předchozí</a></li>
+		<li><a onClick="updateMarker('increase');">Následující</a></li>
+	</ul
+	    
+    ><!--//  NAVBAR-->   
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+	
+    <!-- MAP CANVAS  -->
+   
+    <div id="map_canvas2" style="min-width:100%;height:350px;">
+    
+    </div>
+ <div style="display:none;" id="sidebar">
+ </div>
+	<!-- MAP CANVAS-->
+    
+   
+    </div><!-- end jqm content -->
+    <div data-role="footer" data-theme="c" >
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+    </div>
+    </div>
+	<!----------------------------------------- //SHOW MARKERS OF REALITIES ON MAP  ----------------------------------->
+  
+	 
+   
     
     
     

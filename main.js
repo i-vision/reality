@@ -47,10 +47,23 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2
 
 /*CUSTOM FUNCTIONS*/
 
+/*
+	document.addEventListener('DOMContentLoaded', function(){
+	
+		var
+			options = {},
+			instance = PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), options );
+	
+	}, false);
+	
+*/	
+
 $(document).ready( function(){ 
 
 //INIT SWYPE SHOWDETAILOFREALITYPAGE MUST BE ID OF PAGE, WHERE IS GALLERY PLACED
-var myPhotoSwipe = $("#showDetailOfRealityPage a").photoSwipe({ enableMouseWheel: true , enableKeyboard: true });
+//var myPhotoSwipe = $("#Gallery a").photoSwipe({ enableMouseWheel: true , enableKeyboard: true });
+	
+	
 	
 //BIND EVENT TO TOOGLE FLIP SWITCH IF IS ENABLED EXTEND SEARCHING SHOW EXTENDED FORM, DEFAULT IS HIDDEN	
 	
@@ -876,9 +889,80 @@ function getParamsForSearch(isForMapShow) {
 	 
 	 else
 	 {   
-		
+			
+		//SAVE TO SEARCH HISTORY
+		 saveToHistoryOfSearch(typ, subTyp, okres,0,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
+		 
+		 //CALL FUNCTION FOR WRITEOUT OF REALITIES
 		 getListOfRealities(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
 	 }
+	
+}
+
+
+function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
+{
+	
+	console.log("SAVETOHISTORYOFSEARCH RUNS");
+	
+	//IF IS TO FOR FIRST TIME
+	if(localStorage.savedSearches == undefined)
+	{
+		//CREATE LOCALSTORAGE ITEM
+	    localStorage.savedSearches = new Array();
+	    
+	}
+	
+	//FETCH FROM LS TO VARIABLE
+	var stringOfSavedSearches = localStorage.savedSearches;
+	    
+	//SPLIT VALUES FROM LS TO ARRAY
+	var splittedstringOfSavedSearches =  stringOfSavedSearches.split(":");
+
+	//document.write(typeof splittedstringOfSavedSearches);
+	//GET VALUES FROM PARAMS FOR PUSH TO ARRAY
+	var newValue = typ+":"+subTyp+":"+ okres+":"+trideni+":"+ascdesc+":"+ cenaod+":"+ cenado+":"+plochaod+":"+plochado+":"+prefix+":"+mojelat+":"+ mojelon;
+
+
+	if(splittedstringOfSavedSearches.length > 10)
+	{
+
+	//SHHIFT REMOVE FIRST ARRAY    
+	splittedstringOfSavedSearches.shift();
+	//PUSH INSERT TO LAST POSITION
+	splittedstringOfSavedSearches.push(newValue);
+	}
+	else
+	{
+	splittedstringOfSavedSearches.push(newValue);
+	}
+
+	console.log(splittedstringOfSavedSearches);
+
+	localStorage.savedSearches = splittedstringOfSavedSearches;
+
+
+	console.log("SAVETOHISTORYOFSEARCH FINISHED");
+	
+	
+	
+	/* WRITEOUT
+	for(i=0;i<myCars.length;i++)
+	{
+	    //document.write(myCars[i]);
+	    
+	    str = myCars[i];
+	    
+	    var splittedCars =  str.split(":");
+	    
+	    document.write(splittedCars[0]+"<br>");
+	    document.write(splittedCars[1]+"<br>");
+	    document.write(splittedCars[2]+"<br>");
+	    document.write(splittedCars[3]+"<br>");
+	    
+	     document.write("<br>");
+	    
+	}​*/
 	
 }
 
@@ -1071,10 +1155,10 @@ function showMarkersOnMap(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc
 			    	      title: value.cena,
 			    	      sidebarItem: value.cena,
 			    	      content: "<div id=\"content\">" 
-			    	    	  +"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" />"
+			    	    	  +"<a href=\"\" onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\"><img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" /></a>"
 			    	    	  +"<h4 style=\"float:right;left:20px;\">"+value.cena+"</h4>"
 			    	    	  +"<p style=\"float:right;left:20px;\">"+value.cena+"</p>"
-			    	    	  +"<a onClick=\"showDetailOfReality("+value.prefix+","+"'"+value.inzerent+","+"'"+value.cislo+"'"+");\" style=\"float:right;left:20px;\" >Detail</p>"
+			    	    	  +"<a href=\" onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" style=\"float:right;left:20px;\" >Detail</a>"
 			    	  		  +"</div>"
 			    	      
 			    	    }); 
@@ -1122,9 +1206,11 @@ function showDetailOfReality(prefix,inzerent,cislo)
 	console.log(prefix);
 	
 	
-
+	$(".infoBar").hide();
 	$(".infoBarHeadingText").text('Nacitam data..');
 	$(".infoBar").show();
+	//IF EVERYTHING IS FINISHED CHANGE PAGE
+    $.mobile.changePage( "#showDetailOfRealityPage", { transition: "slideup"} );
 		
 				jQuery.ajax({
 							
@@ -1134,81 +1220,108 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							
 							success : function(result) {
 								
-								console.log(result);
+						    console.log(result);
 								
-								$("#countOfFoundRealities").text(result.nemovitosti.pocet);
+							
+						    //INSERT PHOTOS
+						   
+							$.each(result.nemovitost.fotografie, function(key, value) { 
 								
-								//GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
-								var countOfPages = result.nemovitosti.pocet / $(".choosenValues").attr('itemsPerPage') ;
-								var countOfPagesRounded = Math.round(countOfPages);
-								
-								$(".choosenValues").attr('pagesTotal', countOfPagesRounded);
-								$("#totalCountOfPages").text( countOfPagesRounded);	
-								console.log("pocet STRANEK "+countOfPagesRounded);
-								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
-								
-								
-								
-								var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
-								var parsedRes = JSON.parse(stringifiedRes);
+								console.log(key+" "+value);		
+						
+								//<li><a href="photoswipe/examples/images/full/001.jpg" rel="external"><img src="http://img.ceskereality.cz/foto_mini/19890/19890asm13090224931593.jpg" alt="Image 001" /></a></li>
+								$("#Gallery").append("<li><a rel=\"external\"  href=\"http://img.ceskereality.cz/foto/"+inzerent+"/"+value+"\"><img src=\"http://img.ceskereality.cz/foto_mini/"+inzerent+"/"+value+"\" alt=\"Image 001\" /></a></li>");
 							
 								
-								console.log(parsedRes);
-								/*
-								console.log(result.nemovitosti);
-								console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
-								
-								
-								console.log("NAVRACENE REALITY");
-								console.log(result.nemovitosti.nemovitost);
-								
-								*/
-								
-								
-								
-								$.each(parsedRes, function(key, value) { 
-									  
-									//console.log(value.cena);	
-									//console.log(value.cislo);	
-									/* console.log('CENA:  '          + value.cena         + '\n' +
-									         'CISLO: '         + cislo        + '\n' +
-									         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
-									         'foto: '          + foto         + '\n' +
-									         'inzerent: '          + inzerent         + '\n' +
-									         'lat: '          + lat         + '\n' +
-									         'lon: ' + lon  + '\n' +
-									         'obec: '           + obec          + '\n' +
-									         'okres: '             + okres             + '\n' +
-									         'popis: '             + popis            + '\n' +
-									         'prefix: '             + prefix            + '\n' +
-									
-									         'subtyp: '             + subtyp            + '\n' +
-									         'typ: '             + typ            + '\n' +
-									         'typ_ceny: '             + typ_ceny            + '\n' +
-									         'vlastnictvi: '         + vlastnictvi     + '\n');
-									 */ 
-									
-									
-									$(".listOfFoudRealities").append("<li class=\"listOfRealities\">" +
-											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" " +"idOfCity=\""+key+"\">" +
-											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
-											"<h3>"+value.obec+"</h3>"+
-											"<p><strong>"+value.cena+" Kč</p>"+
-											"<p>"+value.popis+"</p>"+
-											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
-											
-											"</a>" +
-											"</li>");
-						
-								
-								});
-								
+							});
+							
+							$('#detailGallery').listview('refresh');
+							
+							//BASIC INFO, PRICE, PLACE
+							$('#nabidkaod').text(result.nemovitost.inzerent);
+							$('#datum_aktualizace').text(result.nemovitost.datum_aktualizace);
+							$('#adresa').text(result.nemovitost.adresa);
+							$('#cena').text(result.nemovitost.cena);
+							
+							
+							//TEXT DESCRIPTION
+							$('#popis').text(result.nemovitost.popis);
+							
+							
+							//SPECIFICATION
 
-								//IF EVERYTHING IS FINISHED CHANGE PAGE
-							    $.mobile.changePage( "#showDetailOfRealityPage", { transition: "slideup"} );		
-							    
-								$('.listOfFoudRealities').listview('refresh');
-								$(".infoBar").hide();
+							$('#vlastnictvi').text(result.nemovitost.vlastnictvi);
+							$('#rok_vystavby').text(result.nemovitost.rok_vystavby);
+							$('#posl_rekonstrukce').text(result.nemovitost.posl_rekonstrukce);
+							$('#charakterobce').text(result.nemovitost.charakterobce);
+							$('#poloha').text(result.nemovitost.poloha);
+							$('#stav').text(result.nemovitost.stav);
+							$('#plocha_celkova').text(result.nemovitost.plocha_celkova);	
+							$('#plocha_zastavena').text(result.nemovitost.plocha_zastavena);
+							$('#plocha_obytna').text(result.nemovitost.plocha_obytna);
+							$('#plocha_uzitna').text(result.nemovitost.plocha_uzitna);
+							$('#plocha_vyrobni').text(result.nemovitost.plocha_vyrobni);
+							$('#plocha_nebytova').text(result.nemovitost.plocha_nebytova);
+							$('#patro').text(result.nemovitost.patro);
+							
+							
+							//QUIPMENT		
+							
+							/*
+											
+											$('#operace').text(result.nemovitost.operace);
+											$('#typ').text(result.nemovitost.typ);
+											$('#subtyp').text(result.nemovitost.subtyp);
+											$('#okres').text(result.nemovitost.okres);
+											$('#adresa').text(result.nemovitost.adresa);
+											$('#cena_prepocet').text(result.nemovitost.cena_prepocet);
+											$('#cena_prepocet_kcm2').text(result.nemovitost.cena_prepocet_kcm2);
+											$('#poznamkakcene').text(result.nemovitost.poznamkakcene);
+											$('#najem').text(result.nemovitost.najem);
+											$('#typ_ceny').text(result.nemovitost.typ_ceny);
+											$('#podlazi_nadzemnich').text(result.nemovitost.podlazi_nadzemnich);
+											$('#podlazi_podzemnich').text(result.nemovitost.podlazi_podzemnich);
+											$('#mistnosti').text(result.nemovitost.mistnosti);
+											$('#bytu').text(result.nemovitost.bytu);
+											$('#volnychbytu').text(result.nemovitost.volnychbytu);
+											$('#tel_linek').text(result.nemovitost.tel_linek);
+											$('#datum_vlozeni').text(result.nemovitost.datum_vlozeni);
+											$('#datum_aktualizace').text(result.nemovitost.datum_aktualizace);
+											$('#kmodeme').text(result.nemovitost.kmodeme);
+											$('#moznosti').text(result.nemovitost.moznosti);
+											$('#datum_aktualizace').text(result.nemovitost.datum_aktualizace);
+											
+							*/
+							
+							
+							
+							//CONTACT
+							
+							$('#inzerent').text(result.nemovitost.inzerent);
+
+							$('#nabidkaod').text(result.nemovitost.nabidkaod);
+							$('#inzerent_ulice').text(result.nemovitost.inzerent_ulice);
+							$('#inzerent_mesto').text(result.nemovitost.inzerent_mesto);
+							$('#inzerent_tel').text(result.nemovitost.inzerent_tel);
+							$('#inzerent_tel2').text(result.nemovitost.inzerent_tel2);
+							$('#inzerent_tel3').text(result.nemovitost.inzerent_tel3);
+							$('#inzerent_email').text(result.nemovitost.inzerent_email);
+							$('#inzerent_email2').text(result.nemovitost.inzerent_email2);
+							$('#inzerent_www').text(result.nemovitost.inzerent_www);
+							$('#makler_jmeno').text(result.nemovitost.makler_jmeno);
+							$('#makler_telp').text(result.nemovitost.makler_telp);
+							$('#makler_telm').text(result.nemovitost.makler_telm);
+							$('#makler_icq').text(result.nemovitost.makler_icq);
+							$('#makler_mail').text(result.nemovitost.makler_mail);
+							$('#makler_info').text(result.nemovitost.makler_info);
+							$('#makler_foto').attr('src',result.nemovitost.makler_foto);
+							
+							//IF VALUE IS EMPTY INSERT DEFAULT MEASSAGE 
+							$(".grid_6 div:empty").text("-------");
+							
+							//IF EVERYTHING IS SUCESSFULLY FINISHED HIDE INFO MESSAGE
+							
+							$(".infoBar").hide();
 								
 							},
 							// IF HTTP RESULT 400 || 404
@@ -1428,6 +1541,8 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 							type : "GET",
 							
 							success : function(result) {
+							
+								
 								
 								console.log(result);
 								
@@ -1514,6 +1629,117 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 	
 	
 }
+
+
+
+function getListOfRealitiesTest()
+{
+	
+	//REMOVE ALL  PREVIOUS REALITIES
+	$('.listOfFoudRealities li.listOfRealities').remove();
+	
+
+	console.log("FCE getListOfRealities spustena");
+	$(".infoBarHeadingText").text('Nacitam data..');
+	$(".infoBar").show();
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=2&subtyp=1,3&okres=13&stranka=1&trideni=cena&ascdesc=desc&cenado=150000&cenaod=1200&plochaod=10&plochado=1000&mojelat=48.9808&mojelon=15.4814",
+							//data: {jensgps:jensgps,typ:typ,subTyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
+							type : "GET",
+							
+							success : function(result) {
+							
+								
+								
+								console.log(result);
+								
+								$("#countOfFoundRealities").text(result.nemovitosti.pocet);
+								
+								//GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								var countOfPages = result.nemovitosti.pocet / $(".choosenValues").attr('itemsPerPage') ;
+								var countOfPagesRounded = Math.round(countOfPages);
+								
+								$(".choosenValues").attr('pagesTotal', countOfPagesRounded);
+								$("#totalCountOfPages").text( countOfPagesRounded);	
+								console.log("pocet STRANEK "+countOfPagesRounded);
+								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								
+								
+								
+								var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
+								var parsedRes = JSON.parse(stringifiedRes);
+							
+								
+								console.log(parsedRes);
+								/*
+								console.log(result.nemovitosti);
+								console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
+								
+								
+								console.log("NAVRACENE REALITY");
+								console.log(result.nemovitosti.nemovitost);
+								
+								*/
+								
+								
+								
+								$.each(parsedRes, function(key, value) { 
+									  
+									//console.log(value.cena);	
+									//console.log(value.cislo);	
+									/* console.log('CENA:  '          + value.cena         + '\n' +
+									         'CISLO: '         + cislo        + '\n' +
+									         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+									         'foto: '          + foto         + '\n' +
+									         'inzerent: '          + inzerent         + '\n' +
+									         'lat: '          + lat         + '\n' +
+									         'lon: ' + lon  + '\n' +
+									         'obec: '           + obec          + '\n' +
+									         'okres: '             + okres             + '\n' +
+									         'popis: '             + popis            + '\n' +
+									         'prefix: '             + prefix            + '\n' +
+									
+									         'subtyp: '             + subtyp            + '\n' +
+									         'typ: '             + typ            + '\n' +
+									         'typ_ceny: '             + typ_ceny            + '\n' +
+									         'vlastnictvi: '         + vlastnictvi     + '\n');
+									 */ 
+									
+									
+									$(".listOfFoudRealities").append("<li class=\"listOfRealities\">" +
+											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
+											"<h3>"+value.obec+"</h3>"+
+											"<p><strong>"+value.cena+" Kč</p>"+
+											"<p>"+value.popis+"</p>"+
+											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+											
+											"</a>" +
+											"</li>");
+						
+								
+								});
+								
+
+								$('.listOfFoudRealities').listview('refresh');
+								$(".infoBar").hide();
+								
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
+	
+	
+	
+	
+}
+
+
 
 
 
