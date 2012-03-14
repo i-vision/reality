@@ -75,7 +75,7 @@
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage" onclick="showDetailOfReality();"> BYTY PRONÁJEM</a></div></div>
+			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage" onclick="showDetailOfReality('BOR','26062','CB110412');"> BYTY PRONÁJEM</a></div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
 					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -904,16 +904,16 @@
 				
                     
     <fieldset class="container_12">
-	<div class="grid_6"><h2 id="nabidkaod" style="float:left;">Sorent - realitní kancelář</h2></div>
+	<div class="grid_6"><h2 id="nabidkaod" style="float:left;"></h2></div>
 		   
-	<div class="grid_6"><h2 id="datum_aktualizace" style="float:right;">2012-03-01</h2></div>	   
+	<div class="grid_6"><h2 id="datum_aktualizace" style="float:right;"></h2></div>	   
     </fieldset>
                     
                     
      <fieldset class="container_12">
-	<div class="grid_6"><h2 id="adresa">Hlincova hora</h2></div>
+	<div class="grid_6"><h2 id="adresa"></h2></div>
 		   
-	<div class="grid_6"><h2 id="cena" style="float:right;">600000 Kc</h2></div>	   
+	<div class="grid_6"><h2 id="cena" style="float:right;"> Kč</h2></div>	   
     </fieldset>
             
 				
@@ -929,12 +929,12 @@
    <!-- TEXT DESCRIPTION-->    
      <div data-role="collapsible">
 				<h3>Popis </h3>
-				<p id="popis">Nabízíme k prodeji zděnou chatu 16 m2, v lokalitě Hlincová Hora, České Budějovice. Dispozice chaty - obývací pokoj s kuchyňkou, ložnice, koupelna, WC, prostorný sklep s možností využití jako letní kuchyň. Chata leží na pronajatém oploceném pozemku - zahrada s okrasnými keři a bazénem, nájem činí 1300 ,- Kč/rok. Chata má vlastní vrt, el. 220/380 V, septik. Topení je na tuhá paliva (krbová kamna), teplá voda je zajištěna bojlerem. Chata se nachází v zahrádkářské kolonii, v blízkosti rybníka Mrhal (cca 1 km), dostupnost MHD. Bližší informace v RK.</p>
+				<p id="popis"></p>
 			</div>
     <!-- //TEXT DESCRIPTION-->         
             
             
-            <!-- SCECIFICATION--> 
+            <!-- SPECIFICATION--> 
             
 			<div data-role="collapsible">
 				<h3>Specifikace</h3>
@@ -942,14 +942,14 @@
                <fieldset class="container_12">
 	<div class="grid_6"><div>Vlastnictví:</div></div>
 		   
-	<div class="grid_6"><div id="vlastnictvi" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="vlastnictvi" style="float:right;"></div></div>	   
     </fieldset>
     
     
           <fieldset class="container_12">
 	<div class="grid_6"><div>Rok výstavby:</div></div>
 		   
-	<div class="grid_6"><div id="rok_vystavby" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="rok_vystavby" style="float:right;"></div></div>	   
     </fieldset>
     
                    
@@ -957,7 +957,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Posl. rekonstrukce:</div></div>
 		   
-	<div class="grid_6"><div id="posl_rekonstrukce" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="posl_rekonstrukce" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -967,7 +967,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Charakter obce:</div></div>
 		   
-	<div class="grid_6"><div id="charakterobce" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="charakterobce" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -975,7 +975,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Poloha:</div></div>
 		   
-	<div class="grid_6"><div id="poloha" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="poloha" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -983,7 +983,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Stav:</div></div>
 		   
-	<div class="grid_6"><div id="stav" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="stav" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -991,7 +991,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha ceková:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_celkova" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_celkova" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -999,7 +999,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha zastavěná:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_zastavena" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_zastavena" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -1007,7 +1007,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha obytná:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_obytna" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_obytna" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -1016,7 +1016,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha užitná:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_uzitna" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_uzitna" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -1027,7 +1027,7 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha výrobní:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_vyrobni" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_vyrobni" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -1036,14 +1036,14 @@
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Plocha nebytová:</div></div>
 		   
-	<div class="grid_6"><div id="plocha_nebytova" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="plocha_nebytova" style="float:right;"></div></div>	   
     </fieldset>
     
     
                     <fieldset class="container_12">
 	<div class="grid_6"><div>Patro:</div></div>
 		   
-	<div class="grid_6"><div id="patro" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="patro" style="float:right;"></div></div>	   
     </fieldset>
      
      
@@ -1066,7 +1066,7 @@
                        <fieldset class="container_12">
 	<div class="grid_6"><div>Parkování:</div></div>
 		   
-	<div class="grid_6"><div id="parkovani" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="parkovani" style="float:right;"></div></div>	   
     </fieldset>
                 </p>
 			</div>
@@ -1075,27 +1075,7 @@
             
             
             
-              <!-- CONTACT
-              
-               "nabidkaod": "Sorent - realitní kancelář, s.r.o., Sorent - CB s.r.o.",
-  "inzerent_ulice": "Bělehradská 118",
-  "inzerent_mesto": "Praha",
-  "inzerent_psc": "12000",
-  "inzerent_tel": "+420 724004646 Praha",
-  "inzerent_tel2": "+420 777235528 ČB",
-  "inzerent_tel3": "+420 602681581 Praha",
-  "inzerent_email": "reality@sorent.cz",
-  "inzerent_email2": "",
-  "inzerent_www": "http://www.sorent.cz",
-  "makler_jmeno": "Hana Nováková",
-  "makler_telp": "",
-  "makler_telm": "607271728",
-  "makler_icq": "",
-  "makler_mail": "hana.ernatova@sorent.cz",
-  "makler_info": "",
-  "makler_foto": "http://img.ceskereality.cz/makleri/26062/",
-              
-              --> 
+              <!-- CONTACT --> 
             
             <div data-role="collapsible">
 				<h3>Kontakt</h3>
@@ -1104,74 +1084,74 @@
                            <fieldset class="container_12">
 	<div class="grid_6"><div>Nabídka od:</div></div>
 		   
-	<div class="grid_6"><div id="nabidkaod" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="nabidkaod" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Ulice:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_ulice" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_ulice" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Město:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_mesto" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_mesto" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Psč:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_psc" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_psc" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_tel" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_tel" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel 2:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_tel2" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_tel2" style="float:right;"></div></div>	   
     </fieldset>
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel 3:</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_tel3" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_tel3" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Web :</div></div>
 		   
-	<div class="grid_6"><div id="inzerent_www" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="inzerent_www" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Makléř mobilní tel :</div></div>
 		   
-	<div class="grid_6"><div id="makler_telm" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="makler_telm" style="float:right;"></div></div>	   
     </fieldset>
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Makléř e-mail :</div></div>
 		   
-	<div class="grid_6"><div id="makler_mail" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><div id="makler_mail" style="float:right;"></div></div>	   
     </fieldset>
     
          <fieldset class="container_12">
 	<div class="grid_6"><div>Foto :</div></div>
 		   
-	<div class="grid_6"><div id="makler_foto" style="float:right;">2012-03-01</div></div>	   
+	<div class="grid_6"><img src="" id="makler_foto" style="float:right;"/></div>	   
     </fieldset>
   
     
