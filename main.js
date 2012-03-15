@@ -133,6 +133,152 @@ $('#writeoutOfRealities').live('swiperight',function(event, ui){
 
 });
 
+/*CHANGE PAGE IN WRITEOUT OF REALITY ESTATES*/
+
+function changePageOfRealityEstate(action,districtId)
+{
+	
+
+	var districtId = $(".choosenValues").attr("dictrictid");
+	
+	
+	//INCREASE PAGE
+	if(action == "increase")
+	{
+		console.log("INCREASE");
+	  	var actualPageVal = $(".choosenValues").attr("actualPageOfRealEstate");
+	  	var pagesTotal = $(".choosenValues").attr("pagesTotalOfRealEstate");
+	  	
+		actualPageVal ++;
+		$(".choosenValues").attr("actualPageOfRealEstate",actualPageVal);
+		//UPDATE VALUE IN LIST INFO
+		//$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPageOfRealEstate"));
+		
+		
+		if(actualPageVal == pagesTotal )
+		{
+			//$("#nextPage").hide();
+			$(".infoBar").show();
+			$(".infoBarHeadingText").text("TOTO JE POSLEDNI STRÁNKA");
+			
+		}
+		if(actualPageVal < pagesTotal )	
+		{
+			$(".infoBar").hide();
+			getAllRealEstateOfficess(districtId);
+		}
+		
+	}
+	
+
+	//DECREASE PAGE
+	if(action == "decrease")
+	{
+		console.log("DECREASE");
+	  	var actualPageVal = $(".choosenValues").attr("actualPageOfRealEstate");
+	  	var pagesTotal = $(".choosenValues").attr("pagesTotalOfRealEstate");
+	  	
+		actualPageVal -- ;
+		$(".choosenValues").attr("actualPageOfRealEstate",actualPageVal);
+		
+		//UPDATE VALUE IN LIST INFO
+		//$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPageOfRealEstate"));
+		
+		
+		if(actualPageVal < 0 )
+		{
+			//$("#nextPage").hide();
+			$(".infoBar").show();
+			$(".infoBarHeadingText").text("JSTE NA PRVNÍ STRÁNCE");
+			
+		}
+		if(actualPageVal < pagesTotal )	
+		{
+			$(".infoBar").hide();
+			getAllRealEstateOfficess(districtId);
+		
+		}
+		
+	}
+	
+}
+/*CHANGE PAGE IN WRITEOUT OF REALITIES FROM REALITY ESTATE*/
+
+function changePageFromRealEstate(action)
+{
+	
+	var actualPageVal = $(".choosenValues").attr("actualPageOfRealityWriteoutRealEstate");
+  	var pagesTotal = $(".choosenValues").attr("pagesTotalWriteoutRealEstate");  	
+  	var prefix = $(".choosenValues").attr("RealEstatePrefix");
+	
+	//INCREASE PAGE
+	if(action == "increase")
+	{
+		console.log("INCREASE");
+	  	
+	 
+	  	
+		actualPageVal ++;
+		$(".choosenValues").attr("actualPageOfRealityWriteoutRealEstate",actualPageVal);
+		//UPDATE VALUE IN LIST INFO
+		//$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPageOfRealityWriteoutRealEstate"));
+		
+		
+		if(actualPageVal == pagesTotal )
+		{
+			//$("#nextPage").hide();
+			$(".infoBar").show();
+			$(".infoBarHeadingText").text("TOTO JE POSLEDNI STRÁNKA");
+			
+		}
+		if(actualPageVal < pagesTotal )	
+		{
+			$(".infoBar").hide();
+			getListOfRealitiesFromRealEstate(prefix);
+		}
+		
+	}
+	
+
+	//DECREASE PAGE
+	if(action == "decrease")
+	{
+		console.log("DECREASE");
+	  	
+	  	
+		actualPageVal -- ;
+		$(".choosenValues").attr("actualPageOfRealityWriteoutRealEstate",actualPageVal);
+		
+		//UPDATE VALUE IN LIST INFO
+		//$("#ActualPage").text(actualPageVal);
+		
+		console.log("ATTR ACTUAL PAGE MA NYNI HODNOTU "+$(".choosenValues").attr("actualPageOfRealityWriteoutRealEstate"));
+		
+		
+		if(actualPageVal < 0 )
+		{
+			//$("#nextPage").hide();
+			$(".infoBar").show();
+			$(".infoBarHeadingText").text("JSTE NA PRVNÍ STRÁNCE");
+			
+		}
+		if(actualPageVal < pagesTotal )	
+		{
+			$(".infoBar").hide();
+			getListOfRealitiesFromRealEstate(prefix);
+		
+		}
+		
+	}
+	
+}
+
 
 //INCREMENT ACTUAL PAGE VALUE
 
@@ -205,6 +351,8 @@ function init() {
     // document.addEventListener("touchmove", preventBehavior, false);
 	
 	checkSettings();
+	//FILL ATTRIBUES ABOUT ACTUAL DICTRICT AND MUNICIALITY
+	
 	document.addEventListener("deviceready", deviceInfo, true);
 	
    
@@ -217,7 +365,10 @@ function init() {
 //GET ALL JSON VALUES FOR FORMS FILLING 
 
 function checkSettings()
-{
+{	
+	
+	getMyPosition('1');
+	
 	var firstTimeStartUp = localStorage.firstTimeStartUp;
 	
 	console.log("firstTimeStartUp VALUE IS: "+firstTimeStartUp);
@@ -266,9 +417,31 @@ function checkSettings()
 				  console.log(key + ': ' + value); 
 					$(".listOfAllDistricts").append("<li><a onClick=\"passParamsOfDistrict("+key+","+"'"+value+"'"+");\"  href=\"#selectLocalityPage\" idOfCity=\""+key+"\" >"+value+"</a></li>");
 		});
-		$('.listOfAllDistricts').listview('refresh');
+		//$('.listOfAllDistricts').listview('refresh');
 		
 		/*//FILL LIST OF DISTRICTS*/
+		
+		
+		
+		
+		
+
+		/*FILL LIST OF DISTRICTS for REALITY ESTATE SELECT*/
+		
+		var listOfAllDistrictsForRealityEstate = parsedFetchedClassifields.ciselniky.okres;
+		
+		console.log("SEZNAM MEST");
+		console.log(listOfAllDistrictsForRealityEstate);
+		
+		
+		$.each(listOfAllDistrictsForRealityEstate, function(key, value) { 
+				  console.log(key + ': ' + value); 
+					$(".listOfAllDistrictsForRealityEstate").append("<li><a onClick=\"getAllRealEstateOfficess("+key+");\"  href=\"#writeoutAllRealEstateOfficessPage\" >"+value+"</a></li>");
+		});
+		//$('.listOfAllDistrictsForRealityEstate').listview('refresh');
+		
+
+		/*!!FILL LIST OF DISTRICTS for REALITY ESTATE SELECT*/
 		
 		
 		
@@ -281,7 +454,11 @@ function checkSettings()
 	
 }
 
-
+function changeParamsForBackBtn(id,whereToRedirect)
+{
+		
+		$(id).attr('href',whereToRedirect);	
+}
 //GET NAME AND 
 //ID OF  SELECTED DISTRICT
 function passParamsOfDistrict(id,name) {
@@ -967,6 +1144,86 @@ function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cena
 }
 
 
+function getAllRealEstateOfficess(districtId)
+{
+	if(districtId == undefined)
+	{
+	console.log("NEZNAM OKRES, ZJISTIM NEJBLIZSI A TEN VYPISI");		
+	//CALL FUNCTION TO GET GPS COORDS AND DISTRICT ID	
+	getMyPosition('1');
+	console.log($(".choosenValues").attr("dictrictid"));
+	var districtId = $(".choosenValues").attr("dictrictid");
+	}
+	else
+	console.log("ZNAM OKRES,DOSADIM A VYPISI");
+
+	$(".infoBarHeadingText").text('NAČÍTÁM DATA');
+	
+	//GET ACTUAL PAGE	
+	var actualPage = $(".choosenValues").attr("actualPageOfRealEstate");
+	
+	//SAVE DISTRICT ID TO  PARAMS
+	//$(".choosenValues").attr("dictrictid", districtId);
+	
+	console.log("ID OKRESU JE " + districtId);
+		
+	$(".infoBar").show();
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/rk.html",
+							data: {okres:districtId,stranka:actualPage},
+							type : "GET",
+							
+							success : function(result) {
+								console.log("getAllRealEstateOfficess RUNS");	
+								
+								console.log(result);	
+								
+								//TOTAL COUNT OF PAGES
+							
+								var countOfPagesRounded = Math.round(result.rk.pocet/20);
+								
+								$(".choosenValues").attr("pagesTotalOfRealEstate",countOfPagesRounded);
+								
+								$('.listOfFoudRealityEstates li').remove();
+								
+								$.each(result.rk.realitni_kancelar, function(key, value) { 
+								console.log(key + ': ' + value); 
+								
+								$(".listOfFoudRealityEstates").append("<li>" +
+										"<a  onClick=\"getListOfRealitiesFromRealEstate('"+value.prefix+"'"+");\">" +
+										"<img src=\"http://img.ceskereality.cz/loga/"+value.logo+"\" width=\"80px\" />" +
+										"<h3>"+value.rk+" "+value.mesto+" </h3>"+
+										"<p><strong>"+value.www+" Kč</p>"+
+										"<p> telefon: "+value.tel+"</p>"+
+										"<p class=\"ui-li-aside\"><strong> počet nemovitostí: "+value.nemovitosti+"</strong></p>"+	
+										"</a>" +
+										"</li>");
+					
+								
+								});
+								
+								$('.listOfFoudRealityEstates').listview('refresh');	
+								
+								
+								//$(".infoBarHeadingText").text('HOTOVO');
+								$(".infoBar").hide('slow');		
+								
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
+	
+	
+	
+	
+}
+
+
 //SHOW FOUNDED REALITIES AND THEIR MARKERS ON MAP,ONLY WITH FILLED GPS COORDS
 function showMarkersOnMap(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
 {
@@ -1220,9 +1477,9 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							
 							success : function(result) {
 								
-						    console.log(result);
+						   console.log(result);
 								
-							
+						    
 						    //INSERT PHOTOS
 						   
 							$.each(result.nemovitost.fotografie, function(key, value) { 
@@ -1267,10 +1524,15 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							
 							//QUIPMENT		
 							
+							
+							$('#kanalizace').text(result.nemovitost.vybaveni.Kanalizace['0']);
+							$('#parkovani').text(result.nemovitost.vybaveni.Parkování['0']);
+							$('#zahrada').text(result.nemovitost.vybaveni.Zahrada['0']);
+					
+							
+							
 							/*
-											
-											$('#operace').text(result.nemovitost.operace);
-											$('#typ').text(result.nemovitost.typ);
+							
 											$('#subtyp').text(result.nemovitost.subtyp);
 											$('#okres').text(result.nemovitost.okres);
 											$('#adresa').text(result.nemovitost.adresa);
@@ -1294,7 +1556,6 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							*/
 							
 							
-							
 							//CONTACT
 							
 							$('#inzerent').text(result.nemovitost.inzerent);
@@ -1302,9 +1563,9 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							$('#nabidkaod').text(result.nemovitost.nabidkaod);
 							$('#inzerent_ulice').text(result.nemovitost.inzerent_ulice);
 							$('#inzerent_mesto').text(result.nemovitost.inzerent_mesto);
-							$('#inzerent_tel').text(result.nemovitost.inzerent_tel);
-							$('#inzerent_tel2').text(result.nemovitost.inzerent_tel2);
-							$('#inzerent_tel3').text(result.nemovitost.inzerent_tel3);
+							$('#inzerent_tel').text(result.nemovitost.inzerent_tel.replace("+420", ""));
+							$('#inzerent_tel2').text(result.nemovitost.inzerent_tel2.replace("+420", ""));
+							$('#inzerent_tel3').text(result.nemovitost.inzerent_tel3.replace("+420", ""));
 							$('#inzerent_email').text(result.nemovitost.inzerent_email);
 							$('#inzerent_email2').text(result.nemovitost.inzerent_email2);
 							$('#inzerent_www').text(result.nemovitost.inzerent_www);
@@ -1318,6 +1579,21 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							
 							//IF VALUE IS EMPTY INSERT DEFAULT MEASSAGE 
 							$(".grid_6 div:empty").text("-------");
+							
+							
+							//FILL SHOW ON MAP PAGE BTN GPS  COORDS
+							//IF LAT AND LON ARE EMPTY, USE obec_stred_lat COORDS
+							if(result.nemovitost.lat == "")
+							{
+							console.log("LAT NEMOVITOSTI NEUVEDENA");	
+							$('#showOnMapBtn').attr('onClick',"showOnMap("+result.nemovitost.obec_stred_lat+","+ result.nemovitost.obec_stred_lon+");");
+							}
+							if(result.nemovitost.lat != "")
+							{
+							console.log(result.nemovitost.lat);	
+							console.log("LAT NEMOVITOSTI UVEDENA");	
+							$('#showOnMapBtn').attr('onClick',"showOnMap("+result.nemovitost.lat+","+ result.nemovitost.lon+");");
+							}
 							
 							//IF EVERYTHING IS SUCESSFULLY FINISHED HIDE INFO MESSAGE
 							
@@ -1526,6 +1802,7 @@ function updateMarker(action)
 function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,prefix,mojelat,mojelon)
 {
 	
+	
 	//REMOVE ALL  PREVIOUS REALITIES
 	$('.listOfFoudRealities li.listOfRealities').remove();
 	
@@ -1615,6 +1892,132 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 								
 
 								$('.listOfFoudRealities').listview('refresh');
+								$(".infoBar").hide();
+								
+							},
+							// IF HTTP RESULT 400 || 404
+							error : function(x, e) {
+									
+								typeOfRequestError(x, e);
+							}
+						});
+	
+	
+	
+	
+}
+
+
+
+/*Writeout list of all matched realities by passed params
+ * Example:
+ * http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=2&subtyp=1,3&okres=13&stranka=1&trideni=cena&ascdesc=desc&cenado=150000&cenaod=1200&plochaod=10&plochado=1000&mojelat=48.9808&mojelon=15.4814
+ * */
+function getListOfRealitiesFromRealEstate(prefix)
+{
+	
+	//REDIRECT
+	$.mobile.changePage( "#writeoutOfRealitiesFromRealEstate");
+	
+	//REMOVE ALL  PREVIOUS REALITIES
+	$('.listOfFoudRealitiesFromRealEstate li.listOfRealities').remove();
+	
+	//SAVE PREFIX TO ATTR 
+	$(".choosenValues").attr('RealEstatePrefix',prefix);
+	
+	//GET ACTUAL PAGE STORED IN ATTR
+	var actualPage = $(".choosenValues").attr('actualPageOfRealityWriteoutRealEstate');
+
+	
+	console.log("FCE getListOfRealitiesFromRealEstate spustena");
+	$(".infoBarHeadingText").text('Nacitam data..');
+	$(".infoBar").show();
+		
+				jQuery.ajax({
+							
+							url :"http://pts.ceskereality.cz/json/vypis.html",
+							data: {prefix:prefix,stranka:actualPage},
+							type : "GET",
+							
+							success : function(result) {
+							
+								
+								
+								console.log(result);
+								
+								$("#totalCountOfRealitiesFromRealEstate").text(result.nemovitosti.pocet);
+								
+								//GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								var countOfPages = result.nemovitosti.pocet / $(".choosenValues").attr('itemsPerPage') ;
+								var countOfPagesRounded = Math.round(countOfPages);
+								
+								
+								//INSERT VALUES TO WRITEOUT DELIMITER
+								$("#actualPageFromRealEState").text( $(".choosenValues").attr('actualPageOfRealityWriteoutRealEstate'));
+								$(".choosenValues").attr('actualPageOfRealityWriteoutRealEstate');
+								$(".choosenValues").attr('pagesTotalWriteoutRealEstate', countOfPagesRounded);
+								$("#totalCountOfPagesFromRealEState").text( countOfPagesRounded);	
+								console.log("pocet STRANEK "+countOfPagesRounded);
+								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
+								
+								
+								
+								var stringifiedRes = JSON.stringify(result.nemovitosti.nemovitost);	
+								var parsedRes = JSON.parse(stringifiedRes);
+							
+								
+								console.log(parsedRes);
+								/*
+								console.log(result.nemovitosti);
+								console.log("POCET NALEZENYCH NEMOVITOSTI" +result.nemovitosti.pocet);
+								
+								
+								console.log("NAVRACENE REALITY");
+								console.log(result.nemovitosti.nemovitost);
+								
+								*/
+								
+								
+								
+								$.each(parsedRes, function(key, value) { 
+									  
+									//console.log(value.cena);	
+									//console.log(value.cislo);	
+									/* console.log('CENA:  '          + value.cena         + '\n' +
+									         'CISLO: '         + cislo        + '\n' +
+									         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+									         'foto: '          + foto         + '\n' +
+									         'inzerent: '          + inzerent         + '\n' +
+									         'lat: '          + lat         + '\n' +
+									         'lon: ' + lon  + '\n' +
+									         'obec: '           + obec          + '\n' +
+									         'okres: '             + okres             + '\n' +
+									         'popis: '             + popis            + '\n' +
+									         'prefix: '             + prefix            + '\n' +
+									
+									         'subtyp: '             + subtyp            + '\n' +
+									         'typ: '             + typ            + '\n' +
+									         'typ_ceny: '             + typ_ceny            + '\n' +
+									         'vlastnictvi: '         + vlastnictvi     + '\n');
+									 */ 
+									
+									
+									$(".listOfFoudRealitiesFromRealEstate").append("<li class=\"listOfRealities\">" +
+											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
+											"<h3>"+value.obec+"</h3>"+
+											"<p><strong>"+value.cena+" Kč</p>"+
+											"<p>"+value.popis+"</p>"+
+											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+											
+											"</a>" +
+											"</li>");
+						
+								
+								});
+								
+
+								$('.listOfFoudRealitiesFromRealEstate').listview('refresh');
 								$(".infoBar").hide();
 								
 							},
@@ -2014,6 +2417,8 @@ navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 
 
+
+
 //GET NEAREST CITY BY GPS COORDS AND FILL ID OF THIS CITY INTO ATTRIBUTE municipalityId
 function getMunicipalityByGpsCoords(Lat,Long) {
 
@@ -2045,7 +2450,7 @@ $(".infoBar").show();
 							
 							
 							
-							$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
+							//$(".infoBarHeadingText").text('OBEC USPESNE NACTENA');
 							$(".infoBar").hide('slow');		
 							
 						},
@@ -2066,7 +2471,7 @@ $(".infoBar").show();
 //http://code.google.com/p/jquery-ui-map/wiki/jquery_ui_map_v_3_sample_code
 function showOnMap(Lat,Long) {
 
-
+$.mobile.changePage("#selectOnMapPage");
 
 console.log('showOnMap runs');
 

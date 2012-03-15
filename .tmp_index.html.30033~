@@ -51,8 +51,7 @@
         
         
   </head>
-  <body onload="init();" class="choosenValues" actualPageOfRealEstate="0" pagesTotalOfRealEstate="0" actualPageOfRealityWriteoutRealEstate="0" RealEstatePrefix="" pagesTotalWriteoutRealEstate="0"
-   type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
+  <body onload="init();" class="choosenValues" type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
   	
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b" id="mainPage">
@@ -83,8 +82,8 @@
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px"><a href="" onClick="fillTypeSellOrRent('sell');" i18n="mapa_okoli">MAPA OKOLÍ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a href="#writeoutAllRealEstateOfficessPage" onClick="getAllRealEstateOfficess();"  i18n="mapa_okoli">REALITNÍ KANCELÁŘE</a></div></div>
+			<div class="ui-block-a"><div style="height:20px">A</div></div>
+			<div class="ui-block-b"><div style="height:20px">B</div></div>
 			<div class="ui-block-c"><div style="height:20px">C</div></div>
 			<div class="ui-block-d"><div style="height:20px">D</div></div>
 					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -432,42 +431,6 @@
     </div>
 	
     <!------------------------------------SELECT DISTRICT PAGE------------------------------------------>
-    
-    
-    
-    
-    
-     <!------------------------------------SELECT DISTRICT FOR REALITY ESTATE PAGE------------------------------------------>
-  
-    <div data-role="page" data-theme="b" id="selectDistrictForRealityEstatePage">
-  	<div data-role="header">
-    	<a href="#writeoutAllRealEstateOfficessPage"  data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vyberte_okres">Vyberte okres</h1> 
-		
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-  
-  <!-- LIST OF ALL DISTRICTS TO SELECT-->
-   
-  <ul class="listOfAllDistrictsForRealityEstate" i18n="zde_zacnete_psat" data-role="listview" data-filter="true" data-filter-placeholder="Zde zacnete psat" data-filter-theme="b">
-				
-  </ul>
-	
-  <!-- //LIST OF ALL DISTRICTS TO SELECT -->
-  
-    
-   
-
-    </div><!-- end jqm content -->
-   
-    </div>
-	
-    <!------------------------------------SELECT DISTRICT FOR REALITY ESTATE  PAGE------------------------------------------>
     
     
     
@@ -901,123 +864,6 @@
     
     
     
-           
-    <!--------------------------------- WRITEOUT OF REALITIES FROM REAL ESTATE PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="writeoutOfRealitiesFromRealEstate">
-  	<div data-role="header">
-    	<a href="#writeoutAllRealEstateOfficessPage" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">Výpis nemovitostí</h1> 
-		<div data-role="controlgroup" data-type="horizontal" >  
-		<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
-		</div>
-    <div data-role="navbar">
-	<ul>
-		<li id="previousPage"><a i18n="predchozi" onCLick="changePageFromRealEstate('decrease');" class="ui-btn-active">Předchozí</a></li>
-		<li id="nextPage"><a i18n="dalsi" onCLick="changePageFromRealEstate('increase');">Další</a></li>
-	</ul>
-</div><!-- /navbar -->
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-  	
-  
-  <!-- LIST OF MATCHED REALITIES-->
-   
-   <ul data-role="listview" class="listOfFoudRealitiesFromRealEstate">
-			<li data-role="list-divider" id="infoAboutFound">
-			<span i18n="strana">strana :</span> 
-			<span id="actualPageFromRealEState"> 0</span> 
-			<span i18n="z"> z </span>
-			<span id="totalCountOfPagesFromRealEState">0</span>  
-			<span i18n="pocet_nemovitosti" style="float:right;padding-right:20px;">počet  nemovistostí: <span>
-			<span id="totalCountOfRealitiesFromRealEstate" class="ui-li-count">0</span></li>
-    </ul>        
-	
-   
-  <!-- //LIST OF MATCHED REALITIES -->
-  
-
-
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-  
-     
-     
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
-    
-    
-	
-	
-	      
-    <!--------------------------------- WRITEOUT OF REAL ESTATES OFFICESS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="writeoutAllRealEstateOfficessPage">
-  	<div data-role="header">
-    	<a href="#mainPage" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">REALITNÍ KANCELÁŘE</h1> 
-		 
-		<a href="#selectDistrictForRealityEstatePage" data-theme="b"  data-icon="arrow-r" i18n="cena" class="ui-btn-right">Okres</a>
-		
-    <div data-role="navbar">
-	<ul>
-		<li ><a i18n="predchozi" onCLick="changePageOfRealityEstate('decrease');" class="ui-btn-active">Předchozí</a></li>
-		<li ><a i18n="dalsi" onCLick="changePageOfRealityEstate('increase');">Další</a></li>
-	</ul>
-</div><!-- /navbar -->
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-  	
-  
-  <!-- LIST OF FOUND REAL ESTATES-->
-   
-   <ul data-role="listview" class="listOfFoudRealityEstates"  data-filter="true" data-filter-placeholder="Zde zacnete psat" data-filter-theme="b">
-		
-   </ul>        
-	
-   
-  <!-- //LIST OF FOUND REAL ESTATES -->
-  
-
-
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-  
-     
-     
-    
-    </div >
-	</div>
-    <!------------------------------// WRITEOUT OF REAL ESTATES OFFICESS PAGE------------------------------------------------>
-	
-	
-    
     
     <!--------------------------------- SHOW REALITY DEATIL PAGE--------------------------------------------->
     
@@ -1025,7 +871,7 @@
   	<div data-role="header">
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
-		<a href="#selectOnMapPage" id="showOnMapBtn" onClick="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Mapa </a>
+	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Mapa </a>
 </div>
 	
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -1074,25 +920,23 @@
 	</li>
 			
    <!-- //BASIC INFO, PRICE, PLACE --> 
-    
-  </ul>          
-    
+   
    
    <!--  collapsible DIVS-->    
    
-   <div data-role="collapsible-set" data-theme="c" data-content-theme="d" >
+   <div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
 			
-   		<!-- TEXT DESCRIPTION-->    
-   	  <div data-role="collapsible">
+   <!-- TEXT DESCRIPTION-->    
+     <div data-role="collapsible">
 				<h3>Popis </h3>
 				<p id="popis"></p>
 			</div>
-   		 <!-- //TEXT DESCRIPTION-->         
+    <!-- //TEXT DESCRIPTION-->         
             
             
             <!-- SPECIFICATION--> 
             
-		<div data-role="collapsible">
+			<div data-role="collapsible">
 				<h3>Specifikace</h3>
 				<p>
                <fieldset class="container_12">
@@ -1210,7 +1054,7 @@
 
 			</div>
             
-          <!-- //SPECIFICATION-->       
+          <!-- //SCECIFICATION-->       
 		
         
           <!-- QUIPMENT-->       
@@ -1224,22 +1068,6 @@
 		   
 	<div class="grid_6"><div id="parkovani" style="float:right;"></div></div>	   
     </fieldset>
-    
-                  <fieldset class="container_12">
-	<div class="grid_6"><div>Zahrada:</div></div>
-		   
-	<div class="grid_6"><div id="zahrada" style="float:right;"></div></div>	   
-    </fieldset>
-    
-    
-                  <fieldset class="container_12">
-	<div class="grid_6"><div>Kanalizace:</div></div>
-		   
-	<div class="grid_6"><div id="kanalizace" style="float:right;"></div></div>	   
-    </fieldset>
-    
-    
-    
                 </p>
 			</div>
             
@@ -1284,27 +1112,27 @@
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel:</div></div>
 		   
-	<div class="grid_6"><a href="" id="inzerent_tel" style="float:right;"></a></div>	   
+	<div class="grid_6"><div id="inzerent_tel" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel 2:</div></div>
 		   
-	<div class="grid_6"><a href="" id="inzerent_tel2" style="float:right;"></a></div>	   
+	<div class="grid_6"><div id="inzerent_tel2" style="float:right;"></div></div>	   
     </fieldset>
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Tel 3:</div></div>
 		   
-	<div class="grid_6"><a href="" id="inzerent_tel3" style="float:right;"></a></div>	   
+	<div class="grid_6"><div id="inzerent_tel3" style="float:right;"></div></div>	   
     </fieldset>
     
     
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Web :</div></div>
 		   
-	<div class="grid_6"><a href="" target="_new" id="inzerent_www" style="float:right;"></a></div>	   
+	<div class="grid_6"><div id="inzerent_www" style="float:right;"></div></div>	   
     </fieldset>
     
     
@@ -1317,7 +1145,7 @@
                   <fieldset class="container_12">
 	<div class="grid_6"><div>Makléř e-mail :</div></div>
 		   
-	<div class="grid_6"><a  id="makler_mail" style="float:right;"></a></div>	   
+	<div class="grid_6"><div id="makler_mail" style="float:right;"></div></div>	   
     </fieldset>
     
          <fieldset class="container_12">
@@ -1346,7 +1174,9 @@
 		</div>
    
    
-  
+   
+  </ul>          
+    
        
 
 
@@ -1365,13 +1195,12 @@
 			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">PŘIDAT POZNÁMKU</a></li>
 			<li><a href="#" id="beer" data-icon="custom" i18n="historie">SDÍLET</a></li>
 			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-				<li><a href="#" id="beer" data-icon="custom" i18n="historie">SDÍLET</a></li>
-		
 		</ul>
 		</div>
        <!--// NAVBAR--> 
-    </div >
-	</div>
+    </div
+   
+    ></div>
 	
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
@@ -1490,7 +1319,6 @@
 		</div>
     </div>
     </div>
-	 </div>
 	<!----------------------------------------- //SHOW MARKERS OF REALITIES ON MAP  ----------------------------------->
   
 	 
@@ -1515,7 +1343,6 @@
 		
 	</ul>    
     <!--//  NAVBAR-->   
-	</div>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
