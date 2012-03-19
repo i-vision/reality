@@ -401,8 +401,8 @@ function checkSettings()
 		//TODO
 		//FILL ALL FORMS AND LISTS WITH DTA FROM CLASSIFIERS
 		
-		
-		
+		//FILL RECOMMENDED PAGE SELECT BOXES
+		//fillRecommnededRealitiesPage();
 		
 		
 		/*FILL LIST OF DISTRICTS*/
@@ -1076,7 +1076,7 @@ function getParamsForSearch(isForMapShow) {
 	
 }
 
-
+//TODO NOT FNCTIONAL SAVE
 function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
 {
 	
@@ -1140,6 +1140,70 @@ function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cena
 	     document.write("<br>");
 	    
 	}​*/
+	
+}
+
+//('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"',"+"'"+value.foto+"',"+"'"+value.cena+"',"+"'"+value.obec+"',"+"'"+value.plocha+"'"+");\"
+function saveDetailOfReality(prefix,inzerent,cislo,foto,cena,obec,plocha)
+{
+	
+console.log("saveDetailOfReality RUNNNING");
+	
+	console.log('prefix:  '          + prefix         + '\n' +
+	         'inzerent: '         + inzerent        + '\n' +
+	         'cislo: '         + cislo       + '\n' +
+	         'foto: '          + foto         + '\n' +
+	         'cena: '          + cena         + '\n' +
+	         'obec: '          + obec         + '\n' +
+	         'plocha: '          + plocha         + '\n');
+	
+	
+//SAVE JSON TO ARRAY IN LS
+	if(localStorage.storedRealities === undefined)
+	{
+	var work = {"days" : []};
+	//localStorage.storedRealities = work;    
+	localStorage.setItem('storedRealities', JSON.stringify(work));
+	}
+	else
+	{
+	console.log("dedede"); 
+	    
+	}
+	  
+
+
+	// Put the object into storage
+	//localStorage.setItem('testObject', testObject);
+
+
+
+	//alert(work.days[0].jobs[2].job_name)
+
+	//var fetchedItems =  localStorage.getItem('storedRealities');
+	var parsedItems  = JSON.parse(localStorage.storedRealities);
+
+	console.log(parsedItems);   
+
+
+	console.log(parsedItems.days.length);
+
+	//if(parsedItems.days.legth)
+
+	if(parsedItems.days.length >10)
+	{
+	  parsedItems.days.shift();  
+	  parsedItems.days.push({"hours" : "1","job_name" : "swsswswsww"});//add to end of aaray 
+
+	}    
+	else
+	{    
+	parsedItems.days.push({"hours" : "1","job_name" : "CodingForum"});//add a job
+	}
+	    
+	localStorage.storedRealities = JSON.stringify(parsedItems);	
+	
+	
 	
 }
 
@@ -1877,7 +1941,8 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 									
 									
 									$(".listOfFoudRealities").append("<li class=\"listOfRealities\">" +
-											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");" +
+											" saveDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"',"+"'"+value.foto+"',"+"'"+value.cena+"',"+"'"+value.obec+"',"+"'"+value.plocha+"'"+");\" " +"idOfCity=\""+key+"\">" +
 											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
 											"<h3>"+value.obec+"</h3>"+
 											"<p><strong>"+value.cena+" Kč</p>"+
@@ -2144,11 +2209,130 @@ function getListOfRealitiesTest()
 
 
 
+/*FILL PAGES FOR RECOMENDED REALITIES PAGE */
 
 
+function fillRecommnededRealitiesPage()
+{
+
+	$(".infoBar").hide();
+	
+	
+	var fetchedClassifiers = localStorage.getItem('Classifiers');
+	
+	// ARSE FROM STORED VALUES IN LS 
+	var parsedFetchedClassifields = JSON.parse(fetchedClassifiers);
+
+	console.log('retrievedObject:'+ parsedFetchedClassifields);
+	console.log(parsedFetchedClassifields);
+	
+
+	//FILL COUNTRY LIST
+	$.each(parsedFetchedClassifields.ciselniky.region, function(key, value) { 
+			  console.log("NACTENE REGIONY" +key + ': ' + value); 
+			  $("#regionSelectBox").append("<option value=\""+key+"\">"+value+"</option>");
+	});
+
+	
+	//FILL TYPE OF TYPE
+	$.each(parsedFetchedClassifields.ciselniky.typ, function(key, value) { 
+		  console.log("NACTENE TYPY" +key + ': ' + value); 
+		  $("#typeRecommendedSelectBox").append("<option value=\""+key+"\">"+value+"</option>");
+	});
+
+	
+	//ON BTN CLICK CALL FUNCTION FOR WRITEOUT OF RECOMMENDED REALITIES
+	$("#selectedRegionAndTypeBtn").click(function() {
+		
+	    console.log ("ZVOLENY KRAJ  :" + $('select#regionSelectBox option:selected').val()); 
+	    console.log ("ZVOLENY TYP  :" +$('select#typeRecommendedSelectBox option:selected').val()); 
+	
+	    var country  =  $('select#regionSelectBox option:selected').val();
+	    var type  =  $('select#typeRecommendedSelectBox option:selected').val();
+	    
+	    showRecommendedRealities(country, type);
+	    
+		});
+	
+		
+	
+	
+}
+
+function renewFormForRecommendedRealities()
+{   //SHOW FORM
+    $("#divWithFormToSelect").show();
+    
+    //SHOW LIST 
+    $(".listOfRecommendedRealities").hide();
+	
+}
+
+/* WRITEOUT RECOMNENDED REALITIES LIST FROM PASSED VALUES */
+
+function showRecommendedRealities(country, type)
+{
+	
+
+	console.log("showRecommendedRealities prejalo PARAMETRY"+country+" a "+type+"");	
+	
+
+    
+    //HIDE FORM
+    $("#divWithFormToSelect").hide();
+    
+    //SHOW LIST 
+    $(".listOfRecommendedRealities").show();
 
 
+    $(".infoBarHeadingText").text('NAČÍTÁM DOPORUČENÉ REALITY');
+    	
+    $(".infoBar").show();
+    	
+    			jQuery.ajax({
+    						
+    						url :"http://pts.ceskereality.cz/json/vypis_doporucene.html",
+    						data: {region : country,typ : type},
+    						type : "GET",
+    						
+    						success : function(result) {
+    							console.log(result);
+    			    			
+    							
+    							
+    							$('.listOfRecommendedRealities li').remove();
+								
+								$.each(result.nemovitosti.nemovitost, function(key, value) { 
+									$(".listOfRecommendedRealities").append("<li class=\"listOfRealities\">" +
+											"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");\" " +"idOfCity=\""+key+"\">" +
+											"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
+											"<h3>"+value.obec+"</h3>"+
+											"<p><strong>"+value.cena+" Kč</p>"+
+											"<p>"+value.popis+"</p>"+
+											"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+											
+											"</a>" +
+											"</li>");
+						
+								
+								});
+								$('.listOfRecommendedRealities').listview('refresh');
+    							
+    							
+    							
+    							$(".infoBar").hide();		
+    							
+    						},
+    						// IF HTTP RESULT 400 || 404
+    						error : function(x, e) {
+    								
+    							typeOfRequestError(x, e);
+    						}
+    					});
+    	
+    }
 
+	
 
 
 /*Fill select list of price range for rent or sale

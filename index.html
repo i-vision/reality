@@ -79,15 +79,15 @@
 			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage" onclick="showDetailOfReality('BOR','26062','CB110412');"> BYTY PRONÁJEM</a></div></div>
 			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
 			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
-					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-a"><div style="height:20px"><a href="" onClick="fillTypeSellOrRent('sell');" i18n="mapa_okoli">MAPA OKOLÍ</a></div></div>
 			<div class="ui-block-b"><div style="height:20px"><a href="#writeoutAllRealEstateOfficessPage" onClick="getAllRealEstateOfficess();"  i18n="mapa_okoli">REALITNÍ KANCELÁŘE</a></div></div>
-			<div class="ui-block-c"><div style="height:20px">C</div></div>
+			<div class="ui-block-c"><div style="height:20px"><a href="#recommendedRealitiesPage" onClick="fillRecommnededRealitiesPage();" i18n="mapa_okoli">DOPORUČENÉ NEMOVITOSTI</a></div></div>
 			<div class="ui-block-d"><div style="height:20px">D</div></div>
-					<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
+			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -117,7 +117,11 @@
      <!-- CUSTOMIZED AND SEPARATED PAGES ------------------------------------------------------------------------------>
      <!-- CUSTOMIZED AND SEPARATED PAGES ------------------------------------------------------------------------------>	
     
+     
     
+    
+	
+	
 	<!-- PAGE NO.1 FLATS ON SALE PAGE ------------------------------------------------------------------------------------------>
 	
     <div data-role="page" data-theme="b" id="flatsOnSalePage" >
@@ -201,8 +205,6 @@
    
    
 
-   
-   
      
     <!-- SPACE-->
    <fieldset class="container_12"   >
@@ -268,7 +270,7 @@
 	<!-- //PAGE NO.1FLATS ON SALE PAGE------------------------------------------------------------------------------------>
   
 	
-      <!--// CUSTOMIZED AND SEPARATED PAGES ------------------------------------------------------------------------------>
+     <!--// CUSTOMIZED AND SEPARATED PAGES ------------------------------------------------------------------------------>
      <!--// CUSTOMIZED AND SEPARATED PAGES ------------------------------------------------------------------------------>	
     
     
@@ -671,6 +673,7 @@
 	
     <!---------------------------------//SELECT SPACE OF REALITIES PAGE--------------------------------------------->
     
+
     
     
     
@@ -900,6 +903,82 @@
     <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
     
     
+	
+	   
+     <!-------------------------------- RECOMMENDED REALITIES PAGE ---------------------------------------------->
+  
+    <div data-role="page" data-theme="b" id="recommendedRealitiesPage">
+  	<div data-role="header">
+    	<a href="#mainPage" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">DOPORUČENÉ NEMOVITOSTI</h1> 
+		<a href="" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" onclick="renewFormForRecommendedRealities();" i18n="zpet">Formulář</a>
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  <div id="divWithFormToSelect" >
+  <!-- RECOMMENDED REALITIES  TO SELECT-->
+   <div class="ui-grid-a">
+	<div class="ui-block-a">
+    <select name="select-choice-1" id="regionSelectBox">
+    <option value="standard">Kraj:</option>
+      
+   </select>
+    </div>
+	<div class="ui-block-b">
+    
+    <select name="select-choice-1" id="typeRecommendedSelectBox">
+    
+      <option value="standard">Typ:</option>
+   </select>
+    </div>
+</div><!-- /grid-a -->
+	
+  <!-- //RECOMMENDED REALITIES TO SELECT -->
+  
+    <a class="pageForReturn"  id="selectedRegionAndTypeBtn" data-role="button" data-icon="arrow-l">Zvolit</a>
+   
+   </div>
+   
+   
+     <!-- LIST OF RECOMMNEDED REALITIES-->
+   
+   <ul data-role="listview" class="listOfRecommendedRealities">
+			
+   </ul>        
+	
+   
+  <!-- //LIST OF RECOMMNEDED REALITIES -->
+  
+   
+   
+   
+
+    </div>
+    <!-- end jqm content -->
+	
+	
+    <div data-role="footer" data-theme="c" data-position="fixed">
+        <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR-->
+	   
+	  </div>  
+    </div>
+	
+    <!---------------------------------//RECOMMENDED REALITIES PAGE--------------------------------------------->
+	
     
            
     <!--------------------------------- WRITEOUT OF REALITIES FROM REAL ESTATE PAGE--------------------------------------------->
@@ -1018,6 +1097,9 @@
 	
 	
     
+	
+	
+	
     
     <!--------------------------------- SHOW REALITY DEATIL PAGE--------------------------------------------->
     
