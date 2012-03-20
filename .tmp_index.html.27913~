@@ -55,7 +55,7 @@
    type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
   	
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
-    <div data-role="page" data-theme="b" id="mainPage" >
+    <div data-role="page" data-theme="b" id="mainPage">
   	<div data-role="header">
     	<a href="#settingsPage" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
 		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
@@ -67,134 +67,9 @@
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     
-    <div data-role="content" data-theme="d" >
-    <!-- FIRST ROW  -->
     
-   
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c1.png" ></a>
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c3.png" >
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c5.png" >
-   </div>
-   <div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c7.png" >
-   </div>
- </fieldset>
-
-
-
-
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a>
-   </div>
-	<div class="grid_3">
-   	   <a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	BYTY PRONÁJEM</a>
-   </div>
-	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">RODINNÉ DOMY </a>
-   </div>
-	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">ČINŽOVNÍ DOMY </a>
-   </div>
-	
-   </fieldset>		
-	<!--// FIRST ROW  -->	
-		
-		
-	    
-    <!-- SECOND ROW  -->
     
-
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c1.png" ></a>
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c3.png" >
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c5.png" >
-   </div>
-   <div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c7.png" >
-   </div>
- </fieldset>
-
-
-
-
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">POZEMKY</a>
-   </div>
-	<div class="grid_3">
-   	 <a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">  	CHATY & CHALUPY</a>
-   </div>
-	<div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	OBCHODY </a>
-   </div>
-	<div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	KANCELÁŘE</a>
-   </div>
-	
-   </fieldset>
-
-
-		
-	<!--//SECOND ROW  -->		
-		
-		
-
-    <!-- THIRD ROW  -->
-    
-
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c1.png" ></a>
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c3.png" >
-   </div>
-	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c5.png" >
-   </div>
-   <div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c7.png" >
-   </div>
- </fieldset>
-
-
-
-
-   <fieldset class="container_12"  data-type="horizontal" >
-   <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">NOVINKY</a>
-   </div>
-	<div class="grid_3">
-   	      		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	DOPORUČENÉ NEMOVITOSTI</a>
-   </div>
-	<div class="grid_3">
-   		   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">NOVOSTAVBY</a>
-   </div>
-	<div class="grid_3">
-   		   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">REAL. KANCELÁŘE</a>
-   </div>
-	
-   </fieldset>
-
-
-		
-	<!--//THIRD ROW  -->			
-		
-		
-		
-	<!-- 	
+    <div data-role="content" data-theme="d" class="bgImage">
 	<div class="ui-grid-c">
 			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
 			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
@@ -221,11 +96,11 @@
 			<div class="ui-block-c"><div style="height:20px">C</div></div>
 			<div class="ui-block-d"><div style="height:20px">D</div></div>
 				
-		</div>-->	
+		</div><!-- /grid-c -->	
 
     </div><!-- end jqm content -->
-    <div data-role="footer" data-theme="c" data-position="fixed" >
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d"  data-position="fixed" >
+    <div data-role="footer" data-theme="c" >
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
 		<ul >
 			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
 			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
@@ -1588,7 +1463,7 @@
     <div data-role="page" data-theme="b" id="historyOfSearchPage">
   	<div data-role="header">
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">HISTORIE HLEDÁNÍ</h1> 
+		<h1 i18n="vypis_nemovitosti">Historie hledání</h1> 
 	
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -1598,7 +1473,6 @@
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div data-role="content" data-theme="d" class="bgImage">
   	
-	
   
     </div>
     <!-- end jqm content -->
@@ -1621,54 +1495,6 @@
     <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
     
     
-	
-	
-	<!--------------------------------- HISTORY OF DETAILS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="historyOfDetailsPage">
-  	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">HISTORIE NEMOVITOSTÍ</h1> 
-	
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-  	
-	  <!-- LIST OF LAST DETAILS-->
-   
-   <ul data-role="listview" class="listOfStoredDetailsOfRealities">
-	
-   </ul>        
-	
-   
-  <!-- //LIST OF LAST DETAILS -->
-  
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// HISTORY OF DETAILS PAGE------------------------------------------------>
-	
-	
 	
 	
 	

@@ -1143,7 +1143,7 @@ function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cena
 	
 }
 
-//('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"',"+"'"+value.foto+"',"+"'"+value.cena+"',"+"'"+value.obec+"',"+"'"+value.plocha+"'"+");\"
+
 function saveDetailOfReality(prefix,inzerent,cislo,foto,cena,obec,plocha)
 {
 	
@@ -1158,52 +1158,46 @@ console.log("saveDetailOfReality RUNNNING");
 	         'plocha: '          + plocha         + '\n');
 	
 	
-//SAVE JSON TO ARRAY IN LS
-	if(localStorage.storedRealities === undefined)
+	//SAVE JSON TO ARRAY IN LS
+	
+	//PREVIOUS EXIST? IF NOT CREATE
+	if(localStorage.savedDetailsOfRealities === undefined)
 	{
-	var work = {"days" : []};
+	var muster = {"details" : []};
 	//localStorage.storedRealities = work;    
-	localStorage.setItem('storedRealities', JSON.stringify(work));
+	localStorage.setItem('savedDetailsOfRealities', JSON.stringify(muster));
 	}
 	else
 	{
-	console.log("dedede"); 
+	console.log("savedDetailsOfRealities already exist in localstorage"); 
 	    
 	}
 	  
-
-
-	// Put the object into storage
-	//localStorage.setItem('testObject', testObject);
-
-
-
-	//alert(work.days[0].jobs[2].job_name)
-
-	//var fetchedItems =  localStorage.getItem('storedRealities');
-	var parsedItems  = JSON.parse(localStorage.storedRealities);
+	//GET VALUES AND PREPARE FROM STRING TO WORK
+	var parsedItems  = JSON.parse(localStorage.savedDetailsOfRealities);
 
 	console.log(parsedItems);   
 
+	//GET LENGTH
+	console.log(parsedItems.details.length);
 
-	console.log(parsedItems.days.length);
-
-	//if(parsedItems.days.legth)
-
-	if(parsedItems.days.length >10)
+	
+	//IF IS STORED MORE THAN 10 VALUES REMOV FIRST AND ADD LAST
+	if(parsedItems.details.length >10)
 	{
-	  parsedItems.days.shift();  
-	  parsedItems.days.push({"hours" : "1","job_name" : "swsswswsww"});//add to end of aaray 
+	parsedItems.details.shift();  
+	parsedItems.details.push({"prefix" : prefix,"inzerent" : inzerent,"cislo" : cislo,"foto" :foto,"cena" :cena,"obec" : obec,"plocha":plocha});//add to end of aaray 
 
 	}    
 	else
 	{    
-	parsedItems.days.push({"hours" : "1","job_name" : "CodingForum"});//add a job
+		parsedItems.details.push({"prefix" : prefix,"inzerent" : inzerent,"cislo" : cislo,"foto" :foto,"cena" :cena,"obec" : obec,"plocha":plocha});//add to end of aaray 
 	}
-	    
-	localStorage.storedRealities = JSON.stringify(parsedItems);	
+	  
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.savedDetailsOfRealities = JSON.stringify(parsedItems);	
 	
-	
+	console.log("savedDetailsOfRealities DONE!");
 	
 }
 
