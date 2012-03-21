@@ -10,7 +10,9 @@
 	  <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.0.1.min.css" />     
   	 <link rel="stylesheet" href="custom.css" type="text/css"/>
 	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
-      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" /> 
+      <link rel="stylesheet" href="jquery-mobile-fluid960.css"  type="text/css" />
+	  <link rel="stylesheet" href="swipe/jquery.swipeButton-1.0.1.css"  type="text/css" />
+	   
  <!--CSS-->	   
 
 <!--PHOTOSWIPE-->
@@ -48,6 +50,9 @@
 <!--PHOTOSWIPE-->
 
 
+<!--SWIPE TO DELETE-->
+<script type="text/javascript" src="swipe/jquery.swipeButton-1.1.js"></script>
+<!--SWIPE TO DELETE-->
         
         
   </head>
@@ -230,7 +235,7 @@
 			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
 			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
 			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie" onclick="getListOfSavedDetails();">HISTORIE</a></li>
 			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
 		</ul>
 		</div>
@@ -1167,7 +1172,7 @@
        <!--// NAVBAR--> 
     </div >
 	</div>
-    <!------------------------------// WRITEOUT OF REALITIES PAGE------------------------------------------------>
+    <!------------------------------//WRITEOUT OF REALITIES FROM REAL ESTATE PAGE------------------------------------------------>
     
     
 	
@@ -1630,6 +1635,15 @@
     	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">HISTORIE NEMOVITOSTÍ</h1> 
 	
+	
+	    <div data-role="navbar">
+	<ul>
+		<li><a i18n="predchozi" onCLick="getListOfSavedDetails();" class="ui-btn-active">NEMOVITOSTI</a></li>
+		<li><a i18n="dalsi" onCLick="getListOfHistoryOfSearch();">HLEDÁNÍ</a></li>
+	</ul>
+</div><!-- /navbar -->
+	
+	
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -1640,7 +1654,7 @@
   	
 	  <!-- LIST OF LAST DETAILS-->
    
-   <ul data-role="listview" class="listOfStoredDetailsOfRealities">
+   <ul data-role="listview" class="listOfStoredDetailsOfRealities" data-split-icon="delete" data-split-theme="d">
 	
    </ul>        
 	
@@ -1668,6 +1682,62 @@
 	</div>
     <!------------------------------// HISTORY OF DETAILS PAGE------------------------------------------------>
 	
+	
+	
+	
+	<!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="historyOfSearchPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">HISTORIE VYHLEDÁVÁNÍ</h1> 
+	
+	
+	    <div data-role="navbar">
+	<ul>
+		<li><a i18n="predchozi" onCLick="getListOfSavedDetails();" class="ui-btn-active">NEMOVITOSTI</a></li>
+		<li><a i18n="dalsi" onCLick="getListOfHistoryOfSearch();">HLEDÁNÍ</a></li>
+	</ul>
+</div><!-- /navbar -->
+	
+	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" class="bgImage">
+  	
+	  <!-- LIST OF LAST DETAILS-->
+   
+   <ul data-role="listview" class="listOfsavedHisoryOfSearch" data-split-icon="delete" data-split-theme="d">
+	
+   </ul>        
+	
+   
+  <!-- //LIST OF LAST DETAILS -->
+  
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// HISTORY OF DETAILS PAGE------------------------------------------------>
 	
 	
 	

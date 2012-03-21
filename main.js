@@ -1076,71 +1076,146 @@ function getParamsForSearch(isForMapShow) {
 	
 }
 
-//TODO NOT FNCTIONAL SAVE
-function saveToHistoryOfSearch(typ, subTyp, okres,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
+
+function saveToHistoryOfSearch(typ, subTyp, okres,stranka,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon)
+
 {
 	
-	console.log("SAVETOHISTORYOFSEARCH RUNS");
+	console.log("SAVETOHISTORYOFSEARCH RUN");
 	
-	//IF IS TO FOR FIRST TIME
-	if(localStorage.savedSearches == undefined)
-	{
-		//CREATE LOCALSTORAGE ITEM
-	    localStorage.savedSearches = new Array();
-	    
-	}
 	
-	//FETCH FROM LS TO VARIABLE
-	var stringOfSavedSearches = localStorage.savedSearches;
-	    
-	//SPLIT VALUES FROM LS TO ARRAY
-	var splittedstringOfSavedSearches =  stringOfSavedSearches.split(":");
-
-	//document.write(typeof splittedstringOfSavedSearches);
-	//GET VALUES FROM PARAMS FOR PUSH TO ARRAY
-	var newValue = typ+":"+subTyp+":"+ okres+":"+trideni+":"+ascdesc+":"+ cenaod+":"+ cenado+":"+plochaod+":"+plochado+":"+prefix+":"+mojelat+":"+ mojelon;
-
-
-	if(splittedstringOfSavedSearches.length > 10)
+	console.log('typ:  '          + typ         + '\n' +
+	         'subTyp: '         + subTyp        + '\n' +
+	         'okres: '         + okres       + '\n' +
+	         'okres: '         + stranka       + '\n' +
+	         'trideni: '          + trideni         + '\n' +
+	         'ascdesc: '          + ascdesc         + '\n' +
+	         'cenaod'          + cenaod         + '\n' +
+	         'cenado: '          + cenado         + '\n' +
+	       
+	         'plochaod: '          + plochaod         + '\n' +
+	         'plochado: '          + plochado         + '\n' +
+	         'prefix: '          + prefix         + '\n' +
+	         'mojelat: '          + mojelat         + '\n' +
+	         'mojelon: '          + mojelon         + '\n');
+	
+	
+	//PREVIOUS EXIST? IF NOT CREATE
+	if(localStorage.savedHisoryOfSearch === undefined)
 	{
-
-	//SHHIFT REMOVE FIRST ARRAY    
-	splittedstringOfSavedSearches.shift();
-	//PUSH INSERT TO LAST POSITION
-	splittedstringOfSavedSearches.push(newValue);
+	var muster = {"history" : []};
+	//localStorage.storedRealities = work;    
+	localStorage.setItem('savedHisoryOfSearch', JSON.stringify(muster));
 	}
 	else
 	{
-	splittedstringOfSavedSearches.push(newValue);
+	console.log("savedHisoryOfSearch already exist in localstorage"); 
+	    
 	}
+	  
+	//GET VALUES AND PREPARE FROM STRING TO WORK
+	var parsedItems  = JSON.parse(localStorage.savedHisoryOfSearch);
 
-	console.log(splittedstringOfSavedSearches);
+	console.log(parsedItems);   
 
-	localStorage.savedSearches = splittedstringOfSavedSearches;
+	//GET LENGTH
+	console.log(parsedItems.history.length);
 
-
-	console.log("SAVETOHISTORYOFSEARCH FINISHED");
 	
-	
-	
-	/* WRITEOUT
-	for(i=0;i<myCars.length;i++)
+	//IF IS STORED MORE THAN 10 VALUES REMOV FIRST AND ADD LAST
+	if(parsedItems.history.length >10)
 	{
-	    //document.write(myCars[i]);
-	    
-	    str = myCars[i];
-	    
-	    var splittedCars =  str.split(":");
-	    
-	    document.write(splittedCars[0]+"<br>");
-	    document.write(splittedCars[1]+"<br>");
-	    document.write(splittedCars[2]+"<br>");
-	    document.write(splittedCars[3]+"<br>");
-	    
-	     document.write("<br>");
-	    
-	}​*/
+	parsedItems.history.shift();  
+	parsedItems.history.push({"typ" : typ,"subTyp" : subTyp,"okres" : okres,"stranka" : stranka,"trideni" :trideni,"ascdesc" :ascdesc,"cenaod" : cenaod,"cenado":cenado,"plochaod":plochaod,"plochado":plochado,"prefix":prefix,"mojelat":mojelat,"mojelon":mojelon});//add to end of aaray 
+
+	}    
+	else
+	{
+	parsedItems.history.push({"typ" : typ,"subTyp" : subTyp,"okres" : okres,"stranka" : stranka,"trideni" :trideni,"ascdesc" :ascdesc,"cenaod" : cenaod,"cenado":cenado,"plochaod":plochaod,"plochado":plochado,"prefix":prefix,"mojelat":mojelat,"mojelon":mojelon});//add to end of aaray 
 	
+	}
+	  
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.savedHisoryOfSearch = JSON.stringify(parsedItems);	
+	
+	console.log("savedHisoryOfSearch DONE!");
+	
+}
+
+
+function getListOfHistoryOfSearch()
+{
+	
+	console.log("getListOfHistoryOfSearch RUN");
+	var parsedRes = JSON.parse(localStorage.savedHisoryOfSearch);
+	var parsedClassifiers1 = JSON.parse(localStorage.Classifiers);
+	console.log(parsedRes);
+	console.log(parsedClassifiers1.ciselniky);	
+
+	if(parsedRes.history.length==0)
+	{
+		$(".infoBarHeadingText").text('V HISTORII NENÍ ULOŽEN ŽÁDNÝ ZÁZNAM');
+		$(".infoBar").show();
+		
+	}
+	
+	else
+	{
+		$(".infoBar").hide();
+	}
+	
+	
+	
+	$('.listOfsavedHisoryOfSearch li').remove();
+	
+	$.each(parsedRes.history, function(key, value) { 
+		
+		
+	console.log(parsedClassifiers1.ciselniky.okres[parseInt(value.okres)]);
+		
+//jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,prefix,mojelat,mojelon
+		
+		$(".listOfsavedHisoryOfSearch").append("<li class=\"listOfRealities\">" +
+				"<a  onClick=\"getListOfRealities('"+0+"','"+value.typ+"',"+"'"+value.subTyp+"',"+"'"+value.okres+"',"+"'"+value.stranka+"',"
+				+"'"+value.trideni+"',"+"'"+value.ascdesc+"',"+"'"+value.cenaod+"',"+"'"+value.cenado+"',"+"'"+value.plochaod+"',"+"'"+value.plochado+"',"+"'"+value.prefix+"',"+"'"+value.mojelat+"',"+"'"+value.mojelon+"'"+");" +"\" " +"idOfCity=\""+key+"\">" +
+				"<h3>"+parsedClassifiers1.ciselniky.okres[parseInt(value.okres)]+"</h3>"+
+				"<p><strong>Typ "+parsedClassifiers1.ciselniky.typ[parseInt(value.typ)]+"</strong></p>"+
+				"<p><strong>Cena od "+value.cenaod+" - "+value.cenado+" Kč</strong></p>"+
+			
+				
+				
+				"</a>" +
+				"<a onClick=\"deleteSavedDetailOfSearch("+key+");\" data-rel=\"dialog\" data-transition=\"slideup\"></a>"+
+				
+				"</li>");
+
+	
+	});
+	
+	
+
+	//REDIRECT
+	$.mobile.changePage( "#historyOfSearchPage");
+	
+	//REFRESH MUST BE CALL AFTER CHANGEPAGE
+	$('.listOfsavedHisoryOfSearch').listview('refresh');	
+}
+
+
+function deleteSavedDetailOfSearch(id)
+{
+	console.log("deleteSavedDetail RUN");
+	var parsedRes = JSON.parse(localStorage.savedHisoryOfSearch);
+	console.log(parsedRes);
+	
+	console.log("Mazu prvek na pozici"+ id);
+	parsedRes.details.splice(id,id+1);
+	console.log(parsedRes.details.length);
+	
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.savedHisoryOfSearch = JSON.stringify(parsedRes);	
+	
+	getListOfHistoryOfSearch();
 }
 
 
@@ -1200,6 +1275,112 @@ console.log("saveDetailOfReality RUNNNING");
 	console.log("savedDetailsOfRealities DONE!");
 	
 }
+
+
+function getListOfSavedDetails()
+{
+	
+	console.log("getListOfSavedDetails RUN");
+	var parsedRes = JSON.parse(localStorage.savedDetailsOfRealities);
+
+	
+	console.log(parsedRes);
+	if(parsedRes.details.length==0)
+	{
+		$(".infoBarHeadingText").text('V HISTORII NENÍ ULOŽENA ŽÁDNÁ NEMOVITOST');
+		$(".infoBar").show();
+		
+	}
+	
+	
+	
+	$('.listOfStoredDetailsOfRealities li').remove();
+	
+	$.each(parsedRes.details, function(key, value) { 
+		  
+		//console.log(value.cena);	
+		//console.log(value.cislo);	
+		/* console.log('CENA:  '          + value.cena         + '\n' +
+		         'CISLO: '         + cislo        + '\n' +
+		         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+		         'foto: '          + foto         + '\n' +
+		         'inzerent: '          + inzerent         + '\n' +
+		         'lat: '          + lat         + '\n' +
+		         'lon: ' + lon  + '\n' +
+		         'obec: '           + obec          + '\n' +
+		         'okres: '             + okres             + '\n' +
+		         'popis: '             + popis            + '\n' +
+		         'prefix: '             + prefix            + '\n' +
+		
+		         'subtyp: '             + subtyp            + '\n' +
+		         'typ: '             + typ            + '\n' +
+		         'typ_ceny: '             + typ_ceny            + '\n' +
+		         'vlastnictvi: '         + vlastnictvi     + '\n');
+		 */ 
+		
+		
+		$(".listOfStoredDetailsOfRealities").append("<li class=\"listOfRealities\">" +
+				"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");" +"\" " +"idOfCity=\""+key+"\">" +
+				"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
+				"<h3>"+value.obec+"</h3>"+
+				"<p><strong>"+value.cena+" Kč</strong></p>"+
+			
+				"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+
+				
+				"</a>" +
+				"<a onClick=\"deleteSavedDetail("+key+");\" data-rel=\"dialog\" data-transition=\"slideup\"></a>"+
+				
+				"</li>");
+
+	
+	});
+	
+	
+	
+	/*
+	$('#listOfStoredDetailsOfRealities li').swipeDelete({
+	    direction: 'swiperight', // standard jquery mobile event name
+	    btnLabel: 'Delete',
+	    btnTheme: 'b',
+	    btnClass: 'aSwipeBtn',
+	    click: function(e){
+	        e.preventDefault();
+	        var url = $(e.target).attr('href');
+	        $(this).parents('li').remove();
+	        $.post(url, function(data) {
+	            console.log(data);
+	        });
+	    }
+	});
+	
+*/
+	//REDIRECT
+	$.mobile.changePage( "#historyOfDetailsPage");
+	
+	//REFRESH MUST BE CALL AFTER CHANGEPAGE
+	$('.listOfStoredDetailsOfRealities').listview('refresh');	
+}
+
+
+function deleteSavedDetail(id)
+{
+	console.log("deleteSavedDetail RUN");
+	var parsedRes = JSON.parse(localStorage.savedDetailsOfRealities);
+	console.log(parsedRes);
+	
+	console.log("Mazu prvek na pozici"+ id);
+	parsedRes.details.splice(id,id+1);
+	console.log(parsedRes.details.length);
+	
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.savedDetailsOfRealities = JSON.stringify(parsedRes);	
+	
+  getListOfSavedDetails();
+	
+}
+
+
+
 
 
 function getAllRealEstateOfficess(districtId)
@@ -1950,8 +2131,11 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 								});
 								
 
-								$('.listOfFoudRealities').listview('refresh');
 								$(".infoBar").hide();
+								
+								$.mobile.changePage("#writeoutOfRealities");
+								$('.listOfFoudRealities').listview('refresh');
+								
 								
 							},
 							// IF HTTP RESULT 400 || 404
