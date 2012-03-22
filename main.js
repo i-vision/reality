@@ -478,6 +478,11 @@ fillListOfMunicipalities(id);
 
 }
 
+//FILL TYPE OF REALITY (FLAT,HOUSE,ETC) TO ATTR  type 
+function fillTypeOfReality(typeOfReality)
+{
+	$(".choosenValues").attr('type',typeOfReality);
+}
 
 function fillTypeSellOrRent(type)
 {
@@ -1277,6 +1282,9 @@ console.log("saveDetailOfReality RUNNNING");
 }
 
 
+
+
+
 function getListOfSavedDetails()
 {
 	
@@ -1734,7 +1742,14 @@ function showDetailOfReality(prefix,inzerent,cislo)
 							$('#detailGallery').listview('refresh');
 							
 							//BASIC INFO, PRICE, PLACE
-							$('#nabidkaod').text(result.nemovitost.inzerent);
+							$('#uvodniFoto').text(result.nemovitost.fotografie.foto1);
+							
+							$('#prefix').text(prefix);
+							$('#inzerent').text(inzerent);
+							$('#cislo').text(cislo);
+							
+							
+							$('#nabidkaod').text(result.nemovitost.nabidkaod);
 							$('#datum_aktualizace').text(result.nemovitost.datum_aktualizace);
 							$('#adresa').text(result.nemovitost.adresa);
 							$('#cena').text(result.nemovitost.cena);
@@ -2150,7 +2165,155 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 	
 }
 
+//GET VALUES FROM DETAIL OF REALITY AND SAVE THIS VALUES TO FAVORITES IN LS
+function saveToFavorites()
+{
+	console.log("getValuesToSaveToFavorites RUN ");
+	//GET DETAILS
+	console.log($("#prefix").text());
+	console.log($("#inzerent").text());
+	console.log($("#cislo").text());
+	console.log($("#nabidkaod").text());
+	console.log($("#adresa").text());
+	console.log($("#mesto").text());
+	console.log($("#cena").text());
+	console.log($("#myNoteToReality").text());
+	console.log($("#uvodniFoto").text());
+	
+	var prefix = $("#prefix").text();
+	var inzerent = $("#inzerent").text();
+	var cislo = $("#cislo").text();
+	var nabidkaod = $("#nabidkaod").text();
+	var adresa = $("#adresa").text();
+	var mesto = $("#mesto").text();
+	var cena = $("#cena").text();
+	var poznamka = $("#myNoteToReality").text();
+	var foto = $("#uvodniFoto").text();
+	
+	//SAVE JSON TO ARRAY IN LS
+	
+	//PREVIOUS EXIST? IF NOT CREATE
+	if(localStorage.myFavoritesReality === undefined)
+	{
+	var muster = {"details" : []};
+	//localStorage.storedRealities = work;    
+	localStorage.setItem('myFavoritesReality', JSON.stringify(muster));
+	}
+	else
+	{
+	console.log("myFavoritesReality already exist in localstorage"); 
+	    
+	}
+	  
+	//GET VALUES AND PREPARE FROM STRING TO WORK
+	var parsedItems  = JSON.parse(localStorage.myFavoritesReality);
 
+	console.log(parsedItems);   
+
+	//GET LENGTH
+	console.log(parsedItems.details.length);
+
+	
+	//IF IS STORED MORE THAN 10 VALUES REMOV FIRST AND ADD LAST
+	if(parsedItems.details.length >30)
+	{
+	parsedItems.details.shift();  
+	parsedItems.details.push({"prefix" : prefix,"inzerent" : inzerent,"cislo" : cislo,"nabidkaod" :nabidkaod,"adresa" :adresa,"mesto" : mesto,"cena":cena,"poznamka":poznamka,"foto":foto});//add to end of aaray 
+
+	}    
+	else
+	{    
+	parsedItems.details.push({"prefix" : prefix,"inzerent" : inzerent,"cislo" : cislo,"nabidkaod" :nabidkaod,"adresa" :adresa,"mesto" : mesto,"cena":cena,"poznamka":poznamka,"foto":foto});//add to end of aaray 
+	}
+	  
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.myFavoritesReality = JSON.stringify(parsedItems);	
+	
+	console.log("myFavoritesReality DONE!");
+	
+}
+
+//WTRITEOUT FAVOURITES
+function getListOfSavedDFavourites()
+{
+	
+	console.log("getListOfSavedDFavourites RUN");
+	var parsedRes = JSON.parse(localStorage.myFavoritesReality);
+
+	
+	console.log(parsedRes);
+	if(parsedRes.details.length==0)
+	{
+		$(".infoBarHeadingText").text('NENÍ ULOŽENA ŽÁDNÁ NEMOVITOST');
+		$(".infoBar").show();
+		
+	}
+	
+	
+	
+	$('.listOfSavedDFavourites li').remove();
+	
+	$.each(parsedRes.details, function(key, value) { 
+		  
+		//console.log(value.cena);	
+		//console.log(value.cislo);	
+		/* console.log('CENA:  '          + value.cena         + '\n' +
+		         'CISLO: '         + cislo        + '\n' +
+		         'datum_vlozeni: '         + datum_vlozeni        + '\n' +
+		         'foto: '          + foto         + '\n' +
+		         'inzerent: '          + inzerent         + '\n' +
+		         'lat: '          + lat         + '\n' +
+		         'lon: ' + lon  + '\n' +
+		         'obec: '           + obec          + '\n' +
+		         'okres: '             + okres             + '\n' +
+		         'popis: '             + popis            + '\n' +
+		         'prefix: '             + prefix            + '\n' +
+		
+		         'subtyp: '             + subtyp            + '\n' +
+		         'typ: '             + typ            + '\n' +
+		         'typ_ceny: '             + typ_ceny            + '\n' +
+		         'vlastnictvi: '         + vlastnictvi     + '\n');
+		 */ 
+		
+		
+		$(".listOfSavedDFavourites").append("<li class=\"listOfRealities\">" +
+				"<a  onClick=\"showDetailOfReality('"+value.prefix+"',"+"'"+value.inzerent+"',"+"'"+value.cislo+"'"+");" +"\" " +"idOfCity=\""+key+"\">" +
+				"<img src=\"http://img.ceskereality.cz/foto_mini/"+value.inzerent+"/"+value.foto+"\" width=\"80px\" />" +
+				"<h3>"+value.obec+"</h3>"+
+				"<p><strong>"+value.cena+" Kč</strong></p>"+
+				"<p class=\"ui-li-aside\"><strong>"+value.plocha+" m2</strong></p>"+	
+				"</a>" +
+				"<a onClick=\"deleteSavedFafourites("+key+");\" data-rel=\"dialog\" data-transition=\"slideup\"></a>"+
+				"</li>");
+
+	
+	});
+	 
+	//REDIRECT
+	$.mobile.changePage( "#favouritesRealitiesPage");
+	
+	$(".infoBar").hide();
+	//REFRESH MUST BE CALL AFTER CHANGEPAGE
+	$('.listOfSavedDFavourites').listview('refresh');	
+}
+
+
+//DELETE ITEM FROM FAVOURITES
+function deleteSavedFafourites(id)
+{
+	console.log("deleteSavedFafourites RUN");
+	var parsedRes = JSON.parse(localStorage.myFavoritesReality);
+	console.log(parsedRes);
+	
+	console.log("Mazu prvek na pozici"+ id);
+	parsedRes.details.splice(id,id+1);
+	console.log(parsedRes.details.length);
+	
+	//PREPARE FOR SAVE TO LS AS STRING
+	localStorage.myFavoritesReality = JSON.stringify(parsedRes);	
+	
+	getListOfSavedDFavourites();
+}
 
 /*Writeout list of all matched realities by passed params
  * Example:
