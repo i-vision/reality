@@ -47,6 +47,36 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2
 
 /*CUSTOM FUNCTIONS*/
 
+
+/*CLEAR INFO MESSAGES BEFORE NEW PAGE IS LOAD*/
+
+window.doubleLoadPreventer = 0;
+
+$(document).bind('pagebeforechange', function(e, data){
+
+    if ( window.doubleLoadPreventer === 1 ) {
+        window.doubleLoadPreventer = 0;
+        return;
+    } else {
+        window.doubleLoadPreventer = 1;
+    }
+
+    //your normal event handler code here
+    $(".infoBarHeadingText").text('');	
+	$(".infoBar").hide();
+	
+	
+	
+	//GET VALUES AND PREPARE FROM STRING TO WORK
+	var parsedItems  = JSON.parse(localStorage.savedUserSettings);
+
+	console.log(parsedItems);   
+	//CHECK, THAT USER IS SIGNED IN, IF YES, HIDE SIGN IN BTN
+	if(parsedItems.values[0].blokovany === "0")
+	$("#userLogBtnMainPage").hide();	
+
+});
+
 /*
 	document.addEventListener('DOMContentLoaded', function(){
 	
@@ -482,18 +512,22 @@ fillListOfMunicipalities(id);
 function fillTypeOfReality(typeOfReality)
 {
 	$(".choosenValues").attr('type',typeOfReality);
+	console.log("DO ATRIBUTU type ulozena hodnota "+typeOfReality);
 }
 
+//0 = prodej 1= pronajem
 function fillTypeSellOrRent(type)
 {
 	if(type== "sell")
-	{$(".choosenValues").attr('type',1);
-	console.log("DO ATRIBUTU type ulozeno 1 ");
+	{$(".choosenValues").attr('sellOrRent',0);
+	console.log("DO ATRIBUTU sellOrRent ulozeno 0 = prodej ");
+	fillSelectPricePage('sell');
 	}
 	
 	if(type== "rent")
-	{$(".choosenValues").attr('type',2);
-	console.log("DO ATRIBUTU type ulozeno 2 ");
+	{$(".choosenValues").attr('sellOrRent',1);
+	console.log("DO ATRIBUTU sellOrRent ulozeno 1 = pronajem ");
+	fillSelectPricePage('rent');
 	}
 }
 
@@ -719,11 +753,11 @@ function fillListOfSubMunicipalities(idOfMunicipality)
 
 
 /*FILL TYPE OF FLATS  LIST*/
-function fillSubtypeOfRealitiesToSelect(subtype) {
+function fillSubtypeOfRealitiesToSelect() {
+	
 	$.mobile.changePage( "#selectSubTypesOfRealities");
-	
 	//GET COUNT OF REALITY TYPES
-	
+	var type = $(".choosenValues").attr('type');
 	
 	//$(".infoBarHeadingText").text('Načítám informace');
 	
@@ -732,11 +766,11 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 				jQuery.ajax({
 							
 							url :"http://pts.ceskereality.cz/json/pocty_subtypy.html",
-							data: "typ="+subtype+"",
+							data: "typ="+type+"",
 							type : "GET",
 							
 							success : function(result) {
-								console.log("fillTypeOfRealitiesToSelect prejalo parametr"+subtype+"");	
+								console.log("fillTypeOfRealitiesToSelect prejalo parametr"+type+"");	
 								
 								
 								console.log(result.pocty_subtypy);
@@ -757,7 +791,6 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 	
 				
 	console.log(countOfSubtypes);			
-				
 	
 	//!GET COUNT OF REALITY TYPES
 	
@@ -772,7 +805,7 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 	
 	
 	
-	var flatForRentList = parsedFetchedClassifields.ciselniky.subtyp[subtype];
+	var flatForRentList = parsedFetchedClassifields.ciselniky.subtyp[type];
 	
 	console.log(flatForRentList);
 	
@@ -789,7 +822,7 @@ function fillSubtypeOfRealitiesToSelect(subtype) {
 	
 	console.log('INFORMACE O SUBTYPECH NACTENY');
 	
-	$.mobile.changePage( "#selectSubTypesOfRealities");
+	
 
 	
 }
@@ -954,7 +987,7 @@ $(".choosenValues").attr('idOfCity',id);
 /*typeOfPrice is experimental param, is used for show, hwhat type of price (sale, rent)
  *will be offer to user (every page will have be different type, or any) 
  **/
-
+/*
 
 function pageForReturn(idOfpageForReturn,typeOfPrice) {
 
@@ -984,7 +1017,7 @@ function pageForReturn(idOfpageForReturn,typeOfPrice) {
 	 
 
 }
-
+*/
 //UNIVERSAL FUNCTION FOR PASING PARAMMS FROM FORM TO SEARCH FUNCTION
 
 function getParamsForSearch(isForMapShow) {
@@ -996,8 +1029,10 @@ function getParamsForSearch(isForMapShow) {
 	var jensgps = 0;	
 	//TODO HOW TO RESOLVE TYP SALE OR RENT? TOOGLE BTN OR IN PAGE?
 	//ATTR TYPE PRESENTS TYPE OF REALITY, FOR EXAMPLE type="2" is USED FOR FLATS  <div data-role="page" data-theme="b" id="flatsOnSalePage" type="2">
+	var operace = $('.choosenValues').attr('sellOrRent');
 	
 	var typ = $('.choosenValues').attr('type');
+	
 	var subTyp = $('.choosenValues').attr('selectedSubtypesOfRealities');
 	
 	var okres = $('.choosenValues').attr('dictrictId');
@@ -1007,10 +1042,9 @@ function getParamsForSearch(isForMapShow) {
 	var castObce = $('.choosenValues').attr('partOfMunicipalityId');
 	
 	
-	//TODO FIX PAGINATION
 	var stranka  = $('.choosenValues').attr('actualPage');
 	
-	var trideni = "cena";
+	var trideni = $('.choosenValues').attr('sortBy');
 	
 	var ascdesc = "asc";
 	
@@ -1071,12 +1105,14 @@ function getParamsForSearch(isForMapShow) {
 	 
 	 else
 	 {   
-			
+		
+		 //TODO ADD  operace into history
 		//SAVE TO SEARCH HISTORY
 		 saveToHistoryOfSearch(typ, subTyp, okres,0,trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
 		 
+		 
 		 //CALL FUNCTION FOR WRITEOUT OF REALITIES
-		 getListOfRealities(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon);
+		 getListOfRealities(jensgps, typ, subTyp, okres, stranka, trideni, ascdesc, cenaod, cenado, plochaod, plochado,prefix,mojelat, mojelon,operace);
 	 }
 	
 }
@@ -1190,6 +1226,8 @@ function getListOfHistoryOfSearch()
 				
 				
 				"</a>" +
+				"<div>mnau</div>"+
+				
 				"<a onClick=\"deleteSavedDetailOfSearch("+key+");\" data-rel=\"dialog\" data-transition=\"slideup\"></a>"+
 				
 				"</li>");
@@ -1214,13 +1252,17 @@ function deleteSavedDetailOfSearch(id)
 	console.log(parsedRes);
 	
 	console.log("Mazu prvek na pozici"+ id);
-	parsedRes.details.splice(id,id+1);
-	console.log(parsedRes.details.length);
+	parsedRes.history.splice(id,id+1);
+	console.log(parsedRes.history.length);
 	
 	//PREPARE FOR SAVE TO LS AS STRING
 	localStorage.savedHisoryOfSearch = JSON.stringify(parsedRes);	
 	
 	getListOfHistoryOfSearch();
+	
+	
+
+	
 }
 
 
@@ -2029,6 +2071,326 @@ function showOnMapTest()
     
 }
 
+
+function registerNewUser()
+{
+	var name = $("#name").val() ;
+		var surname = $("#surname").val() ;
+			var email =$("#userEmail").val() ;
+				var cellPhone =$("#cellPhone").val() ;
+					var watcher = $("#watcher").val() ;
+						var password = $.encoding.digests.hexSha1Str($("#passwordNewUsr").val() );
+						console.log(
+								"DELKA HESLA " +$("#passwordNewUsr").val().length+"\n"+
+								name+"\n"+
+								surname+"\n"+
+								email+"\n"+
+								cellPhone+"\n"+
+								watcher+"\n"+
+								password+"\n"
+						);
+						
+						
+						//VALIDATE THAT FORM IS FILLED
+						 if(name.length == 0 || surname.length== 0 || email.length< 4 || cellPhone.length < 9 || watcher == 0|| $("#passwordNewUsr").val().length < 5 )
+							 
+						 {
+						 $(".infoBarHeadingText").text('NESPRAVNE ZADANE HODNOTY, ZADEJTE PROSIM ZNOVU');	
+						 $(".infoBar").show();
+						 $(".infoBar").slideUp(6000);
+						 return false;
+						 }
+						 
+							
+						//IF O.K, SEND DATA
+						 else
+						{
+							 
+							 
+							 
+							 console.log("FCE registerNewUser spustena");
+							
+									
+											jQuery.ajax({
+														
+														url :"http://pts.ceskereality.cz/json/hlidac_registrace.html",
+														data: {jmeno:name,prijmeni:surname,tel:cellPhone,email:email,heslo:password},
+														type : "GET",
+														beforeSend:function()
+														{
+															//SHOW MESSAGE ABOUT PROGRESS
+															 $(".infoBarHeadingText").text('ODESILAM DATA..');	
+															 $(".infoBar").show();
+															//SHOW MESSAGE ON BTN 
+															
+															 $('#registerNewUsrBtn').attr("disabled", "disabled");
+															//DISABLE INPUTS
+															 $("#registerFieldContain :input").attr("disabled", "disabled");
+															
+															 
+														},
+														complete:function()
+														{
+															// $(".infoBar").hide();
+														},
+														success : function(result) {
+														
+															
+															//TODO ADD VERIFICATION, THAT USER IS SUCCESSFULLY REGISTRED
+															console.log(result.hlidac_registrace.status);
+															console.log(result);
+															if(result.hlidac_registrace.status === "ok")
+															{
+																
+																$(".infoBarHeadingText").text('REGISTRACE O.K');	
+																$(".infoBar").slideUp(6000);
+																//CLEAR ALL INPUTS
+																$("#registerFieldContain :input").text("");
+																$("#registerFieldContain :input").val("");
+															}	
+															
+															if(result.hlidac_registrace.status === "error")
+															{
+																
+																//SHOW ERROR MESS
+																$(".infoBarHeadingText").text('CHYBA PŘI REGISTRACI, ZKUSTE TO PROSÍM ZNOVU');	
+																$(".infoBar").slideUp(6000);
+																
+																//AND ENABLE INPUTS
+																$("#registerFieldContain :input").removeAttr("disabled");
+																//CLEAR PASSWORD
+																$("#passwordNewUsr").text("").val("");
+															}	
+																
+															
+															
+														},
+														// IF HTTP RESULT 400 || 404
+														error : function(x, e) {
+																
+															typeOfRequestError(x, e);
+														}
+													});
+								
+								
+							 
+							 
+						}
+						
+						
+}
+
+
+
+function loginUser()
+{
+	var email = $("#userLoginEmail").val() ;
+	var password = $.encoding.digests.hexSha1Str($("#userLoginPassword").val() );
+				
+						console.log(
+								email+"\n"+
+								password+"\n"
+								
+						);
+						
+						
+						//VALIDATE THAT FORM IS FILLED
+						 if(email.length < 4 || $("#userLoginPassword").val().length< 4 )
+							 
+						 {
+						 $(".infoBarHeadingText").text('NESPRAVNE ZADANE HODNOTY, ZADEJTE PROSIM ZNOVU');	
+						 $(".infoBar").show();
+						 return false;
+						 }
+						 
+							
+						//IF O.K, SEND DATA
+						 else
+						{
+							 
+							 
+							 
+							 console.log("ODESILANI DAT PRO fci loginUser spusteno");
+							
+									
+											jQuery.ajax({
+														
+														url :"http://pts.ceskereality.cz/json/hlidac_prihlaseni.html",
+														data: {email:email,heslo:password},
+														type : "GET",
+														beforeSend:function()
+														{
+															 $(".infoBarHeadingText").text('ODESILAM DATA..');	
+															 $(".infoBar").show();
+														},
+														complete:function()
+														{
+															// $(".infoBar").hide();
+														},
+														success : function(result) {
+														
+															
+															//TODO ADD VERIFICATION, THAT USER IS SUCCESSFULLY REGISTRED
+															console.log(result);
+															if(result.hlidac_prihlaseni.blokovany=== "0" )
+															
+														{
+																 $(".infoBarHeadingText").text('PŘIHLÁŠENÍ ÚSPĚŠNÉ');	
+																 $(".infoBar").show();
+																	$(".infoBar").slideUp(6000);
+																	//CLEAR ALL INPUTS
+																	$("#loginFieldContain :input").text("");
+																	$("#loginFieldContain :input").val("");
+																	
+																	
+																	//SAVE VALUES TO LS
+																	
+																	
+																	//SAVE JSON TO ARRAY IN LS
+																	
+																	//PREVIOUS EXIST? IF NOT CREATE
+																	if(localStorage.savedUserSettings === undefined)
+																	{
+																	var muster = {"values" : []};
+																	//localStorage.storedRealities = work;    
+																	localStorage.setItem('savedUserSettings', JSON.stringify(muster));
+																	}
+																	else
+																	{
+																	console.log("savedUserSettings already exist in localstorage"); 
+																	    
+																	}
+																	  
+																	//GET VALUES AND PREPARE FROM STRING TO WORK
+																	var parsedItems  = JSON.parse(localStorage.savedUserSettings);
+
+																	console.log(parsedItems);   
+
+																	//GET LENGTH
+																	console.log(parsedItems.values.length);
+
+																	
+																	//DELETE OLD, SAVE NEW VALUES
+																	
+																	parsedItems.values.shift();  
+																	parsedItems.values.push({"blokovany" : result.hlidac_prihlaseni.blokovany,"email" : result.hlidac_prihlaseni.email,
+																	"id" : result.hlidac_prihlaseni.id,"jmeno" :result.hlidac_prihlaseni.jmeno,
+																	"prijmeni" :result.hlidac_prihlaseni.prijmeni,"tel" : result.hlidac_prihlaseni.tel});//add to end of aaray 
+
+																	$("#userLoginHeader").text("Uživatel "+result.hlidac_prihlaseni.prijmeni+" "+result.hlidac_prihlaseni.jmeno);
+																	
+																	
+																	  
+																	//PREPARE FOR SAVE TO LS AS STRING
+																	localStorage.savedUserSettings = JSON.stringify(parsedItems);	
+																	
+																	
+																	
+																
+														}
+															
+															
+														else
+														{
+															 $(".infoBarHeadingText").text('PŘIHLÁŠENÍ NEÚSPĚŠNÉ');	
+															 $(".infoBar").show();
+																$(".infoBar").slideUp(6000);
+																//CLEAR ALL INPUTS
+																$("#userLoginPassword").text("");
+																$("#userLoginPassword").val("");
+																
+															
+														}
+															
+															
+														},
+														// IF HTTP RESULT 400 || 404
+														error : function(x, e) {
+																
+															typeOfRequestError(x, e);
+														}
+													});
+								
+								
+							 
+							 
+						}
+						
+						
+}
+
+
+function getNewPassword()
+{
+	var email = $("#userForgottenEmail").val() ;
+				
+						console.log(
+								email+"\n"
+								
+						);
+						
+						
+						//VALIDATE THAT FORM IS FILLED
+						 if(email.length < 4)
+							 
+						 {
+						 $(".infoBarHeadingText").text('NESPRAVNE ZADANE HODNOTY, ZADEJTE PROSIM ZNOVU');	
+						 $(".infoBar").show();
+						 return false;
+						 }
+						 
+							
+						//IF O.K, SEND DATA
+						 else
+						{
+							 
+							 
+							 
+							 console.log("ODESILANI DAT PRO fci getNewPassword spusteno");
+							
+									
+											jQuery.ajax({
+														
+														url :"http://pts.ceskereality.cz/json/hlidac_heslo.html",
+														data: {email:email},
+														type : "GET",
+														beforeSend:function()
+														{
+															 $(".infoBarHeadingText").text('ODESILAM DATA..');	
+															 $(".infoBar").show();
+														},
+														complete:function()
+														{
+															// $(".infoBar").hide();
+														},
+														success : function(result) {
+														
+															
+															//TODO ADD VERIFICATION, THAT USER IS SUCCESSFULLY REGISTRED
+															console.log(result);
+															
+														
+															
+															
+														},
+														// IF HTTP RESULT 400 || 404
+														error : function(x, e) {
+																
+															typeOfRequestError(x, e);
+														}
+													});
+								
+								
+							 
+							 
+						}
+						
+						
+}
+
+
+
+
 /*THIS FUNCTION IS FOR SWICTHING OF MARKERS AT MAP, BUTTONS ARE HIDDEN AND WE INCREASE O DECR. ID OF HIDDEN BUTTON,
 THIS BUTTON WE THEN SUBMIT BY TRIGGER*/
 
@@ -2053,7 +2415,7 @@ function updateMarker(action)
  * Example:
  * http://pts.ceskereality.cz/json/vypis.html?jensgps=0&typ=2&subtyp=1,3&okres=13&stranka=1&trideni=cena&ascdesc=desc&cenado=150000&cenaod=1200&plochaod=10&plochado=1000&mojelat=48.9808&mojelon=15.4814
  * */
-function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,prefix,mojelat,mojelon)
+function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cenaod,cenado,plochaod,plochado,prefix,mojelat,mojelon,operace)
 {
 	
 	
@@ -2068,7 +2430,8 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 				jQuery.ajax({
 							
 							url :"http://pts.ceskereality.cz/json/vypis.html",
-							data: {jensgps:jensgps,typ:typ,subTyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado,prefix:prefix,mojelat:mojelat,mojelon:mojelon},
+							data: {jensgps:jensgps,typ:typ,subTyp:subTyp,okres:okres,stranka:stranka,trideni:trideni,ascdesc:ascdesc,cenaod:cenaod,cenado:cenado,plochaod:plochaod,plochado:plochado
+								,prefix:prefix,mojelat:mojelat,mojelon:mojelon,operace:operace},
 							type : "GET",
 							
 							success : function(result) {
@@ -2086,6 +2449,13 @@ function getListOfRealities(jensgps,typ,subTyp,okres,stranka,trideni,ascdesc,cen
 								$(".choosenValues").attr('pagesTotal', countOfPagesRounded);
 								$("#totalCountOfPages").text( countOfPagesRounded);	
 								console.log("pocet STRANEK "+countOfPagesRounded);
+								
+								if(countOfPagesRounded === 0 )	
+								{
+									$.mobile.changePage('#nothingFoundPage', {transition: 'slidedown', role: 'dialog'});   
+									return false;
+								}
+								
 								//!! GET COUNT OF PAGES AND FILL THIS VALUE INTO ATTR
 								
 								
@@ -2596,7 +2966,7 @@ function fillRecommnededRealitiesPage()
 		});
 	
 		
-	
+	$.mobile.changePage("#recommendedRealitiesPage");
 	
 }
 
@@ -2689,6 +3059,67 @@ function fillSelectPricePage(typeOf) {
 	var steps = 30; 
 	
 	
+	$('#priceFrom option').remove();
+
+	$('#priceTo option').remove();
+	
+	/*FILL FOR SALE OF FLATS, HOUSES, AREAS, ETC*/
+	
+	if(typeOf === "sell")
+	{
+		
+
+		console.log ("Plnim ciselniky hodnotami pro prodej");
+		
+		for ( var int = 0; int < steps; int++) {
+			
+			$("#priceFrom").append("<option value=\""+int * 100000+"\">"+int * 100000+" Kč</option>");
+			console.log(int * 100000);
+			
+		}	
+		
+		
+		for ( var int = 0; int < steps; int++) {
+			
+			$("#priceTo").append("<option value=\""+int * 100000+"\">"+int * 100000+" Kč</option>");
+			console.log(int * 100000);
+			
+		}
+	
+	
+	
+	}
+	
+	
+/*FILL FOR RENT OF FLATS, HOUSES, AREAS, ETC*/
+	
+	if(typeOf === "rent")
+	{
+		
+		console.log ("Plnim ciselniky hodnotami pro pronajem"); 
+		//TODO FILL INTO LIST USER CURRENCY 
+		for ( var int = 0; int < steps; int++) {
+		
+			$("#priceFrom").append("<option value=\""+int * 1000+"\" >"+int * 1000+" Kč/měs</option>");
+			console.log(int * 1000);
+			
+		}
+		
+		
+		for ( var int = 0; int < steps; int++) {
+			
+			$("#priceTo").append("<option value=\""+int * 1000+"\">"+int * 1000+" Kč/měs</option>");
+			console.log(int * 1000);
+			
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
 	$('#priceRange').click(function() {
 	    
 		
@@ -2705,58 +3136,16 @@ function fillSelectPricePage(typeOf) {
 	});
 	
 	
-	/*FILL FOR RENT OF FLATS, HOUSES, AREAS, ETC*/
 	
-	if(typeOf = "rent")
-	{
-		
+	
+}
 
-		//TODO FILL INTO LIST USER CURRENCY 
-		for ( var int = 0; int < steps; int++) {
-		
-			$("#priceFrom").append("<option value=\""+int * 1000+"\ >"+int * 1000+"</option>");
-			
-		}
-		
-		
-		for ( var int = 0; int < steps; int++) {
-			
-			$("#priceTo").append("<option value=\""+int * 1000+"\">"+int * 1000+"</option>");
-
-			
-		}
-		
-		
-		
-	}
+function changeSortMethod(sortBy)
+{
 	
-	
-	/*FILL FOR SALE OF FLATS, HOUSES, AREAS, ETC*/
-	
-	if(typeOf = "sale")
-	{
-		
-		for ( var int = 0; int < steps; int++) {
-			
-			$("#priceFrom").append("<option value=\""+int * 100000+"\">"+int * 100000+"</option>");
-
-			
-		}	
-		
-		
-	for ( var int = 0; int < steps; int++) {
-			
-			$("#priceTo").append("<option value=\""+int * 100000+"\">"+int * 100000+"</option>");
-
-			
-		}
-	
-	
-	
-	}
-	
-	
-	
+	console.log(sortBy);
+	$(".choosenValues").attr("sortBy",sortBy);
+	getParamsForSearch();
 	
 }
 

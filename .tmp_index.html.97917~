@@ -40,12 +40,6 @@
 <script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
 
  <!--JQM--> 
-
- <!--SHA1 PLUGIN-->  
-<script type="text/javascript" src="sha1plugin.js"></script>
-
- <!--SHA1 PLUGIN--> 
-
 	  
 <!--CUSTOM FUNCTIONS JS-->
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
@@ -68,9 +62,9 @@
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b" id="mainPage" >
   	<div data-role="header">
-    	<a href="#userSetingsPageOverView" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
+    	<a href="#settingsPage" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
 		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
-		<a href="#userLoginPage" id="userLogBtnMainPage" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
+		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -1333,358 +1327,7 @@ Poznámka k nemovitosti (nepovinné)
     <!------------------------------// WRITEOUT OF REAL ESTATES OFFICESS PAGE------------------------------------------------>
 	
 	
-	
-	
-	
-		 <!--------------------------------- USER LOGIN PAGE--------------------------------------------->
     
-    <div data-role="page" data-theme="b" id="userLoginPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti" id="userLoginHeader">PŘIHLÁŠENÍ </h1> 
-	
-	</div>
-	<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-     <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="loginFieldContain">
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userLoginEmail" value="" />
-
-	
-	<label for="username">Heslo:</label>
-	<input type="password" name="username" id="userLoginPassword" value="" />
-	
-	
-	
-	
-	<a href="#" onclick="loginUser();" data-role="button">Přihlásit</a>
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER LOGIN PAGE------------------------------------------------>
-	
-	
-	
-	 <!--------------------------------- USER SETTINGS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userSetingsPageOverView">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">DETAIL ÚČTU </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userSetingsPageOverView" class="ui-btn-active">detail</a></li>
-		<li><a href="#userSetingsChangePage">změna údajů</a></li>
-
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER SETTINGS PAGE------------------------------------------------>
-    
-	
-		
-	 <!--------------------------------- EDIT USER SETTINGS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userSetingsChangePage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">ZMĚNA ÚDAJŮ </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userSetingsPageOverView" class="ui-btn-active">detail</a></li>
-		<li><a href="#userSetingsChangePage">změna údajů</a></li>
-
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------//EDIT USER SETTINGS PAGE------------------------------------------------>
-    
-		
-	 <!--------------------------------- USER REGISTRATION PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userRegistrationPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">REGISTRACE </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER REGISTRATION PAGE------------------------------------------------>
-	
-	
-	
-			
-	 <!--------------------------------- USER NEW PASSWORD PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userNewPasswordPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back"  data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">ZTRACENÉ HESLO</h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" >
-  
-	 <div data-role="fieldcontain" >
-
-
-
-	<label for="username">E-mail:</label>
-	<input type="text" name="username" id="userForgottenEmail" value="" />
-
-	
-	<a href="#" onclick="getNewPassword();" data-role="button">Odeslat</a>
-</div>	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER NEW PASSWORD PAGE------------------------------------------------>
-	
-	
 	
 	
 	
@@ -2056,7 +1699,43 @@ Poznámka k nemovitosti (nepovinné)
 	
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
-
+	
+	 <!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="historyOfSearchPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">HISTORIE HLEDÁNÍ</h1> 
+	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" >
+  	
+	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
     
     
 	

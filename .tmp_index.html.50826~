@@ -40,12 +40,6 @@
 <script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
 
  <!--JQM--> 
-
- <!--SHA1 PLUGIN-->  
-<script type="text/javascript" src="sha1plugin.js"></script>
-
- <!--SHA1 PLUGIN--> 
-
 	  
 <!--CUSTOM FUNCTIONS JS-->
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
@@ -63,14 +57,14 @@
         
   </head>
   <body onload="init();" class="choosenValues" actualPageOfRealEstate="0" pagesTotalOfRealEstate="0" actualPageOfRealityWriteoutRealEstate="0" RealEstatePrefix="" pagesTotalWriteoutRealEstate="0"
-   sellOrRent="" type="" sortBy="cena" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
+   sellOrRent="" type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
   	
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b" id="mainPage" >
   	<div data-role="header">
-    	<a href="#userSetingsPageOverView" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
+    	<a href="#settingsPage" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
 		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
-		<a href="#userLoginPage" id="userLogBtnMainPage" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
+		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -84,16 +78,16 @@
    
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c1.png" ></a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillSelectPricePage('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c1.png" ></a>
    </div>
 	<div class="grid_3">
-   	 	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c3.png" ></a>
+   	 	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillSelectPricePage('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c3.png" ></a>
    </div>
 	<div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c5.png" ></a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillSelectPricePage('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c5.png" ></a>
    </div>
    <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c7.png" ></a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillSelectPricePage('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c7.png" ></a>
    </div>
  </fieldset>
 
@@ -102,20 +96,21 @@
 
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillSelectPricePage('sell');" i18n="byty_prodej">BYTY PRODEJ</a>
    </div>
 	<div class="grid_3">
-   	   <a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('rent');" i18n="byty_prodej">	BYTY PRONÁJEM</a>
+   	   <a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillSelectPricePage('rent');" i18n="byty_prodej">	BYTY PRONÁJEM</a>
    </div>
 	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillTypeSellOrRent('rent');" i18n="byty_prodej">RODINNÉ DOMY </a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillSelectPricePage('rent');" i18n="byty_prodej">RODINNÉ DOMY </a>
    </div>
 	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillTypeSellOrRent('rent');" i18n="byty_prodej">ČINŽOVNÍ DOMY </a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillSelectPricePage('rent');" i18n="byty_prodej">ČINŽOVNÍ DOMY </a>
    </div>
 	
    </fieldset>		
 	<!--// FIRST ROW  -->	
+		
 		
 	    
     <!-- SECOND ROW  -->
@@ -497,7 +492,7 @@
     
     
   
-    <a   href="#flatsOnSalePage" data-role="button" data-icon="arrow-l">Zvolit</a>
+    <a class="pageForReturn" onClick="" href=""  data-role="button" data-icon="arrow-l">Zvolit</a>
    
 
     </div>
@@ -968,57 +963,7 @@ Poznámka k nemovitosti (nepovinné)
    
     </div>
 	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
-
-
-
-
-	   <!------------------------------- ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
-   
-  
-    <div data-role="page" data-theme="b" id="addNoteToRealityPage">
-  	<div data-role="header">
-   
-		<h1 i18n="zvolte_inzerenta">PŘIDAT DO OBLÍBENÝCH</h1> 
-		
-	</div>
-   
-    <div data-role="content" data-theme="d" >
-  	
-<textarea name="textarea"  id="myNoteToReality">
-Poznámka k nemovitosti (nepovinné)
-</textarea>
-
-			<a href="#" onClick="saveToFavorites();" data-role="button" data-rel="back" data-theme="b">Uložit</a>       
-			<a href="#" data-rel="back" data-role="button" data-rel="back" data-theme="c">Zrušit</a>    
-
-
-    </div><!-- end jqm content -->
-   
-    </div>
-	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->	
 	
-	
-	
-	
-		   <!------------------------------- ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
-   
-  
-    <div data-role="page" data-theme="b" id="nothingFoundPage">
-  	<div data-role="header">
-   
-		<h1 i18n="zvolte_inzerenta">NEMOVITOST NENALEZENA</h1> 
-		
-	</div>
-   
-    <div data-role="content" data-theme="d" >
-	<p>Bohužel, dle zadaných parametrů nebylo nic nalezeno, zkuste prosím jiný dotaz.</p>
-	<a href="#" data-rel="back" data-role="button" data-rel="back" data-theme="c">Zrušit</a>    
-
-
-    </div><!-- end jqm content -->
-   
-    </div>
-	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->	
 	
           
     <!--------------------------------- SAVED FAVOURITES PAGE--------------------------------------------->
@@ -1073,18 +1018,9 @@ Poznámka k nemovitosti (nepovinné)
   	<div data-role="header">
     	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">VÝPIS NEMOVITOSTÍ</h1> 
-		
-		 <div data-role="fieldcontain" style="position: absolute; top: 5px; right: 0; margin: 0; padding: 0">
-    <select onchange="changeSortMethod(this.options[this.selectedIndex].value);">
-      <option>Řadit</option>
-	  <option value= "cena">Cena vzestupně</option>
-	  <option value= "vlozeni">Od nejnovějších</option>
-	  <option value= "aktualizace">Dle aktualizace</option>
-	  <option value= "nejblize">Nejbliže ode mne</option>
-    </select>
-  </div>
-		
-	
+		<div data-role="controlgroup" data-type="horizontal" >  
+		<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
+		</div>
     <div data-role="navbar">
 	<ul>
 		<li id="previousPage"><a i18n="predchozi" onCLick="decrementActualPage();" class="ui-btn-active">Předchozí</a></li>
@@ -1333,358 +1269,7 @@ Poznámka k nemovitosti (nepovinné)
     <!------------------------------// WRITEOUT OF REAL ESTATES OFFICESS PAGE------------------------------------------------>
 	
 	
-	
-	
-	
-		 <!--------------------------------- USER LOGIN PAGE--------------------------------------------->
     
-    <div data-role="page" data-theme="b" id="userLoginPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti" id="userLoginHeader">PŘIHLÁŠENÍ </h1> 
-	
-	</div>
-	<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-     <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="loginFieldContain">
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userLoginEmail" value="" />
-
-	
-	<label for="username">Heslo:</label>
-	<input type="password" name="username" id="userLoginPassword" value="" />
-	
-	
-	
-	
-	<a href="#" onclick="loginUser();" data-role="button">Přihlásit</a>
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER LOGIN PAGE------------------------------------------------>
-	
-	
-	
-	 <!--------------------------------- USER SETTINGS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userSetingsPageOverView">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">DETAIL ÚČTU </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userSetingsPageOverView" class="ui-btn-active">detail</a></li>
-		<li><a href="#userSetingsChangePage">změna údajů</a></li>
-
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER SETTINGS PAGE------------------------------------------------>
-    
-	
-		
-	 <!--------------------------------- EDIT USER SETTINGS PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userSetingsChangePage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">ZMĚNA ÚDAJŮ </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userSetingsPageOverView" class="ui-btn-active">detail</a></li>
-		<li><a href="#userSetingsChangePage">změna údajů</a></li>
-
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------//EDIT USER SETTINGS PAGE------------------------------------------------>
-    
-		
-	 <!--------------------------------- USER REGISTRATION PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userRegistrationPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back" " data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">REGISTRACE </h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="b" >
-  
-  <div data-role="fieldcontain" id="registerFieldContain">
-	<label for="username">Jméno:</label>
-	<input type="text" name="username" id="name" value="" />
-
-	<label for="username">Příjmení:</label>
-	<input type="text" name="username" id="surname" value="" />
-
-
-	<label for="username">E-mail:</label>
-	<input type="email" name="username" id="userEmail" value="" />
-
-
-
-	<label for="username">Telefon (9 znaků):</label>
-	<input type="number" name="username" id="cellPhone" value=""/>
-	
-	<label for="flip-a">Povolit zasílání z hlídače:</label>
-<select name="slider" id="watcher" data-role="slider">
-	<option value="1">Ano</option>
-	<option value="0">Ne</option>
-</select> 
-
-	
-	<label for="username">Heslo (min. 5 znaků):</label>
-	<input type="password" name="username" id="passwordNewUsr" value="" />
-	
-	
-	<a href="#" onclick="registerNewUser();" id="registerNewUsrBtn" data-role="button">Registrovat</a>
-
-
-</div>	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER REGISTRATION PAGE------------------------------------------------>
-	
-	
-	
-			
-	 <!--------------------------------- USER NEW PASSWORD PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="userNewPasswordPage">
-  	<div data-role="header">
-    	<a href="#"  data-rel="back"  data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">ZTRACENÉ HESLO</h1> 
-	
-	</div>
-		<!-- navbar -->
-		<div data-role="navbar">
-	<ul>
-		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
-		<li><a href="#userRegistrationPage">nový</a></li>
-		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
-	</ul>
-</div><!-- /navbar -->
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" >
-  
-	 <div data-role="fieldcontain" >
-
-
-
-	<label for="username">E-mail:</label>
-	<input type="text" name="username" id="userForgottenEmail" value="" />
-
-	
-	<a href="#" onclick="getNewPassword();" data-role="button">Odeslat</a>
-</div>	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// USER NEW PASSWORD PAGE------------------------------------------------>
-	
-	
 	
 	
 	
@@ -1693,8 +1278,8 @@ Poznámka k nemovitosti (nepovinné)
     
     <div data-role="page" data-theme="b" id="showDetailOfRealityPage" class="gallery-page">
   	<div data-role="header">
-    	<a href="#"  data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet" data-rel="back">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">DETAIL NEMOVITOSTI</h1> 
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
 		<a href="#selectOnMapPage" id="showOnMapBtn" onClick="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Mapa </a>
 </div>
 	
@@ -2056,7 +1641,43 @@ Poznámka k nemovitosti (nepovinné)
 	
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
-
+	
+	 <!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="historyOfSearchPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">HISTORIE HLEDÁNÍ</h1> 
+	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" >
+  	
+	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
     
     
 	

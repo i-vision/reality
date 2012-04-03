@@ -40,6 +40,12 @@
 <script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
 
  <!--JQM--> 
+
+ <!--SHA1 PLUGIN-->  
+<script type="text/javascript" src="sha1plugin.js"></script>
+
+ <!--SHA1 PLUGIN--> 
+
 	  
 <!--CUSTOM FUNCTIONS JS-->
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
@@ -57,14 +63,14 @@
         
   </head>
   <body onload="init();" class="choosenValues" actualPageOfRealEstate="0" pagesTotalOfRealEstate="0" actualPageOfRealityWriteoutRealEstate="0" RealEstatePrefix="" pagesTotalWriteoutRealEstate="0"
-   type="" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
+   sellOrRent="" type="" sortBy="cena" selectedSubtypesOfRealities="" dictrictId="" municipalityId="" partOfMunicipalityId="" nameOfDistrict="" nameOfMunicipality="" nameOfSubMunicipality=""  mojelat="" mojelon="" priceFrom="" priceTo="" sizeFrom="" sizeTo="" selectedSubtypesOfAdvertisers="" actualPage="0" pagesTotal="" itemsPerPage = "20" countOfMarkers="" >
   	
 	<!-- MAIN PAGE ------------------------------------------------------------------------------------------------------>
     <div data-role="page" data-theme="b" id="mainPage" >
   	<div data-role="header">
     	<a href="#settingsPage" data-theme="b" i18n="nastaveni" class="ui-btn-left" data-icon="gear">Nastavení</a>
 		<h1 i18n="ceskereality.cz" uilang="unknown_user">ČESKÉREALITY.CZ</h1> 
-		<a href="index.html" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
+		<a href="#userLoginPage" data-theme="b" i18n="login" class="ui-btn-right"  data-icon="arrow-r"> Přihlásit se</a>
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
     <div  class="infoBar">
@@ -78,16 +84,16 @@
    
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c1.png" ></a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c1.png" ></a>
    </div>
 	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c3.png" >
+   	 	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c3.png" ></a>
    </div>
 	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c5.png" >
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c5.png" ></a>
    </div>
    <div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c7.png" >
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillTypeSellOrRent('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r1_c7.png" ></a>
    </div>
  </fieldset>
 
@@ -96,21 +102,20 @@
 
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a>
    </div>
 	<div class="grid_3">
-   	   <a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	BYTY PRONÁJEM</a>
+   	   <a href="#flatsOnSalePage" onClick="fillTypeOfReality('2');fillTypeSellOrRent('rent');" i18n="byty_prodej">	BYTY PRONÁJEM</a>
    </div>
 	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">RODINNÉ DOMY </a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('0');fillTypeSellOrRent('rent');" i18n="byty_prodej">RODINNÉ DOMY </a>
    </div>
 	<div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">ČINŽOVNÍ DOMY </a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('3');fillTypeSellOrRent('rent');" i18n="byty_prodej">ČINŽOVNÍ DOMY </a>
    </div>
 	
    </fieldset>		
 	<!--// FIRST ROW  -->	
-		
 		
 	    
     <!-- SECOND ROW  -->
@@ -118,16 +123,16 @@
 
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c1.png" ></a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('5');fillSelectPricePage('rent');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c1.png" ></a>
    </div>
 	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c3.png" >
+      	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('1');fillSelectPricePage('rent');" i18n="byty_prodej">	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c3.png" ></a>
    </div>
 	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c5.png" >
+      	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('9');fillSelectPricePage('rent');" i18n="byty_prodej">	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c5.png" ></a>
    </div>
    <div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c7.png" >
+   	  	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('8');fillSelectPricePage('rent');" i18n="byty_prodej">	<img class="mainPageImg" src="img/mobilniAplikace_v1_r3_c7.png" ></a>
    </div>
  </fieldset>
 
@@ -136,16 +141,16 @@
 
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">POZEMKY</a>
+   	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('5');fillSelectPricePage('rent');" i18n="byty_prodej">POZEMKY</a>
    </div>
 	<div class="grid_3">
-   	 <a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">  	CHATY & CHALUPY</a>
+   		<a href="#flatsOnSalePage" onClick="fillTypeOfReality('1');fillSelectPricePage('rent');" i18n="byty_prodej"> 	CHATY & CHALUPY</a>
    </div>
 	<div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	OBCHODY </a>
+   	  	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('9');fillSelectPricePage('rent');" i18n="byty_prodej">	OBCHODY </a>
    </div>
 	<div class="grid_3">
-   	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	KANCELÁŘE</a>
+  	<a href="#flatsOnSalePage" onClick="fillTypeOfReality('8');fillSelectPricePage('rent');" i18n="byty_prodej">KANCELÁŘE</a>
    </div>
 	
    </fieldset>
@@ -164,7 +169,7 @@
    	<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c1.png" ></a>
    </div>
 	<div class="grid_3">
-   	<img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c3.png" >
+   	<a href="#" onClick="fillRecommnededRealitiesPage();" i18n="byty_prodej"><img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c3.png" ></a>
    </div>
 	<div class="grid_3">
    	<img class="mainPageImg" src="img/mobilniAplikace_v1_r5_c5.png" >
@@ -182,7 +187,7 @@
    		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">NOVINKY</a>
    </div>
 	<div class="grid_3">
-   	      		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">	DOPORUČENÉ NEMOVITOSTI</a>
+   	      		<a href="#" onClick="fillRecommnededRealitiesPage();" i18n="byty_prodej">DOPORUČENÉ NEMOVITOSTI</a>
    </div>
 	<div class="grid_3">
    		   		<a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">NOVOSTAVBY</a>
@@ -198,35 +203,7 @@
 	<!--//THIRD ROW  -->			
 		
 		
-		
-	<!-- 	
-	<div class="ui-grid-c">
-			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px"><a href="#flatsOnSalePage" onClick="fillTypeSellOrRent('sell');" i18n="byty_prodej">BYTY PRODEJ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a href="#showDetailOfRealityPage" onclick="showDetailOfReality('BOR','26062','CB110412');"> BYTY PRONÁJEM</a></div></div>
-			<div class="ui-block-c"><div style="height:20px">RODINNÉ DOMY</div></div>
-			<div class="ui-block-d"><div style="height:20px">ČIŽOVNÍ DOMY</div></div>
-			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px"><a href="" onClick="fillTypeSellOrRent('sell');" i18n="mapa_okoli">MAPA OKOLÍ</a></div></div>
-			<div class="ui-block-b"><div style="height:20px"><a href="#writeoutAllRealEstateOfficessPage" onClick="getAllRealEstateOfficess();"  i18n="mapa_okoli">REALITNÍ KANCELÁŘE</a></div></div>
-			<div class="ui-block-c"><div style="height:20px"><a href="#recommendedRealitiesPage" onClick="fillRecommnededRealitiesPage();" i18n="mapa_okoli">DOPORUČENÉ NEMOVITOSTI</a></div></div>
-			<div class="ui-block-d"><div style="height:20px">D</div></div>
-			<div class="ui-block-a"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-b"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-c"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-d"><div style="height:120px"><img class="mainPageImg" src="img/flat.png" ></div></div>
-			<div class="ui-block-a"><div style="height:20px">A</div></div>
-			<div class="ui-block-b"><div style="height:20px">B</div></div>
-			<div class="ui-block-c"><div style="height:20px">C</div></div>
-			<div class="ui-block-d"><div style="height:20px">D</div></div>
-				
-		</div>-->	
+	
 
     </div><!-- end jqm content -->
     <div data-role="footer" data-theme="c" data-position="fixed" >
@@ -256,9 +233,8 @@
 	
     <div data-role="page" data-theme="b" id="flatsOnSalePage" >
   	<div data-role="header">
-    	<a href="index.html" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="byty_na_prodej">Byty na  prodej</h1> 
-		
+    	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="byty_na_prodej">ZADEJTE PARAMETRY</h1> 
         <!-- CHOOSE SELL OR RENT --> 
         <div data-role="navbar">
 	<ul>
@@ -274,16 +250,16 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">  
+    <div data-role="content" data-theme="d" >  
    
    
    
    <!-- SELECT SUBTYPE OF FLATT fillTypeOfRealitiesToSelect('2') 2 it means flats-->
    <fieldset class="container_12"  data-type="horizontal" >
    <div class="grid_3">
-    <label i18n="typ_bytu" >Typ bytu:</label>
+    <label i18n="typ_bytu" >Typ nemovitosti:</label>
 	</div>
-	<div class="grid_9"><a  class="choosenSubtypesBtn" typ="2"  onClick="pageForReturn('flatsOnSalePage'),fillSubtypeOfRealitiesToSelect('2')"; data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_typ_nemovitosti">Zvolte typ nemovitosti</a></div>	
+	<div class="grid_9"><a  class="choosenSubtypesBtn" typ="2"  onClick="fillSubtypeOfRealitiesToSelect()"; data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_typ_nemovitosti">Zvolte typ nemovitosti</a></div>	
    
    </fieldset>
    <!-- //SELECT SUBTYPE OF FLATT -->
@@ -297,7 +273,7 @@
     <label i18n="lokalita" >Lokalita: 	</label>
     <a  onClick="getMyPosition('1');" data-role="button"  data-icon="plus" data-iconpos="notext">Zjistit moji polohu</a>
 	</div>
-	<div class="grid_9"><a class="choosenCityBtn"  onClick="pageForReturn('flatsOnSalePage')"; href="#selectLocalityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_lokalitu">Zvolte lokalitu</a></div>	
+	<div class="grid_9"><a class="choosenCityBtn"   href="#selectLocalityPage" data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_lokalitu">Zvolte lokalitu</a></div>	
    
    </fieldset>
       <!-- //SELECT LOCALITY PART-->
@@ -309,7 +285,7 @@
     <label i18n="cena" >Cena: 	</label>
    
 	</div>
-	<div class="grid_9"><a class="choosenPriceBtn"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectPriceRangePage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="zvolte_cenu">Zvolte cenu</a></div>	
+	<div class="grid_9"><a class="choosenPriceBtn"    href="#selectPriceRangePage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="zvolte_cenu">Zvolte cenu</a></div>	
    
    </fieldset>
          <!-- //SELECT PRICE FROM AND TO PART-->
@@ -342,7 +318,7 @@
     <label i18n="plocha" >Plocha: 	</label>
 
 	</div>
-	<div class="grid_9"><a href="#Space"  class="choosenSpaceBtn"  onClick="pageForReturn('flatsOnSalePage')"; data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_plochu">Zvolte plochu</a></div>	
+	<div class="grid_9"><a href="#Space"  class="choosenSpaceBtn"   data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte_plochu">Zvolte plochu</a></div>	
    
    </fieldset>
       <!-- //SPACE-->
@@ -354,7 +330,7 @@
     <label i18n="cena" >Cena splátky: 	</label>
    
 	</div>
-	<div class="grid_9"><a class="choosenPriceOfRepaymentBtn"  onClick="pageForReturn('flatsOnSalePage','sale')";  href="#selectRepaymentPage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="zvolte_cenu">Zvolte cenu</a></div>	
+	<div class="grid_9"><a class="choosenPriceOfRepaymentBtn"   href="#selectRepaymentPage" data-role="button"  data-icon="arrow-r" data-iconpos="right" i18n="zvolte_cenu">Zvolte cenu</a></div>	
    
    </fieldset>
          <!-- //PRICE OF REPAYMENT-->
@@ -365,7 +341,7 @@
    <div class="grid_3">
     <label i18n="typ_bytu" >Inzerenti:</label>
 	</div>
-	<div class="grid_9"><a href="#allAdvertisersPage" class="choosenAdvertisersBtn" onClick="pageForReturn('flatsOnSalePage')"; data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte">Zvolte</a></div>	
+	<div class="grid_9"><a href="#allAdvertisersPage" class="choosenAdvertisersBtn"  data-role="button" data-icon="arrow-r" data-iconpos="right" i18n="zvolte">Zvolte</a></div>	
    
    </fieldset>
    <!-- //ADVERTISERS -->
@@ -387,10 +363,10 @@
       <!-- NAVBAR-->
     	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" >
 		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat">HLEDAT</a></li>
 			<li><a href="#" id="email" data-icon="custom" i18n="mapa">MAPA</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky" onclick="getListOfSavedDFavourites();" >POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie" onclick="getListOfSavedDetails();">HISTORIE</a></li>
 			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
 		</ul>
 		</div>
@@ -413,8 +389,8 @@
    <!-- SELECT SUBTYPE OF RELAITY PAGE -->
     <div data-role="page" data-theme="b" id="selectSubTypesOfRealities">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="upresneni">Zvolte typ</h1> 
+    	<a href="#" data-rel="back" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="upresneni">ZVOLTE TYP</h1> 
 		
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -422,7 +398,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF ALL REALITIES TO SELECT-->
 
@@ -452,8 +428,8 @@
     
     <div data-role="page" data-theme="b" id="selectLocalityPage">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vyberte_mesto">Zvolte lokalitu</h1> 
+    	<a href="#" data-rel="back" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">ZVOLTE LOKALITU</h1> 
 		
          <!-- SELECT FROM MENU OR FROM MAP -->
     
@@ -477,7 +453,7 @@
 	    
     
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
 
     
     <!-- CHOOSE DISTRICT BUTTON --> 
@@ -521,7 +497,7 @@
     
     
   
-    <a class="pageForReturn" onClick="" href=""  data-role="button" data-icon="arrow-l">Zvolit</a>
+    <a   href="#flatsOnSalePage" data-role="button" data-icon="arrow-l">Zvolit</a>
    
 
     </div>
@@ -546,7 +522,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF ALL DISTRICTS TO SELECT-->
    
@@ -582,7 +558,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF ALL DISTRICTS TO SELECT-->
    
@@ -618,7 +594,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF ALL MUNICIPALITIES TO SELECT-->
    
@@ -653,7 +629,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF  PART OF MUNICIPALITIES TO SELECT-->
    
@@ -678,8 +654,8 @@
   
     <div data-role="page" data-theme="b" id="selectPriceRangePage">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vyberte_mesto">Zvolte cenovy rozsah</h1> 
+    	<a href="#" data-rel="back" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vyberte_mesto">ZVOLTE CENOVY ROZSAH</h1> 
 		
 	</div>
     <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
@@ -687,7 +663,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF PRICE RANGES TO SELECT-->
    <div class="ui-grid-a">
@@ -708,7 +684,7 @@
 	
   <!-- //LIST OF PRICE RANGES TO SELECT -->
   
-    <a class="pageForReturn" onClick="" href="" id="priceRange" data-role="button" data-icon="arrow-l">Zvolit</a>
+    <a class="pageForReturn"  href="#" data-rel="back" id="priceRange" data-role="button" data-icon="arrow-l">Zvolit</a>
    
 
     </div>
@@ -735,7 +711,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
     
     
     
@@ -820,7 +796,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
     
     
     
@@ -943,7 +919,7 @@
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   
   <!-- LIST OF ALL ADVERTISERS TO SELECT-->
 
@@ -992,19 +968,123 @@ Poznámka k nemovitosti (nepovinné)
    
     </div>
 	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
+
+
+
+
+	   <!------------------------------- ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
+   
+  
+    <div data-role="page" data-theme="b" id="addNoteToRealityPage">
+  	<div data-role="header">
+   
+		<h1 i18n="zvolte_inzerenta">PŘIDAT DO OBLÍBENÝCH</h1> 
+		
+	</div>
+   
+    <div data-role="content" data-theme="d" >
+  	
+<textarea name="textarea"  id="myNoteToReality">
+Poznámka k nemovitosti (nepovinné)
+</textarea>
+
+			<a href="#" onClick="saveToFavorites();" data-role="button" data-rel="back" data-theme="b">Uložit</a>       
+			<a href="#" data-rel="back" data-role="button" data-rel="back" data-theme="c">Zrušit</a>    
+
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->	
 	
 	
+	
+	
+		   <!------------------------------- ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->
+   
+  
+    <div data-role="page" data-theme="b" id="nothingFoundPage">
+  	<div data-role="header">
+   
+		<h1 i18n="zvolte_inzerenta">NEMOVITOST NENALEZENA</h1> 
+		
+	</div>
+   
+    <div data-role="content" data-theme="d" >
+	<p>Bohužel, dle zadaných parametrů nebylo nic nalezeno, zkuste prosím jiný dotaz.</p>
+	<a href="#" data-rel="back" data-role="button" data-rel="back" data-theme="c">Zrušit</a>    
+
+
+    </div><!-- end jqm content -->
+   
+    </div>
+	<!------------------------------- //ADD REALITY TO FAVORITES - IS SHOWN AS DIALOG------------------------------->	
+	
+          
+    <!--------------------------------- SAVED FAVOURITES PAGE--------------------------------------------->
     
+    <div data-role="page" data-theme="b" id="favouritesRealitiesPage">
+  	<div data-role="header">
+    	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">ULOŽENÉ NEMOVITOSTI</h1> 
+		<div data-role="controlgroup" data-type="horizontal" >  
+		</div>
+  	
+	</div>
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" >
+  	
+  
+  <!-- LIST OF FAVOURITE REALITIES-->
+   <ul data-role="listview" class="listOfSavedDFavourites" data-split-icon="delete">
+			
+   </ul>       
+  <!-- //LIST OF FAVOURITE REALITIES -->
+  
+
+
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">  
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div>
+	</div>
+    <!------------------------------// SAVED FAVOURITES PAGE------------------------------------------------>
+	
         
     <!--------------------------------- WRITEOUT OF REALITIES PAGE--------------------------------------------->
     
     <div data-role="page" data-theme="b" id="writeoutOfRealities">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">Výpis nemovitostí</h1> 
-		<div data-role="controlgroup" data-type="horizontal" >  
-		<a href="index.html" data-role="button" data-icon="arrow-u" i18n="cena" class="ui-btn-right">Cena</a>
-		</div>
+    	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">VÝPIS NEMOVITOSTÍ</h1> 
+		
+		 <div data-role="fieldcontain" style="position: absolute; top: 5px; right: 0; margin: 0; padding: 0">
+    <select onchange="changeSortMethod(this.options[this.selectedIndex].value);">
+      <option>Řadit</option>
+	  <option value= "cena">Cena vzestupně</option>
+	  <option value= "vlozeni">Od nejnovějších</option>
+	  <option value= "aktualizace">Dle aktualizace</option>
+	  <option value= "nejblize">Nejbliže ode mne</option>
+    </select>
+  </div>
+		
+	
     <div data-role="navbar">
 	<ul>
 		<li id="previousPage"><a i18n="predchozi" onCLick="decrementActualPage();" class="ui-btn-active">Předchozí</a></li>
@@ -1017,7 +1097,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
   
   <!-- LIST OF MATCHED REALITIES-->
@@ -1075,7 +1155,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   <div id="divWithFormToSelect" >
   <!-- RECOMMENDED REALITIES  TO SELECT-->
    <div class="ui-grid-a">
@@ -1159,7 +1239,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
   
   <!-- LIST OF MATCHED REALITIES-->
@@ -1226,7 +1306,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
   
   <!-- LIST OF FOUND REAL ESTATES-->
@@ -1253,7 +1333,181 @@ Poznámka k nemovitosti (nepovinné)
     <!------------------------------// WRITEOUT OF REAL ESTATES OFFICESS PAGE------------------------------------------------>
 	
 	
+	
+	
+	
+		 <!--------------------------------- USER LOGIN PAGE--------------------------------------------->
     
+    <div data-role="page" data-theme="b" id="userLoginPage">
+  	<div data-role="header">
+    	<a href="#"  data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">PŘIHLÁŠENÍ UŽIVATELE</h1> 
+	
+	</div>
+	<!-- navbar -->
+		<div data-role="navbar">
+	<ul>
+		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
+		<li><a href="#userRegistrationPage">nový</a></li>
+		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
+	</ul>
+</div><!-- /navbar -->
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" >
+  
+	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// USER LOGIN PAGE------------------------------------------------>
+	
+    
+		
+	 <!--------------------------------- USER REGISTRATION PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="userRegistrationPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">REGISTRACE UŽIVATELE</h1> 
+	
+	</div>
+		<!-- navbar -->
+		<div data-role="navbar">
+	<ul>
+		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
+		<li><a href="#userRegistrationPage">nový</a></li>
+		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
+	</ul>
+</div><!-- /navbar -->
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="b" >
+  
+  <div data-role="fieldcontain" >
+	<label for="username">Jméno:</label>
+	<input type="text" name="username" id="name" value="" />
+
+	<label for="username">Příjmení:</label>
+	<input type="text" name="username" id="surname" value="" />
+
+
+	<label for="username">E-mail:</label>
+	<input type="text" name="username" id="email" value="" />
+
+
+
+	<label for="username">Telefon:</label>
+	<input type="text" name="username" id="cellPhone" value=""/>
+	
+	<label for="flip-a">Povolit zasílání z hlídače:</label>
+<select name="slider" id="watcher" data-role="slider">
+	<option value="1">Ano</option>
+	<option value="0">Ne</option>
+</select> 
+
+	
+	<label for="username">Heslo:</label>
+	<input type="text" name="username" id="password" value="" />
+	
+	
+	
+	
+	<a href="#" onclick="registerNewUser();" data-role="button">Registrovat</a>
+</div>	
+	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// USER REGISTRATION PAGE------------------------------------------------>
+	
+	
+	
+			
+	 <!--------------------------------- USER NEW PASSWORD PAGE--------------------------------------------->
+    
+    <div data-role="page" data-theme="b" id="userNewPasswordPage">
+  	<div data-role="header">
+    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">ZTRACENÉ HESLO</h1> 
+	
+	</div>
+		<!-- navbar -->
+		<div data-role="navbar">
+	<ul>
+		<li><a href="#userLoginPage" class="ui-btn-active">stávající uživatel</a></li>
+		<li><a href="#userRegistrationPage">nový</a></li>
+		<li><a href="#userNewPasswordPage">ztracené heslo</a></li>
+	</ul>
+</div><!-- /navbar -->
+    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div  class="infoBar">
+	<h3 class="infoBarHeadingText"></h3>					
+	</div>
+    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
+    <div data-role="content" data-theme="d" >
+  
+	
+  
+    </div>
+    <!-- end jqm content -->
+   
+    <div data-role="footer" data-theme="c" data-position="fixed">
+   
+      <!-- NAVBAR-->
+    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
+		<ul >
+			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
+			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
+			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
+			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
+			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
+		</ul>
+		</div>
+       <!--// NAVBAR--> 
+    </div >
+	</div>
+    <!------------------------------// USER NEW PASSWORD PAGE------------------------------------------------>
+	
+	
 	
 	
 	
@@ -1262,8 +1516,8 @@ Poznámka k nemovitosti (nepovinné)
     
     <div data-role="page" data-theme="b" id="showDetailOfRealityPage" class="gallery-page">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">Detail nemovitosti</h1> 
+    	<a href="#"  data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet" data-rel="back">Zpět</a>
+		<h1 i18n="vypis_nemovitosti">DETAIL NEMOVITOSTI</h1> 
 		<a href="#selectOnMapPage" id="showOnMapBtn" onClick="" class="pageForReturn" data-theme="b"  class="ui-btn-right" data-icon="arrow-r" i18n="zpet">Mapa </a>
 </div>
 	
@@ -1272,7 +1526,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
     
     <!-- GALLERY FOR IMAGES -->
@@ -1625,43 +1879,7 @@ Poznámka k nemovitosti (nepovinné)
 	
     <!------------------------------// SHOW REALITY DEATIL PAGE------------------------------------------------>
     
-	
-	 <!--------------------------------- HISTORY OF SEARCH PAGE--------------------------------------------->
-    
-    <div data-role="page" data-theme="b" id="historyOfSearchPage">
-  	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="vypis_nemovitosti">HISTORIE HLEDÁNÍ</h1> 
-	
-	</div>
-    <!-- INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div  class="infoBar">
-	<h3 class="infoBarHeadingText"></h3>					
-	</div>
-    <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
-  	
-	
-  
-    </div>
-    <!-- end jqm content -->
-   
-    <div data-role="footer" data-theme="c" data-position="fixed">
-   
-      <!-- NAVBAR-->
-    	<div data-role="navbar" class="nav-glyphish-example" data-grid="d" data-position="fixed" >
-		<ul >
-			<li><a href="#" id="chat" data-icon="custom" i18n="hledat" >HLEDAT</a></li>
-			<li><a onClick="getParamsForSearch('1');" data-icon="custom" i18n="zobraz_na_mape">ZOBRAZ NA MAPĚ</a></li>
-			<li><a href="#" id="skull" data-icon="custom" i18n="poznamky">POZNÁMKY</a></li>
-			<li><a href="#" id="beer" data-icon="custom" i18n="historie">HISTORIE</a></li>
-			<li><a href="#" id="coffee" data-icon="custom" i18n="vice">VÍCE</a></li>
-		</ul>
-		</div>
-       <!--// NAVBAR--> 
-    </div >
-	</div>
-    <!------------------------------// HISTORY OF SEARCH PAGE------------------------------------------------>
+
     
     
 	
@@ -1670,7 +1888,7 @@ Poznámka k nemovitosti (nepovinné)
     
     <div data-role="page" data-theme="b" id="historyOfDetailsPage">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+    	<a href="#" data-rel="back" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">HISTORIE NEMOVITOSTÍ</h1> 
 	
 	
@@ -1688,7 +1906,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
 	  <!-- LIST OF LAST DETAILS-->
    
@@ -1727,7 +1945,7 @@ Poznámka k nemovitosti (nepovinné)
     
     <div data-role="page" data-theme="b" id="historyOfSearchPage">
   	<div data-role="header">
-    	<a href="" class="pageForReturn" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+    	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
 		<h1 i18n="vypis_nemovitosti">HISTORIE VYHLEDÁVÁNÍ</h1> 
 	
 	
@@ -1745,7 +1963,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
   	
 	  <!-- LIST OF LAST DETAILS-->
    
@@ -1829,7 +2047,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
 	
     <!-- MAP CANVAS  -->
    
@@ -1868,8 +2086,8 @@ Poznámka k nemovitosti (nepovinné)
 	
     <div data-role="page" data-theme="b" id="selectOnMapPage">
   	<div data-role="header">
-    	<a href="#selectLocalityPage" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
-		<h1 i18n="byty_na_prodej" id="mapActionStatus">Zvolte na mapě</h1> 
+    	<a href="#" data-rel="back" data-theme="b"  class="ui-btn-left" data-icon="arrow-l" i18n="zpet">Zpět</a>
+		<h1 i18n="byty_na_prodej" id="mapActionStatus">ZVOLTE NA MAPĚ</h1> 
 		<a href="" class="pageForReturn" data-theme="b" i18n="ulozit"   data-icon="arrow-r">Zvolit</a>
         
     <!-- NAVBAR-->    
@@ -1886,7 +2104,7 @@ Poznámka k nemovitosti (nepovinné)
 	<h3 class="infoBarHeadingText"></h3>					
 	</div>
     <!-- //INFORMATION AND PROGRESS BAR, HIDDEN -->
-    <div data-role="content" data-theme="d" class="bgImage">
+    <div data-role="content" data-theme="d" >
 	
     <!-- MAP CANVAS  -->
     
