@@ -73,7 +73,7 @@ $(document).bind('pagebeforechange', function(e, data){
 	console.log(parsedItems);   
 	//CHECK, THAT USER IS SIGNED IN, IF YES, HIDE SIGN IN BTN
 	if(parsedItems.values[0].blokovany === "0")
-	$("#userLogBtnMainPage").hide();	
+	$("#userLogBtnMainPage .ui-btn-text").text(parsedItems.values[0].jmeno + " " + parsedItems.values[0].prijmeni);	
 
 });
 
@@ -622,6 +622,137 @@ function fillListOfMunicipalities(idOfDistrict)
 		
 	
 }
+
+
+
+//FUNCTION CHECK THAT USER IS SIGNED UNDER HIS ACCOUNT AND IF YES, FILL FORM 
+function getUserInfo()
+{
+	
+	
+	//PREVIOUS EXIST? IF NOT REDIRECT WITH MESSAGE
+	if(localStorage.savedUserSettings === undefined)
+	{
+		
+		$.mobile.changePage( "#userLoginPage");
+		$(".infoBarHeadingText").text('PRO ZMĚNU NASTAVENÍ JE TŘEBA SE PŘIHLÁSIT');
+		
+		
+	}
+	
+
+	//FILL FORM AND DISABLE INPUTS
+	else
+	{
+	console.log("UZIVATEL JE PRIHLASEN, NACITAM JEHO DATA"); 
+	//GET VALUES AND PREPARE FROM STRING TO WORK
+	var parsedItems  = JSON.parse(localStorage.savedUserSettings);
+
+	
+	
+	 $("#registerUpdateFieldContain :input").attr("disabled", "disabled");
+	
+
+	$('#changedName').val(parsedItems.values[0].jmeno);
+
+	$('#changedSurname').val(parsedItems.values[0].prijmeni);
+
+	$('#changedUserEmail').val(parsedItems.values[0].email);
+
+
+	$('#changedCellPhone').val(parsedItems.values[0].tel);
+
+	
+	}
+	  
+	
+	
+	
+}
+
+
+
+//GET NEW VALUES FROM USER SEND TO UPDATE AND SHOW MESSAGE ABOUT PROGRESS
+function updateUserInfo()
+{
+	
+	if($('#updateUserInfoBtn').attr('status')=== 0);
+	{
+	$('#updateUserInfoBtn .ui-btn-inner').text('Uložit');
+	
+
+	 $("#registerUpdateFieldContain :input").removeAttr("disabled");
+	 
+	 $('#changedWatcher').slider('enable');	
+	 
+	 $('#updateUserInfoBtn').attr('status','1');
+	 
+	}
+
+	
+	if($('#updateUserInfoBtn').attr('status')=== 1);
+	{
+		//GET VALUES FROM FORM
+		
+		var parsedItems  = JSON.parse(localStorage.savedUserSettings);
+		var id = parsedItems.values[0].id;
+		
+		var jmeno = $('#changedName').val();	
+		var prijmeni =  $('#changedSurname').val();
+		var email =  $('#changedUserEmail').val();
+		var telefon =  $('#changedCellPhone').val();
+		var stareheslo = parsedItems.values[0].heslo;
+		
+		var noveheslo = $.encoding.digests.hexSha1Str($("#changedPasswordUsr").val());
+		 
+		console.log($("#changedPasswordUsr").val.length);
+		
+		if(jmeno.length == 0 || prijmeni.length== 0 || email.length== 0 || telefon.length == 0 )
+		{
+
+			$(".infoBarHeadingText").text('ZADANE UDAJE NEJSOU SPRAVNE');
+			$(".infoBar").show();	
+			return false;
+			
+		}
+		
+		//http://pts.ceskereality.cz/json/hlidac_registrace_oprava.html
+		//?id=2977&email=ivo.stejskal@ceskestavby.cz&
+		//heslo=30170405&blokovany=1&novejmeno=Ivo&noveprijmeni=Stejskal&novetel=608463126&noveemail=ivo.stejskal@ceskestavby.cz
+		//&noveheslo=30170405&noveip=ff
+		
+		jQuery.ajax({
+			
+			url :"http://pts.ceskereality.cz/json/hlidac_registrace_oprava.html",
+			data: {id:id,email:email,heslo:actualPage,
+					novejmeno:jmeno,noveprijmeni:prijmeni,
+					novetel:telefon,noveemail:email,noveheslo:heslo},
+			type : "GET",
+			
+			success : function(result) {
+				
+			
+				
+				$(".infoBarHeadingText").text('INFORMACE O OBCICH NACTENY');
+				$(".infoBar").hide('slow');		
+				
+				
+				
+			},
+			// IF HTTP RESULT 400 || 404
+			error : function(x, e) {
+					
+				typeOfRequestError(x, e);
+			}
+		});
+
+		
+	}
+	
+	
+}
+
+
 
 //GET VALUES FROM FORM WHERE USER SELECTED SIZE FROM AND TO OF REALITY
 
@@ -1222,11 +1353,11 @@ function getListOfHistoryOfSearch()
 				"<h3>"+parsedClassifiers1.ciselniky.okres[parseInt(value.okres)]+"</h3>"+
 				"<p><strong>Typ "+parsedClassifiers1.ciselniky.typ[parseInt(value.typ)]+"</strong></p>"+
 				"<p><strong>Cena od "+value.cenaod+" - "+value.cenado+" Kč</strong></p>"+
-			
+				"<div><img src=\"img/bell_active.png\" /></div>"+
+				
 				
 				
 				"</a>" +
-				"<div>mnau</div>"+
 				
 				"<a onClick=\"deleteSavedDetailOfSearch("+key+");\" data-rel=\"dialog\" data-transition=\"slideup\"></a>"+
 				
